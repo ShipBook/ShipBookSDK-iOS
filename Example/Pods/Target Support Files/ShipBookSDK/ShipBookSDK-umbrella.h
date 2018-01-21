@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "ShipBook.h"
 
 FOUNDATION_EXPORT double ShipBookSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char ShipBookSDKVersionString[];

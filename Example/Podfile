@@ -5,6 +5,8 @@ target 'ShipBookSDK_Example' do
 
   target 'ShipBookSDK_Tests' do
     inherit! :search_paths
+    platform :ios, '10.0'
+    pod 'ShipBookSDK', :path => '../'
 
     pod 'FBSnapshotTestCase' , '~> 2.1.4'
   end

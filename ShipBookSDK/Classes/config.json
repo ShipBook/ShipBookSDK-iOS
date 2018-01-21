@@ -1,0 +1,30 @@
+{
+  "appenders" :
+  [{
+   "type" : "ConsoleAppender",
+   "name" : "console",
+   "config" : {
+   "pattern" : "$message"
+   }
+   },
+   {
+   "type" : "SLCloudAppender",
+   "name" : "cloud",
+   "config" :
+   {
+   "maxTime" : 5,
+   "flushLevel" : "Warning"
+   }
+   }],
+  "loggers" :
+  [{
+   "name" : "",
+   "level" : "Verbose",
+   "appenderRef" : "console"
+   },
+   {
+   "name" : "",
+   "level" : "Verbose",
+   "appenderRef" : "cloud"
+   }]
+}
