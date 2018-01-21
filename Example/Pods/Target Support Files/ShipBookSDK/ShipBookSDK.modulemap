@@ -1,0 +1,6 @@
+framework module ShipBookSDK {
+  umbrella header "ShipBookSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

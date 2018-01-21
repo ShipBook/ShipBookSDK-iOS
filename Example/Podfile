@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ShipBookSDK_Example' do
+  pod 'ShipBookSDK', :path => '../'
+
+  target 'ShipBookSDK_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end

@@ -1,0 +1,6 @@
+framework module Pods_ShipBookSDK_Example {
+  umbrella header "Pods-ShipBookSDK_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
