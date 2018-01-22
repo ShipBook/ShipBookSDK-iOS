@@ -3,7 +3,7 @@
 //  ShipBookSDK
 //
 //  Created by Elisha Sterngold on 01/21/2018.
-//  Copyright (c) 2018 Elisha Sterngold. All rights reserved.
+//  Copyright (c) 2018 ShipBook Ltd. All rights reserved.
 //
 
 import UIKit

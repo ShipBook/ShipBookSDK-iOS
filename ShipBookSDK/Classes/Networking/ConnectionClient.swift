@@ -38,10 +38,8 @@ class ResponseData {
   }
 }
 
-fileprivate let BASE_URL = "https://api.shipbook.io/v1/"
-// fileprivate let BASE_URL = "http://localhost:8080/v1/"
-
 class ConnectionClient {
+  static var BASE_URL = "https://api.shipbook.io/v1/"
   static let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -61,7 +59,7 @@ class ConnectionClient {
   }()
   
   func request<T : Encodable>(url: String, data: T?, method: HttpMethod?, completionHandler:@escaping(ResponseData)->Void) -> Void {
-    var urlRequest = URLRequest(url: URL(string: BASE_URL + url)!)
+    var urlRequest = URLRequest(url: URL(string: ConnectionClient.BASE_URL + url)!)
     if let data = data {
       let jsonData = try? ConnectionClient.jsonEncoder.encode(data)
       urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

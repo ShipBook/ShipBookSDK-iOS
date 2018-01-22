@@ -17,6 +17,10 @@ public class ShipBook {
     InnerLog.enabled = enable
   }
 
+  static public func setConnectionUrl(_ url: String) {
+    ConnectionClient.BASE_URL = url
+  }
+
   static public func registerUser(userId: String,
                                   userName: String? = nil,
                                   email: String? = nil,

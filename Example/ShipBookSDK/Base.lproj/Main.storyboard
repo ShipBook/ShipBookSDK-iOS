@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +21,73 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIs-Xh-dKN">
+                                <rect key="frame" x="90" y="318" width="194" height="30"/>
+                                <state key="normal" title="Open SecondViewController"/>
+                                <connections>
+                                    <segue destination="a2g-us-4RJ" kind="show" id="dod-nD-15v"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShipBook" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="pWp-GQ-ubc">
+                                <rect key="frame" x="22" y="45" width="330" height="43"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="AIs-Xh-dKN" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Myl-fV-KwL"/>
+                            <constraint firstItem="pWp-GQ-ubc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="6" id="Oz4-S8-od6"/>
+                            <constraint firstItem="pWp-GQ-ubc" firstAttribute="centerX" secondItem="AIs-Xh-dKN" secondAttribute="centerX" id="cL7-69-ifW"/>
+                            <constraint firstItem="pWp-GQ-ubc" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="niI-mL-RVD"/>
+                            <constraint firstItem="pWp-GQ-ubc" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="25" id="ucg-Kn-gp2"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="kdv-bi-xKh">
+            <objects>
+                <viewController id="a2g-us-4RJ" customClass="SecondViewController" customModule="ShipBookSDK_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pfb-98-u93"/>
+                        <viewControllerLayoutGuide type="bottom" id="gtM-Sl-Dpi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OFy-oY-Cer">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqn-Yz-ifQ">
+                                <rect key="frame" x="89" y="318" width="196" height="30"/>
+                                <state key="normal" title="Close SecondViewController"/>
+                                <connections>
+                                    <action selector="back" destination="a2g-us-4RJ" eventType="touchUpInside" id="85I-zf-KnX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShipBook" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-56-A6r">
+                                <rect key="frame" x="22" y="51" width="330" height="43"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vGY-56-A6r" firstAttribute="top" secondItem="Pfb-98-u93" secondAttribute="bottom" constant="31" id="52C-hX-HZQ"/>
+                            <constraint firstItem="rqn-Yz-ifQ" firstAttribute="centerY" secondItem="OFy-oY-Cer" secondAttribute="centerY" id="Mx3-0u-Pna"/>
+                            <constraint firstItem="vGY-56-A6r" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="ehU-Oc-gSv"/>
+                            <constraint firstItem="vGY-56-A6r" firstAttribute="leading" secondItem="OFy-oY-Cer" secondAttribute="leadingMargin" constant="6" id="hI4-4b-nNm"/>
+                            <constraint firstItem="vGY-56-A6r" firstAttribute="centerX" secondItem="rqn-Yz-ifQ" secondAttribute="centerX" id="rxC-x1-b65"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DdG-TN-cFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1416.8" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>

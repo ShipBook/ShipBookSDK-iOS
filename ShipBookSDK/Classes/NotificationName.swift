@@ -9,7 +9,7 @@
 import Foundation
 
 struct NotificationName {
-  static let ConfigChange = Notification.Name(rawValue: "io.shipbook.ShipBook.config")
-  static let Connected = Notification.Name(rawValue: "io.shipbook.ShipBook.connected")
-  static let UserChange = Notification.Name(rawValue: "io.shipbook.ShipBook.user")
+  static let ConfigChange = Notification.Name(rawValue: "io.shipbook.ShipBookSDK.config")
+  static let Connected = Notification.Name(rawValue: "io.shipbook.ShipBookSDK.connected")
+  static let UserChange = Notification.Name(rawValue: "io.shipbook.ShipBookSDK.user")
 }

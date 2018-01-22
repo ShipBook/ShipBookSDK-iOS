@@ -8,7 +8,7 @@
 
 import Foundation
 
-fileprivate let shipbookQueue = DispatchQueue(label: "io.shipbook.ShipBook")
+fileprivate let shipbookQueue = DispatchQueue(label: "io.shipbook.ShipBookSDK")
 fileprivate let syncAppenderQueue = DispatchQueue(label: "io.shipbook.syncAppender")
 extension DispatchQueue {
   class var shipBook: DispatchQueue {

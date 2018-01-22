@@ -8,7 +8,7 @@
 
 import Foundation
 
-let sdkBundle = Bundle(identifier: "io.shipbook.ShipBook")
+let sdkBundle = Bundle(identifier: "io.shipbook.ShipBookSDK")
 class SessionManager {
   private var isInLoginRequest: Bool = false
   let configURL: URL
