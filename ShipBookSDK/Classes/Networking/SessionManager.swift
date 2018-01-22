@@ -8,8 +8,9 @@
 
 import Foundation
 
-let sdkBundle = Bundle(identifier: "io.shipbook.ShipBookSDK")
+let sdkBundle = Bundle(for: SessionManager.self)
 class SessionManager {
+  
   private var isInLoginRequest: Bool = false
   let configURL: URL
   var appId: String?
@@ -39,7 +40,7 @@ class SessionManager {
     else if let url = userConfig {
       readConfig(url: url)
     }
-    else if let filepath = sdkBundle?.path(forResource: "config", ofType: "json")  {
+    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
       let url = URL(fileURLWithPath: filepath)
       readConfig(url: url)
     }

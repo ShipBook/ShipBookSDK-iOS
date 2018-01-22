@@ -32,11 +32,11 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ShipBookSDK/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'ShipBookSDK' => ['ShipBookSDK/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'ShipBookSDK' => ['ShipBookSDK/Assets/**/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
+  
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

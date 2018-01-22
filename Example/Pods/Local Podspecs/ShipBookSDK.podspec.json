@@ -18,5 +18,10 @@
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "ShipBookSDK/Classes/**/*"
+  "source_files": "ShipBookSDK/Classes/**/*",
+  "resource_bundles": {
+    "ShipBookSDK": [
+      "ShipBookSDK/Assets/**/*"
+    ]
+  }
 }

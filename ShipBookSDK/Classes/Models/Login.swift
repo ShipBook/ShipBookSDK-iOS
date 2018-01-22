@@ -41,8 +41,8 @@ struct Login : Codable {
     osVersion = UIDevice.current.systemVersion
     appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-    sdkVersion = sdkBundle?.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-    sdkBuild = sdkBundle?.infoDictionary?["CFBundleVersion"] as? String ?? ""
+    sdkVersion = sdkBundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    sdkBuild = sdkBundle.infoDictionary?["CFBundleVersion"] as? String ?? ""
     deviceName = UIDevice.current.modelName
     language = "\(Locale.current.languageCode ?? "")-\(Locale.current.regionCode ?? "")"
   #if DEBUG
