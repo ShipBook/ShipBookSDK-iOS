@@ -25,6 +25,7 @@ struct Login : Codable {
   let sdkBuild: String
   let manufacturer: String = "apple"
   let deviceName: String
+  let deviceModel: String
   var advertisementId: String? = nil
   let language: String
   var isDebug: Bool? = nil
@@ -43,7 +44,8 @@ struct Login : Codable {
     appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
     sdkVersion = sdkBundle.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     sdkBuild = sdkBundle.infoDictionary?["CFBundleVersion"] as? String ?? ""
-    deviceName = UIDevice.current.modelName
+    deviceName = UIDevice.current.name
+    deviceModel = UIDevice.current.modelName
     language = "\(Locale.current.languageCode ?? "")-\(Locale.current.regionCode ?? "")"
   #if DEBUG
     isDebug = true
@@ -69,6 +71,7 @@ func ==(lhs: Login, rhs: Login) -> Bool {
     lhs.sdkVersion == rhs.sdkVersion &&
     lhs.sdkBuild == rhs.sdkBuild &&
     lhs.manufacturer == rhs.manufacturer &&
+    lhs.deviceModel == rhs.deviceModel &&
     lhs.deviceName == rhs.deviceName &&
     lhs.language == rhs.language &&
     lhs.advertisementId == rhs.advertisementId

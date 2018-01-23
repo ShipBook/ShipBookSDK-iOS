@@ -23,12 +23,14 @@ public class ShipBook {
 
   static public func registerUser(userId: String,
                                   userName: String? = nil,
+                                  fullName: String? = nil,
                                   email: String? = nil,
                                   phoneNumber: String? = nil,
                                   additionalInfo: [String: String]? = nil) {
     DispatchQueue.shipBook.async {
       SessionManager.shared.registerUser(userId: userId,
                                          userName: userName,
+                                         fullName: fullName,
                                          email: email,
                                          phoneNumber: phoneNumber,
                                          additionalInfo: additionalInfo)

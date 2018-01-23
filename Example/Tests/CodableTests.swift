@@ -141,6 +141,7 @@ class CodableTests: XCTestCase {
     additionalInfo["test2"] = "test2"
     let user = User(userId: "testing",
                     userName: "testName",
+                    fullName: "Test Name",
                     email: "test@test.com",
                     phoneNumber: nil,
                     additionalInfo: additionalInfo)
@@ -164,6 +165,7 @@ class CodableTests: XCTestCase {
       let logs : [BaseLog] = [message, exception]
       let user = User(userId: "testing",
                               userName: "testName",
+                              fullName: "Test Name",
                               email: "test@test.com",
                               phoneNumber: "0110101001",
                               additionalInfo: [String: String]())

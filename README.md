@@ -97,11 +97,14 @@ The SDK enables the option to associate the session with specific user informati
 ```swift
 ShipBook.registerUser(userId: "USER_ID",
 userName: "USER_NAME",
+fullName: "USER NAME",
 email: "USER_EMAIL",
 phoneNumber: "USER_PHONE_NUMBER",
 additionalInfo: "STRING DICTIONARY OF KEY VALUE")
 ```
 The only parameter that must be entered is the `userId`.
+
+The best position to set the registerUser is before the `ShipBook.start`. It will also work after it, but there will need to be one more api request.
 
 ### Logout
 When a user logs out of the system then a new session is created.

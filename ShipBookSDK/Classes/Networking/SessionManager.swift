@@ -63,11 +63,13 @@ class SessionManager {
   
   func registerUser(userId: String,
                     userName: String?,
+                    fullName: String?,
                     email: String?,
                     phoneNumber: String?,
                     additionalInfo: [String: String]?) {
     let user = User(userId: userId,
                     userName: userName,
+                    fullName: fullName,
                     email: email,
                     phoneNumber: phoneNumber,
                     additionalInfo: additionalInfo)
