@@ -39,6 +39,7 @@ class AppenderResponse: Decodable {
 struct LoggerResponse: Decodable {
   let name: String?
   let level: String
+  let callStackLevel: String?
   let appenderRef: String
 }
 

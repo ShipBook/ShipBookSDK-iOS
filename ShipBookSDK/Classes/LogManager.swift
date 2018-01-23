@@ -12,6 +12,7 @@ class LogManager {
   struct Logger {
     var key: String
     var severity: Severity
+    var callStackSeverity: Severity
     var appender: BaseAppender
   }
   
@@ -43,10 +44,10 @@ class LogManager {
     }
   }
   
-  func add(module: String, severity: Severity, appender: String){
+  func add(module: String, severity: Severity, callStackSeverity: Severity, appender: String){
     DispatchQueue.shipBook.async {
       if let appenderObj = self.appenders[appender] {
-        self.loggers.append(Logger(key: module, severity: severity, appender: appenderObj))
+        self.loggers.append(Logger(key: module, severity: severity, callStackSeverity: callStackSeverity, appender: appenderObj))
       }
     }
   }
@@ -62,7 +63,7 @@ class LogManager {
       var appenderNames = Set<String>()
       
       for logger in loggers {
-        if message.tag.starts(with: logger.key) {
+        if message.tag.starts(with: logger.key) && message.severity.rawValue <= logger.severity.rawValue {
           appenderNames.insert(logger.appender.name)
         }
       }
@@ -91,6 +92,18 @@ class LogManager {
     return severity
   }
 
+  func getCallStackLevel(_ tag: String) -> Severity {
+    let loggers = self.loggers // so that if something happens asynchronous it won't disturb
+    var callStackSeverity = Severity.Off
+    for logger in loggers {
+      if tag.starts(with: logger.key) && logger.callStackSeverity.rawValue > callStackSeverity.rawValue {
+        callStackSeverity = logger.callStackSeverity
+      }
+    }
+    
+    return callStackSeverity
+  }
+
   func config(_ config: ConfigResponse) {
     DispatchQueue.shipBook.async {
       // appenders
@@ -109,7 +122,10 @@ class LogManager {
       var loggers = [Logger]()
       for logger in config.loggers {
         if let appender = appenders[logger.appenderRef] {
-          let logger = Logger(key: logger.name ?? "", severity: Severity(name: logger.level), appender: appender)
+          let logger = Logger(key: logger.name ?? "",
+                              severity: Severity(name: logger.level),
+                              callStackSeverity: logger.callStackLevel != nil ? Severity(name: logger.callStackLevel!) : Severity.Off,
+                              appender: appender)
           loggers.append(logger)
         }
       }

@@ -40,6 +40,7 @@ public class Log {
   // None  static part of class
   var tag: String
   var level: Severity
+  var callStacklevel: Severity
   
   init(_ tag: String?, file: String = #file) {
     var tempTag = tag
@@ -50,12 +51,14 @@ public class Log {
     
     self.tag = "\(appName).\(tempTag!)"
     level = LogManager.shared.getLevel(self.tag)
+    callStacklevel = LogManager.shared.getCallStackLevel(self.tag)
     addNotification()
   }
   
   init(_ klass: AnyClass) {
     self.tag = String(reflecting: klass)
     self.level = LogManager.shared.getLevel(tag)
+    self.callStacklevel = LogManager.shared.getCallStackLevel(tag)
     addNotification()
   }
   
@@ -97,7 +100,9 @@ public class Log {
   
   public func message(msg:String, severity:Severity, function: String = #function, file: String = #file, line: Int = #line) {
     if (severity.rawValue > level.rawValue) { return }
-    let messageObj = Message(message: msg, severity:severity, tag: self.tag, function: function, file: file, line: line)
+    var callStackSymbols: [String]? = nil
+    if (severity.rawValue <= callStacklevel.rawValue) { callStackSymbols = Thread.callStackSymbols }
+    let messageObj = Message(message: msg, severity:severity, tag: self.tag, function: function, file: file, line: line, callStackSymbols: callStackSymbols)
     LogManager.shared.push(log: messageObj)
   }
 }

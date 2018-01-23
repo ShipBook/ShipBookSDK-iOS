@@ -120,11 +120,12 @@ class LogManagerTests: XCTestCase {
       XCTAssertEqual(message.message, msg)
       XCTAssertEqual(message.threadInfo.queueLabel, currentLabel)
       XCTAssertEqual(message.severity, .Error)
+      XCTAssertNotNil(message.callStackSymbols)
       expect.fulfill()
     }
     
     LogManager.shared.add(appender: test, name: "test")
-    LogManager.shared.add(module: "", severity: .Info , appender: "test")
+    LogManager.shared.add(module: "", severity: .Info, callStackSeverity: .Error, appender: "test")
     let log = Log("test")
     log.d("shouldn't do anything")
     log.e(msg)

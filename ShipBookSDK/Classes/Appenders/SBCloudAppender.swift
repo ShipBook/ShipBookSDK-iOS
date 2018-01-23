@@ -119,10 +119,10 @@ class SBCloudAppender: BaseAppender{
   }
   
   func push(log: BaseLog) {
-    BaseLog.dispatchQueue.sync {
-      if let message = log as? Message { push(message: message) }
-      else if let exception = log as? Exception { push(exception: exception) }
-      else if let event = log as? BaseEvent { push(event: event) }
+    DispatchQueue.shipBook.async {
+      if let message = log as? Message { self.push(message: message) }
+      else if let exception = log as? Exception { self.push(exception: exception) }
+      else if let event = log as? BaseEvent { self.push(event: event) }
     }
   }
 
