@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SLCloudAppender: BaseAppender{
+class SBCloudAppender: BaseAppender{
   let name: String
   // config variables
   var maxTime: Double = 3

@@ -74,8 +74,8 @@ class LogManagerTests: XCTestCase {
     XCTAssertTrue(appenders["console"] is ConsoleAppender)
     let consoleAppender = appenders["console"] as? ConsoleAppender
     XCTAssertEqual(consoleAppender?.pattern, "$time $severity $tag $message /n $file:$line")
-    XCTAssertTrue(appenders["cloud"] is SLCloudAppender)
-    let cloudAppender = appenders["cloud"] as? SLCloudAppender
+    XCTAssertTrue(appenders["cloud"] is SBCloudAppender)
+    let cloudAppender = appenders["cloud"] as? SBCloudAppender
     XCTAssertEqual(cloudAppender?.maxTime, 5)
   }
   

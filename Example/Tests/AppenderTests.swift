@@ -38,7 +38,7 @@ class AppenderTests: XCTestCase {
   }
   
   func testCloudAppender() {
-    let cloudAppender = SLCloudAppender(name: "cloud", config: nil)
+    let cloudAppender = SBCloudAppender(name: "cloud", config: nil)
     try? FileManager.default.removeItem(at: cloudAppender.fileURL)
     let token = "testing"
     SessionManager.shared.token = token

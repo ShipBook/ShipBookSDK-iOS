@@ -8,7 +8,7 @@
    }
    },
    {
-   "type" : "SLCloudAppender",
+   "type" : "SBCloudAppender",
    "name" : "cloud",
    "config" :
    {

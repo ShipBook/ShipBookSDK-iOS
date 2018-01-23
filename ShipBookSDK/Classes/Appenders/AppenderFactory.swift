@@ -20,8 +20,8 @@ struct AppenderFactory {
       return ConsoleAppender(name: name, config: config)
     case "OsLogAppender":
       return OsLogAppender(name: name, config: config)
-    case "SLCloudAppender":
-      return SLCloudAppender(name: name, config: config)
+    case "SLCloudAppender", "SBCloudAppender": // SLCloudAppender for backward compatibility
+      return SBCloudAppender(name: name, config: config)
       
     default:
       throw FactoryError()
