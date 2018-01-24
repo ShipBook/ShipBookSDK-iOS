@@ -72,11 +72,30 @@ class AppenderTests: XCTestCase {
     var sessionsData: [SessionLogData]? = nil
     XCTAssertNoThrow (sessionsData = try cloudAppender.loadFromFile(url: cloudAppender.fileURL))
     XCTAssertEqual(sessionsData!.count, 2)
-    let sessionLogData1 = sessionsData![0]
+    var sessionLogData1 = sessionsData![0]
     XCTAssertNil(sessionLogData1.login)
     XCTAssertEqual(sessionLogData1.token, token)
     XCTAssertEqual(sessionLogData1.logs, logs1)
-    let sessionLogData2 = sessionsData![1]
+    var sessionLogData2 = sessionsData![1]
+    XCTAssertNil(sessionLogData2.token)
+    XCTAssertEqual(sessionLogData2.login, SessionManager.shared.login)
+    XCTAssertEqual(sessionLogData2.logs, logs2)
+    
+    // checking the usage of temp file works
+    try! FileManager.default.moveItem(at: cloudAppender.fileURL, to: cloudAppender.tempFileURL)
+    let log = Message(message: "message6", severity: .Info, tag: "test", function: #function, file: #file, line: #line)
+    cloudAppender.saveToFile(data: log)
+    logs2.append(log)
+    
+    cloudAppender.concatTmpFile()
+    sessionsData = nil
+    XCTAssertNoThrow (sessionsData = try cloudAppender.loadFromFile(url: cloudAppender.fileURL))
+    XCTAssertEqual(sessionsData!.count, 2)
+    sessionLogData1 = sessionsData![0]
+    XCTAssertNil(sessionLogData1.login)
+    XCTAssertEqual(sessionLogData1.token, token)
+    XCTAssertEqual(sessionLogData1.logs, logs1)
+    sessionLogData2 = sessionsData![1]
     XCTAssertNil(sessionLogData2.token)
     XCTAssertEqual(sessionLogData2.login, SessionManager.shared.login)
     XCTAssertEqual(sessionLogData2.logs, logs2)

@@ -43,6 +43,11 @@ class SBCloudAppender: BaseAppender{
     fileURL =  dir!.appendingPathComponent("CloudQueue.log")
     tempFileURL =  dir!.appendingPathComponent("TempCloudQueue.log")
     
+    //checking if there exists a temp file.
+    if FileManager.default.fileExists(atPath: tempFileURL.path) {
+      self.concatTmpFile()
+    }
+    
     update(config: config)
     
     backgroundObserver = NotificationCenter.default.addObserver(
@@ -243,14 +248,7 @@ class SBCloudAppender: BaseAppender{
         else {
           InnerLog.i("server is probably down")
           DispatchQueue.shipBook.async {
-            do {
-              if !FileManager.default.fileExists(atPath: self.fileURL.path) {
-                try String(contentsOf: self.fileURL).write(append: self.tempFileURL, separatedBy: self.NEW_LINE_SEPARATOR)
-              }
-              try FileManager.default.moveItem(at: self.fileURL, to: self.tempFileURL)
-            } catch let error {
-              InnerLog.e(error.localizedDescription)
-            }
+            self.concatTmpFile()
             self.uploadingSavedData = false
           }
         }
@@ -324,6 +322,18 @@ class SBCloudAppender: BaseAppender{
   func removeFile(url: URL) {
     do {
       try FileManager.default.removeItem(at: url)
+    } catch let error {
+      InnerLog.e(error.localizedDescription)
+    }
+  }
+  
+  func concatTmpFile() {
+    do {
+      if FileManager.default.fileExists(atPath: self.fileURL.path) {
+        try String(contentsOf: self.fileURL).write(append: self.tempFileURL, separatedBy: self.NEW_LINE_SEPARATOR)
+        try FileManager.default.removeItem(at: self.fileURL) // for that the move item will happen
+      }
+      try FileManager.default.moveItem(at: self.tempFileURL, to: self.fileURL)
     } catch let error {
       InnerLog.e(error.localizedDescription)
     }
