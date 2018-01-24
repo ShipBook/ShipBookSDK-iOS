@@ -16,7 +16,19 @@ class SessionManager {
   var appId: String?
   var appKey: String?
   var token: String?
-  var login: Login?
+  private var _login: Login?
+  var login: Login? {
+    get {
+      if let user = user { // adding user to the login
+        _login?.user = user
+      }
+      return _login
+    }
+    set (login) {
+      _login = login
+    }
+  }
+  var user: User?
   
   var connected: Bool {
     get {
@@ -71,15 +83,16 @@ class SessionManager {
                     email: String?,
                     phoneNumber: String?,
                     additionalInfo: [String: String]?) {
-    DispatchQueue.shipBook.async {
-      let user = User(userId: userId,
-                      userName: userName,
-                      fullName: fullName,
-                      email: email,
-                      phoneNumber: phoneNumber,
-                      additionalInfo: additionalInfo)
-      self.login?.user = user
-      NotificationCenter.default.post(name: NotificationName.UserChange, object: self)
+    self.user = User(userId: userId,
+                    userName: userName,
+                    fullName: fullName,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    additionalInfo: additionalInfo)
+    if self.login != nil { //it is still not initialized the user was before the start
+      DispatchQueue.shipBook.async {
+        NotificationCenter.default.post(name: NotificationName.UserChange, object: self)
+      }
     }
   }
   

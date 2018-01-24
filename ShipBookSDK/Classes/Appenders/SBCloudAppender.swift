@@ -72,7 +72,7 @@ class SBCloudAppender: BaseAppender{
       forName: NotificationName.UserChange,
       object: nil,
       queue: nil) {[weak self] notification in
-        InnerLog.d("usee change")
+        InnerLog.d("user changed")
         if let user = SessionManager.shared.login?.user {
           self?.saveToFile(data: user)
           self?.createTimer()
