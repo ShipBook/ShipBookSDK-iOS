@@ -27,20 +27,16 @@ public class ShipBook {
                                   email: String? = nil,
                                   phoneNumber: String? = nil,
                                   additionalInfo: [String: String]? = nil) {
-    DispatchQueue.shipBook.async {
       SessionManager.shared.registerUser(userId: userId,
                                          userName: userName,
                                          fullName: fullName,
                                          email: email,
                                          phoneNumber: phoneNumber,
                                          additionalInfo: additionalInfo)
-    }
   }
   
   static public func logout() {
-    DispatchQueue.shipBook.async {
-      SessionManager.shared.logout()
-    }
+    SessionManager.shared.logout()
   }
   
   static public func getLogger(_ klass: AnyClass) -> Log {

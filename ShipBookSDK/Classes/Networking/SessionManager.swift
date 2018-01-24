@@ -34,31 +34,36 @@ class SessionManager {
   static let shared = SessionManager()
   
   func login(appId: String, appKey: String, userConfig: URL?){
-    if FileManager.default.fileExists(atPath: configURL.path) {
-      readConfig(url: configURL)
+    DispatchQueue.shipBook.async {
+      if FileManager.default.fileExists(atPath: self.configURL.path) {
+        self.readConfig(url: self.configURL)
+      }
+      else if let url = userConfig {
+        self.readConfig(url: url)
+      }
+      else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
+        let url = URL(fileURLWithPath: filepath)
+        self.readConfig(url: url)
+      }
+      else {
+        InnerLog.e("there was a problem with initialization")
+      }
+
+      self.appId = appId
+      self.appKey = appKey
+
+      self.login = Login(appId: appId,
+                    appKey: appKey)
+      
+      self.innerLogin()
     }
-    else if let url = userConfig {
-      readConfig(url: url)
-    }
-    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
-      let url = URL(fileURLWithPath: filepath)
-      readConfig(url: url)
-    }
-    else {
-      InnerLog.e("there was a problem with initialization")
-    }
-    
-    self.appId = appId
-    self.appKey = appKey
-    login = Login(appId: appId,
-                  appKey: appKey)
-    
-    innerLogin()
   }
   
   func logout() {
-    token = nil
-    login =  nil
+    DispatchQueue.shipBook.async {
+      self.token = nil
+      self.login = nil
+    }
   }
   
   func registerUser(userId: String,
@@ -67,14 +72,16 @@ class SessionManager {
                     email: String?,
                     phoneNumber: String?,
                     additionalInfo: [String: String]?) {
-    let user = User(userId: userId,
-                    userName: userName,
-                    fullName: fullName,
-                    email: email,
-                    phoneNumber: phoneNumber,
-                    additionalInfo: additionalInfo)
-    login?.user = user
-    NotificationCenter.default.post(name: NotificationName.UserChange, object: self)
+    DispatchQueue.shipBook.async {
+      let user = User(userId: userId,
+                      userName: userName,
+                      fullName: fullName,
+                      email: email,
+                      phoneNumber: phoneNumber,
+                      additionalInfo: additionalInfo)
+      self.login?.user = user
+      NotificationCenter.default.post(name: NotificationName.UserChange, object: self)
+    }
   }
   
   struct NoDataError: Error {
@@ -105,6 +112,7 @@ class SessionManager {
     let url = "auth/loginSdk"
     
     let client = ConnectionClient()
+    login?.deviceTime = Date()
     client.request(url: url, data: login, method: HttpMethod.POST) { response in
       DispatchQueue.shipBook.async {
         self.isInLoginRequest = false
@@ -139,6 +147,10 @@ class SessionManager {
   }
   
   func refreshToken (completionHandler:@escaping(Bool)->()) {
+    if !Reachability.isConnectedToNetwork() {
+      completionHandler(false)
+      return
+    }
     guard token != nil && appKey != nil else {
       InnerLog.e("the token or appKey are not initialized")
       return

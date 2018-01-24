@@ -16,7 +16,9 @@ struct Login : Codable {
   let bundleIdentifier: String
   let appName: String
   let udid: String
-  var deviceTime: Date
+  let time: Date
+  var deviceTime: Date // the device time in the time of the login request
+  
   let os: String = "ios"
   let osVersion: String
   let appVersion: String
@@ -36,7 +38,8 @@ struct Login : Codable {
     self.appKey = appKey
     
     udid = UIDevice.current.identifierForVendor!.uuidString
-    deviceTime = Date()
+    time = Date()
+    deviceTime = time
     bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
     appName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? ""
     osVersion = UIDevice.current.systemVersion
@@ -63,6 +66,7 @@ func ==(lhs: Login, rhs: Login) -> Bool {
   return lhs.appId == rhs.appId &&
     lhs.appKey == rhs.appKey &&
     lhs.udid == rhs.udid &&
+    lhs.time.toISO8601Format() == rhs.time.toISO8601Format() &&
     lhs.deviceTime.toISO8601Format() == rhs.deviceTime.toISO8601Format() &&
     lhs.os == rhs.os &&
     lhs.osVersion == rhs.osVersion &&
