@@ -80,7 +80,7 @@ class LogManager {
     }
   }
   
-  func getLevel(_ tag: String) -> Severity {
+  func getSeverity(_ tag: String) -> Severity {
     let loggers = self.loggers // so that if something happens asynchronous it won't disturb
     var severity = Severity.Off
     for logger in loggers {
@@ -92,7 +92,7 @@ class LogManager {
     return severity
   }
 
-  func getCallStackLevel(_ tag: String) -> Severity {
+  func getCallStackSeverity(_ tag: String) -> Severity {
     let loggers = self.loggers // so that if something happens asynchronous it won't disturb
     var callStackSeverity = Severity.Off
     for logger in loggers {
@@ -123,8 +123,8 @@ class LogManager {
       for logger in config.loggers {
         if let appender = appenders[logger.appenderRef] {
           let logger = Logger(key: logger.name ?? "",
-                              severity: Severity(name: logger.level),
-                              callStackSeverity: logger.callStackLevel != nil ? Severity(name: logger.callStackLevel!) : Severity.Off,
+                              severity: Severity(name: logger.severity),
+                              callStackSeverity: logger.callStackSeverity != nil ? Severity(name: logger.callStackSeverity!) : Severity.Off,
                               appender: appender)
           loggers.append(logger)
         }

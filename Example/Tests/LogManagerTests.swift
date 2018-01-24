@@ -36,16 +36,16 @@ class LogManagerTests: XCTestCase {
       "loggers" :
       [{
        "name" : "iOSExample.SecondViewController",
-       "level" : "Verbose",
+       "severity" : "Verbose",
        "appenderRef" : "console"
        },
        {
        "name" : "iOSExample.MainViewController",
-       "level" : "Info",
+       "severity" : "Info",
        "appenderRef" : "cloud"
        },
        {
-        "level" : "Error",
+        "severity" : "Error",
         "appenderRef" : "console"
       }]
     }
@@ -79,12 +79,12 @@ class LogManagerTests: XCTestCase {
     XCTAssertEqual(cloudAppender?.maxTime, 5)
   }
   
-  func testLogLevel() {
-    var severity = LogManager.shared.getLevel("example");
+  func testLogSeverity() {
+    var severity = LogManager.shared.getSeverity("example");
     XCTAssertEqual(severity, Severity.Error)
-    severity = LogManager.shared.getLevel("iOSExample.SecondViewController.inner");
+    severity = LogManager.shared.getSeverity("iOSExample.SecondViewController.inner");
     XCTAssertEqual(severity, Severity.Verbose)
-    severity = LogManager.shared.getLevel("iOSExample.MainViewController");
+    severity = LogManager.shared.getSeverity("iOSExample.MainViewController");
     XCTAssertEqual(severity, Severity.Info)
   }
 
@@ -160,7 +160,7 @@ class LogManagerTests: XCTestCase {
         }
        }],
       "loggers": [{
-        "level" : "Verbose",
+        "severity" : "Verbose",
         "appenderRef" : "console"
       }]
     }

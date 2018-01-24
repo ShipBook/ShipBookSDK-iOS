@@ -13,7 +13,7 @@ class SBCloudAppender: BaseAppender{
   // config variables
   var maxTime: Double = 3
   var maxFileSize: Int = 1048576
-  var flushLevel: Severity = .Verbose
+  var flushSeverity: Severity = .Verbose
   var flushSize: Int = 40
   
   // file names
@@ -64,7 +64,7 @@ class SBCloudAppender: BaseAppender{
       object: nil,
       queue: nil) {[weak self] notification in
         InnerLog.d("Connected!")
-        InnerLog.d("++++++ the current label" + DispatchQueue.currentLabel)
+        InnerLog.d("++++++ the current label: " + DispatchQueue.currentLabel)
         self?.send()
     }
     
@@ -83,9 +83,9 @@ class SBCloudAppender: BaseAppender{
   func update(config: Config?) {
     maxTime = config?["maxTime"] as? NSNumber as? Double  ?? maxTime
     maxFileSize = config?["maxFileSize"] as? Int ?? maxFileSize
-    let flushLevelString = config?["flushLevel"] as? String
-    if let flushLevelString = flushLevelString {
-      flushLevel = Severity(name:flushLevelString)
+    let flushSeverityString = config?["flushSeverity"] as? String
+    if let flushSeverityString = flushSeverityString {
+      flushSeverity = Severity(name:flushSeverityString)
     }
     flushSize = config?["flushSize"] as? Int ?? flushSize
   }
@@ -132,7 +132,7 @@ class SBCloudAppender: BaseAppender{
   }
 
   func push(message: Message) {
-      if flushLevel.rawValue < message.severity.rawValue {
+      if flushSeverity.rawValue < message.severity.rawValue {
       flushQueue.append(message)
       if flushQueue.count > flushSize {
         flushQueue.remove(at: 0)
@@ -146,7 +146,7 @@ class SBCloudAppender: BaseAppender{
   }
   
   func push(event: BaseEvent) {
-    if flushLevel.rawValue < Severity.Info.rawValue { // events are the same level as severity info
+    if flushSeverity.rawValue < Severity.Info.rawValue { // events are the same severity as severity info
       flushQueue.append(event)
       if flushQueue.count > flushSize {
         flushQueue.remove(at: 0)

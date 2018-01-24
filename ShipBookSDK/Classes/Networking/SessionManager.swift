@@ -33,30 +33,29 @@ class SessionManager {
   
   static let shared = SessionManager()
   
-  func login(appId: String, appKey: String, userConfig: URL?){
-    DispatchQueue.shipBook.async {
-      if FileManager.default.fileExists(atPath: self.configURL.path) {
-        self.readConfig(url: self.configURL)
-      }
-      else if let url = userConfig {
-        self.readConfig(url: url)
-      }
-      else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
-        let url = URL(fileURLWithPath: filepath)
-        self.readConfig(url: url)
-      }
-      else {
-        InnerLog.e("there was a problem with initialization")
-      }
-
-      self.appId = appId
-      self.appKey = appKey
-
-      self.login = Login(appId: appId,
-                    appKey: appKey)
-      
-      self.innerLogin()
+  func login(appId: String, appKey: String, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
+                                                               // would be messages it missed
+    if FileManager.default.fileExists(atPath: self.configURL.path) {
+      self.readConfig(url: self.configURL)
     }
+    else if let url = userConfig {
+      self.readConfig(url: url)
+    }
+    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
+      let url = URL(fileURLWithPath: filepath)
+      self.readConfig(url: url)
+    }
+    else {
+      InnerLog.e("there was a problem with initialization")
+    }
+
+    self.appId = appId
+    self.appKey = appKey
+    
+    self.login = Login(appId: appId,
+                  appKey: appKey)
+    
+    self.innerLogin()
   }
   
   func logout() {

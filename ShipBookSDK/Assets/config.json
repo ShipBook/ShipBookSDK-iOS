@@ -13,18 +13,18 @@
    "config" :
    {
    "maxTime" : 5,
-   "flushLevel" : "Warning"
+   "flushSeverity" : "Warning"
    }
    }],
   "loggers" :
   [{
    "name" : "",
-   "level" : "Verbose",
+   "severity" : "Verbose",
    "appenderRef" : "console"
    },
    {
    "name" : "",
-   "level" : "Verbose",
+   "severity" : "Verbose",
    "appenderRef" : "cloud"
    }]
 }
