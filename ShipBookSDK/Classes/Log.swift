@@ -70,6 +70,7 @@ public class Log {
       queue: nil) { (notification) in
         if let _self = _self {
           _self.severity = LogManager.shared.getSeverity(self.tag)
+          _self.callStackSeverity = LogManager.shared.getCallStackSeverity(self.tag)
         }
     }
   }
