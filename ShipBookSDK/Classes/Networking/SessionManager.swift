@@ -13,7 +13,6 @@ class SessionManager {
   
   private var isInLoginRequest: Bool = false
   let configURL: URL
-  var appId: String?
   var appKey: String?
   var token: String?
   private var _login: Login?
@@ -61,7 +60,6 @@ class SessionManager {
       InnerLog.e("there was a problem with initialization")
     }
 
-    self.appId = appId
     self.appKey = appKey
     
     self.login = Login(appId: appId,
@@ -119,7 +117,7 @@ class SessionManager {
   }
   
   private func innerLogin() {
-    if !Reachability.isConnectedToNetwork() || isInLoginRequest || appId == nil { return }
+    if !Reachability.isConnectedToNetwork() || isInLoginRequest || appKey == nil { return }
     isInLoginRequest = true
     let url = "auth/loginSdk"
     
