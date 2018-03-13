@@ -9,7 +9,7 @@
 import Foundation
 struct ConfigResponse : Decodable {
   let eventLoggingDisabled : Bool?
-  let crashReportDisabled: Bool?
+  let exceptionReportDisabled: Bool?
   
   let appenders: [AppenderResponse]
   let loggers: [LoggerResponse]

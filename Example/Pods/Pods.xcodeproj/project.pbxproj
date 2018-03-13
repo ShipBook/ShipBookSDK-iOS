@@ -43,7 +43,7 @@
 		8A4C02668DA8167D08A3D55B5DA23D2A /* PatternLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7B191563DD59B84AD736943BC0620 /* PatternLayout.swift */; };
 		8CEB4D902CA09A4BF3CEA599F7EBE3EE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B2B9EBEAB56194FD74F0A5907B1079 /* Message.swift */; };
 		903B0865C037C3CD980C45903189A6BB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B83BFFF2A59828E21717534F36DEA /* Log.swift */; };
-		9397EE266F4D6761BEA944B17D93BCDD /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8ECDA7BC69432D513959F965CCE078 /* CrashManager.swift */; };
+		9397EE266F4D6761BEA944B17D93BCDD /* ExceptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8ECDA7BC69432D513959F965CCE078 /* ExceptionManager.swift */; };
 		9981F6FB48ACB035B6986727DE13082A /* ShipBookSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C824CC85092AA6E80FDFC916FE84C /* ShipBookSDK-dummy.m */; };
 		A9ADC94CD5C1B63F3E7F75DDD6404B1E /* Pods-ShipBookSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E859A1DA561C077F956A4D7FCD78F1B /* Pods-ShipBookSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0F1B16973F285F6E6F1F122CE9D615B /* Pods-ShipBookSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A321CADDAF790352DE8E8F009D561B /* Pods-ShipBookSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,11 +100,11 @@
 		1928D9F389D76569F8FE41B57593B594 /* BaseLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseLog.swift; sourceTree = "<group>"; };
 		1932DFCF98F396136213FC4F41E1FD89 /* ShipBookSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ShipBookSDK-prefix.pch"; sourceTree = "<group>"; };
 		1B61FBF2A7E8CFCA9E85413A82DE0A7F /* Pods-ShipBookSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ShipBookSDK_Example-resources.sh"; sourceTree = "<group>"; };
-		1BAD2D488293BC38656489B531BDEEA7 /* Pods-ShipBookSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ShipBookSDK_Tests.modulemap"; sourceTree = "<group>"; };
+		1BAD2D488293BC38656489B531BDEEA7 /* Pods-ShipBookSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ShipBookSDK_Tests.modulemap"; sourceTree = "<group>"; };
 		1CE4010EFB3F360F294FA8E9BBF0847C /* Pods-ShipBookSDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ShipBookSDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		1D5760EC5257E2B2C6AEDCCECF25A59F /* OsLogAppender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OsLogAppender.swift; sourceTree = "<group>"; };
 		1E7C7F726493B16D19CCB881F006C45D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F345DF623D46FC0637248E791761603 /* Pods_ShipBookSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ShipBookSDK_Tests.framework; path = "Pods-ShipBookSDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F345DF623D46FC0637248E791761603 /* Pods_ShipBookSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		206C1FEDAC41F0C6EECE8F61DAA91003 /* Pods-ShipBookSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ShipBookSDK_Tests-dummy.m"; sourceTree = "<group>"; };
 		21EF30733B1F78BAB7D80CB07BFB2D01 /* Pods-ShipBookSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ShipBookSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		22AF467025EDAF40921ADCA7D83A6E87 /* Login.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -116,17 +116,17 @@
 		29FF1C757E3B5AFFE31ED79EAB2B3087 /* BaseEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseEvent.swift; sourceTree = "<group>"; };
 		3445C28A14735FA8915FA5F5893DFEF7 /* DispatchQueue+CurrentLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+CurrentLabel.swift"; sourceTree = "<group>"; };
 		34DE5829AE57B7C7B7228CEBA7DC5AEC /* ErrorResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		36D92498D9894C20C62237C2557B937B /* ShipBookSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ShipBookSDK.framework; path = ShipBookSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D92498D9894C20C62237C2557B937B /* ShipBookSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShipBookSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6B789F81DD6C69E409013BD0090D10 /* UIDevice+ModelName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIDevice+ModelName.swift"; sourceTree = "<group>"; };
-		403F24BEE50324E1558EB185DABD491D /* Pods-ShipBookSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ShipBookSDK_Example.modulemap"; sourceTree = "<group>"; };
-		42D39785048097C0CEA59B2B80713AD4 /* ShipBookSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ShipBookSDK.modulemap; sourceTree = "<group>"; };
+		403F24BEE50324E1558EB185DABD491D /* Pods-ShipBookSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ShipBookSDK_Example.modulemap"; sourceTree = "<group>"; };
+		42D39785048097C0CEA59B2B80713AD4 /* ShipBookSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ShipBookSDK.modulemap; sourceTree = "<group>"; };
 		467FB1CED68F71D389DC9BC33BA16613 /* Date+ToString.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Date+ToString.swift"; sourceTree = "<group>"; };
 		4AFD584AC8B37AEA330512168B52EA9B /* Pods-ShipBookSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ShipBookSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4C21538DB1B5AA7E9375AEFD0F211B59 /* CustomEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomEvent.swift; sourceTree = "<group>"; };
 		51D367243A3C7331AEC68D291A270BA0 /* Encodable+Json.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Encodable+Json.swift"; sourceTree = "<group>"; };
 		538DAFE5E89223680D4217D1B974060E /* SBCloudAppender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SBCloudAppender.swift; sourceTree = "<group>"; };
 		54B296619A54FF7E94710D782B289937 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55B6A162538BB86AA50C4109BEF5D631 /* config.json */ = {isa = PBXFileReference; includeInIndex = 1; name = config.json; path = ShipBookSDK/Assets/config.json; sourceTree = "<group>"; };
+		55B6A162538BB86AA50C4109BEF5D631 /* config.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = config.json; path = ShipBookSDK/Assets/config.json; sourceTree = "<group>"; };
 		59D3FD8924F26782314FFF8211D6F2BD /* LogManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogManager.swift; path = ShipBookSDK/Classes/LogManager.swift; sourceTree = "<group>"; };
 		5A0B83BFFF2A59828E21717534F36DEA /* Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ShipBookSDK/Classes/Log.swift; sourceTree = "<group>"; };
 		5A71750E0E6FB018E3E4EF045A54FCA8 /* ViewControllerEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewControllerEvent.swift; sourceTree = "<group>"; };
@@ -141,13 +141,13 @@
 		7C46296EFEDC1AE0A42379098D67501C /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		7DAB7767C1C2D01DAC29459BCB262180 /* Severity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Severity.swift; sourceTree = "<group>"; };
 		7EC8F3F1D523367A9ACCCDADA544D5E0 /* Exception.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
-		7F8ECDA7BC69432D513959F965CCE078 /* CrashManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrashManager.swift; path = ShipBookSDK/Classes/CrashManager.swift; sourceTree = "<group>"; };
+		7F8ECDA7BC69432D513959F965CCE078 /* ExceptionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExceptionManager.swift; path = ShipBookSDK/Classes/ExceptionManager.swift; sourceTree = "<group>"; };
 		885E11641CD8B11A7AB6141BB29CEFFD /* ConnectionClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectionClient.swift; sourceTree = "<group>"; };
 		8D5994F676477CF075128978C08164CC /* String+Write.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+Write.swift"; sourceTree = "<group>"; };
 		8E8C824CC85092AA6E80FDFC916FE84C /* ShipBookSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ShipBookSDK-dummy.m"; sourceTree = "<group>"; };
 		910EF98FA79319F4EE91A60E827A6354 /* ConsoleAppender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConsoleAppender.swift; sourceTree = "<group>"; };
 		9258E36450AF834C25CAAFFD848A186C /* AppEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93B0F07DEC37DE3C1780CFCED4693663 /* SessionLogData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SessionLogData.swift; sourceTree = "<group>"; };
 		93D7B191563DD59B84AD736943BC0620 /* PatternLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PatternLayout.swift; sourceTree = "<group>"; };
 		984E09DF520D999117ED420697FC0885 /* ShipBookSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ShipBookSDK.xcconfig; sourceTree = "<group>"; };
@@ -155,12 +155,12 @@
 		9D8D6A71C6BD585580B8138DBE01A12A /* Pods-ShipBookSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ShipBookSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A04969B47718BB4EDE224ABDE53B1616 /* Pods-ShipBookSDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ShipBookSDK_Tests-resources.sh"; sourceTree = "<group>"; };
 		AF942827B2C74A8DD70868A0F5CC8EE8 /* Pods-ShipBookSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ShipBookSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B63C2BEC09E4D7FD935C4DF9C4F2B523 /* ShipBookSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ShipBookSDK.bundle; path = ShipBookSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		B63C2BEC09E4D7FD935C4DF9C4F2B523 /* ShipBookSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipBookSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B990ED335ADF04059EB016C232577400 /* ShipBookSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ShipBookSDK-umbrella.h"; sourceTree = "<group>"; };
 		D08613EE223EAD478C9A3D0311554E46 /* Thread+Number.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Thread+Number.swift"; sourceTree = "<group>"; };
 		D1D6E7F0119CCCC6C639A2DC83420CE6 /* BaseAppender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseAppender.swift; sourceTree = "<group>"; };
 		D5B2B9EBEAB56194FD74F0A5907B1079 /* Message.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		D9528195DEDA59C327F94CEFDDFF03CB /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ShipBookSDK_Example.framework; path = "Pods-ShipBookSDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9528195DEDA59C327F94CEFDDFF03CB /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE1ECACE94CE1E27A141BDE358928298 /* LoginResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		DFAEF00228D867DE7262CDC6F0292350 /* ShipBook.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShipBook.swift; path = ShipBookSDK/Classes/ShipBook.swift; sourceTree = "<group>"; };
 		E053993396ACBF9127294684A98E3B3A /* EventManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = ShipBookSDK/Classes/EventManager.swift; sourceTree = "<group>"; };
@@ -351,7 +351,6 @@
 				DE1ECACE94CE1E27A141BDE358928298 /* LoginResponse.swift */,
 				ECBD69ECC123C299C9053C53981D7778 /* RefreshTokenResponse.swift */,
 			);
-			name = Response;
 			path = Response;
 			sourceTree = "<group>";
 		};
@@ -366,7 +365,7 @@
 		CF47F52C955C46062F2F4F5E77FD0412 /* ShipBookSDK */ = {
 			isa = PBXGroup;
 			children = (
-				7F8ECDA7BC69432D513959F965CCE078 /* CrashManager.swift */,
+				7F8ECDA7BC69432D513959F965CCE078 /* ExceptionManager.swift */,
 				E053993396ACBF9127294684A98E3B3A /* EventManager.swift */,
 				0715A93D911721988A04D62D45073141 /* Info.plist */,
 				9D8069B8AB7BF70E8C6403E2E63AD623 /* InnerLog.swift */,
@@ -533,7 +532,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0920;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -604,7 +603,7 @@
 				295ECFF46243764152B25B25EE50C7C3 /* ConfigResponse.swift in Sources */,
 				43BF0EA60D5FCC4E5C52113D0B1409F7 /* ConnectionClient.swift in Sources */,
 				3F8CD7D468729F4F6DC4D8EEADFA12D0 /* ConsoleAppender.swift in Sources */,
-				9397EE266F4D6761BEA944B17D93BCDD /* CrashManager.swift in Sources */,
+				9397EE266F4D6761BEA944B17D93BCDD /* ExceptionManager.swift in Sources */,
 				2918B1E9E8A2860C968EFC7E8E658B79 /* CustomEvent.swift in Sources */,
 				83C552B0679A81E4D87A78BA86F67DDC /* Data+Write.swift in Sources */,
 				EAE8FA99373A71BA974DC131E5AAB9EE /* Date+ToString.swift in Sources */,
@@ -967,6 +966,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;

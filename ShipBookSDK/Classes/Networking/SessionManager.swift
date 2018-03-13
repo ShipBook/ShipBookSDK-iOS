@@ -101,8 +101,8 @@ class SessionManager {
     do {
       let contents = try Data(contentsOf:url)
       let config = try JSONDecoder().decode(ConfigResponse.self, from: contents)
-      if !(config.crashReportDisabled == true) {
-        CrashManager.shared.start()
+      if !(config.exceptionReportDisabled == true) {
+        ExceptionManager.shared.start()
       }
       if !(config.eventLoggingDisabled == true) {
         EventManager.shared.enableViewController()

@@ -8,11 +8,11 @@
 
 import Foundation
 
-class CrashManager {
-  static let shared = CrashManager()
-  func start(crash: Bool = true) {
-    if (crash) {
-      createCrash()
+class ExceptionManager {
+  static let shared = ExceptionManager()
+  func start(exception: Bool = true) {
+    if (exception) {
+      createException()
     }
   }
   
@@ -52,7 +52,7 @@ class CrashManager {
     }
     signal(sig, SIG_DFL)
   }
-  private func createCrash() {
+  private func createException() {
     NSSetUncaughtExceptionHandler { exception in
       let callStackSymbols: [String] = exception.callStackSymbols
       for (_, appender) in LogManager.shared.appenders {

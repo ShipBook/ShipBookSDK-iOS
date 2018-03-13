@@ -25,7 +25,7 @@ class CrashManagerTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-      CrashManager.shared.start()
+      ExceptionManager.shared.start()
 //      signal(<#T##Int32#>, <#T##((Int32) -> Void)!##((Int32) -> Void)!##(Int32) -> Void#>)
     }
     
