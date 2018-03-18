@@ -146,16 +146,9 @@ class SBCloudAppender: BaseAppender{
   }
   
   func push(event: BaseEvent) {
-    if flushSeverity.rawValue < Severity.Info.rawValue { // events are the same severity as severity info
-      flushQueue.append(event)
-      if flushQueue.count > flushSize {
-        flushQueue.remove(at: 0)
-      }
-    }
-    else { // the info needs to be flushed and saved
-      saveFlushQueue()
-      saveToFile(data: event)
-      createTimer()
+    flushQueue.append(event)
+    if flushQueue.count > flushSize {
+      flushQueue.remove(at: 0)
     }
   }
 
