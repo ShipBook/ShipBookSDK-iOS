@@ -12,13 +12,13 @@
 		075485FD2014F79E00E92F10 /* LogManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CAC2014CC5400043849 /* LogManagerTests.swift */; };
 		075485FE2014F7B400E92F10 /* CrashManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA62014CC4B00043849 /* CrashManagerTests.swift */; };
 		07DED7EA2015FDD000D63565 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DED7E92015FDD000D63565 /* SecondViewController.swift */; };
-		45ECBB771BF2CCDD1D97EB0D /* Pods_ShipBookSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		9E43C07C680C85978F504BE6 /* Pods_ShipBookSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */; };
+		C62683C9FDA283A42B532CC2 /* Pods_ShipBookSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +38,10 @@
 		070A3CAC2014CC5400043849 /* LogManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManagerTests.swift; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ShipBookSDK.podspec; path = ../ShipBookSDK.podspec; sourceTree = "<group>"; };
-		3D3C69CB23A5E476F1D5F997 /* Pods-ShipBookSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4928FF8D04C239E003B69ED0 /* Pods-ShipBookSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		520BD48B197A20D267C4290B /* Pods-ShipBookSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ShipBookSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShipBookSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,8 +53,8 @@
 		607FACE51AFB9204008FA782 /* ShipBookSDK_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipBookSDK_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		903A3EE1AB241BB39EBA02C8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		B3BD95AD0DCAE90B0269C325 /* Pods-ShipBookSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		EDCAB9F07EF529B25D9B8B32 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45ECBB771BF2CCDD1D97EB0D /* Pods_ShipBookSDK_Tests.framework in Frameworks */,
+				C62683C9FDA283A42B532CC2 /* Pods_ShipBookSDK_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +82,8 @@
 			children = (
 				4928FF8D04C239E003B69ED0 /* Pods-ShipBookSDK_Example.debug.xcconfig */,
 				520BD48B197A20D267C4290B /* Pods-ShipBookSDK_Example.release.xcconfig */,
-				3D3C69CB23A5E476F1D5F997 /* Pods-ShipBookSDK_Tests.debug.xcconfig */,
-				B3BD95AD0DCAE90B0269C325 /* Pods-ShipBookSDK_Tests.release.xcconfig */,
+				4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */,
+				F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -198,12 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ShipBookSDK_Tests" */;
 			buildPhases = (
-				C2A42B2ADC4B17370F018D8B /* [CP] Check Pods Manifest.lock */,
+				4735FE9E7318F7BE0752512A /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				35FD423AE1C8FF74723B9AC6 /* [CP] Embed Pods Frameworks */,
-				29D786D54AD3E73FA6F5D5DC /* [CP] Copy Pods Resources */,
+				CE89E6FF7F3BCA6DE97D34CF /* [CP] Embed Pods Frameworks */,
+				BAD5D18D83E4711B22FAB690 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -276,37 +276,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		29D786D54AD3E73FA6F5D5DC /* [CP] Copy Pods Resources */ = {
+		4735FE9E7318F7BE0752512A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShipBookSDK_Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		35FD423AE1C8FF74723B9AC6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ShipBookSDK/ShipBookSDK.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShipBookSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		551C2E59E0E2EAA51905472C /* [CP] Embed Pods Frameworks */ = {
@@ -360,22 +345,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C2A42B2ADC4B17370F018D8B /* [CP] Check Pods Manifest.lock */ = {
+		BAD5D18D83E4711B22FAB690 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ShipBookSDK_Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE89E6FF7F3BCA6DE97D34CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ShipBookSDK/ShipBookSDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShipBookSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -565,7 +565,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D3C69CB23A5E476F1D5F997 /* Pods-ShipBookSDK_Tests.debug.xcconfig */;
+			baseConfigurationReference = 4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -587,7 +587,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3BD95AD0DCAE90B0269C325 /* Pods-ShipBookSDK_Tests.release.xcconfig */;
+			baseConfigurationReference = F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

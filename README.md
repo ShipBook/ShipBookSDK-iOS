@@ -8,7 +8,7 @@ The SDK has very special emphasis on being very fast in the case that the log is
 
 ---
 ## Requirements
-ShipBook works with SWIFT 4 and from iOS 10
+ShipBook works with SWIFT 4 (min. version 3) and from iOS 10
 
 ---
 ## Installation
