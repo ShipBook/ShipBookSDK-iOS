@@ -27,6 +27,31 @@ class BaseLog: Codable  {
       self.orderId = BaseLog.count
     }
   }
+  
+  enum BaseCodingKeys: String, CodingKey {
+    case time
+    case orderId
+    case threadInfo
+    case type
+  }
+  
+  required init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: BaseCodingKeys.self)
+    let time = try container.decode(String.self, forKey: .time)
+    self.time = time.toDate()
+    self.orderId = try container.decode(Int.self, forKey: .orderId)
+    self.threadInfo = try container.decode(ThreadInfo.self, forKey: .threadInfo)
+    self.type = try container.decode(String.self, forKey: .type)
+  }
+  
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: BaseCodingKeys.self)
+    try container.encode(time.toISO8601Format(), forKey: .time)
+    try container.encode(orderId, forKey: .orderId)
+    try container.encode(threadInfo, forKey: .threadInfo)
+    try container.encode(type, forKey: .type)
+  }
+
 }
 
 struct ThreadInfo: Codable {

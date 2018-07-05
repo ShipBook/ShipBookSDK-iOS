@@ -134,6 +134,21 @@ class CodableTests: XCTestCase {
     XCTAssertEqual(event, event2!)
   }
 
+  func testLogin() {
+    let jsonEncoder = JSONEncoder()
+    let login = Login(appId: "idTest", appKey: "keyTest")
+    
+    var jsonData: Data? = nil
+    XCTAssertNoThrow(jsonData = try jsonEncoder.encode(login))
+    let jsonString = String(data: jsonData!, encoding: .utf8)
+    print("JSON String : " + jsonString!)
+    
+    let jsonDecoder = JSONDecoder()
+    var login2: Login? = nil
+    XCTAssertNoThrow(login2 = try jsonDecoder.decode(Login.self, from: jsonData!))
+    XCTAssertEqual(login, login2!)
+  }
+  
   func testUser() {
     let jsonEncoder = JSONEncoder()
     var additionalInfo = [String: String]()
