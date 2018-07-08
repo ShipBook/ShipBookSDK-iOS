@@ -114,6 +114,12 @@ ShipBook.logout()
 
 ---
 
+## Screen
+To add screen information to the log add to `viewWillAppear` in the view controller the following code:
+```swift
+ShipBook.screen(name: "SCREEN_NAME")
+```
+
 ## Wrapper on ShipBook
 If you want to create a wrapper on the logs you will need to implement all the parameters of each log.
 
