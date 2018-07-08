@@ -264,6 +264,7 @@ class SBCloudAppender: BaseAppender{
     let messageName = String(describing: Message.self)
     let exceptionName = String(describing: Exception.self)
     let actionEventName = String(describing: ActionEvent.self)
+    let screenEventName = String(describing: ScreenEvent.self)
     let vcEventName = String(describing: ViewControllerEvent.self)
     let appStateEventName = String(describing: AppEvent.self)
     let loginName = String(describing: Login.self)
@@ -296,6 +297,9 @@ class SBCloudAppender: BaseAppender{
         case actionEventName:
           let actionEvent = try classJson.decode(json: ActionEvent.self)
           sessionLogData?.logs.append(actionEvent)
+        case screenEventName:
+          let screenEvent = try classJson.decode(json: ScreenEvent.self)
+          sessionLogData?.logs.append(screenEvent)
         case vcEventName:
           let vcEvent = try classJson.decode(json: ViewControllerEvent.self)
           sessionLogData?.logs.append(vcEvent)

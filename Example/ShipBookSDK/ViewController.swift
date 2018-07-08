@@ -21,6 +21,11 @@ class ViewController: UIViewController {
     log.v("this is a verbose message")
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    ShipBook.screen(name: "viewController")
+  }
+  
   override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.

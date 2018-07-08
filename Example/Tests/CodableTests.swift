@@ -84,6 +84,21 @@ class CodableTests: XCTestCase {
     XCTAssertEqual(event, event2!)
   }
 
+  func testScreenEvent() {
+    let jsonEncoder = JSONEncoder()
+    let event = ScreenEvent(name: "test")
+    var jsonData: Data? = nil
+    XCTAssertNoThrow(jsonData = try jsonEncoder.encode(event))
+    let jsonString = String(data: jsonData!, encoding: .utf8)
+    print("JSON String : " + jsonString!)
+    
+    let jsonDecoder = JSONDecoder()
+    var event2: ScreenEvent? = nil
+    XCTAssertNoThrow(event2 = try jsonDecoder.decode(ScreenEvent.self, from: jsonData!))
+    XCTAssertEqual(event, event2!)
+
+  }
+  
   func testCustomEvent() {
     let jsonEncoder = JSONEncoder()
     var params = [String: String]()

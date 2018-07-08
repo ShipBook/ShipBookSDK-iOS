@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05DA680E9EF522B5100359797CD85044 /* ShipBookSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5513188453A2CD3567CAE46DAACE47B1 /* ShipBookSDK-dummy.m */; };
 		07B2D06420EE65EC001A30BD /* String+ToDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3F32520EE60260042B796 /* String+ToDate.swift */; };
+		07B2D06720F206EE001A30BD /* ScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B2D06520F203FC001A30BD /* ScreenEvent.swift */; };
 		07B87E005043CD816C129D97F3F12DC2 /* DispatchQueue+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EC53DEA4787CFD21678E7397D9D84D /* DispatchQueue+Log.swift */; };
 		0A06D238139F34BBCE655572CC0B4630 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D05A7B529986EADE77D55B1291F53 /* Log.swift */; };
 		0C74BE7B1523C6FD521D7EB2111F9820 /* Severity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2698FE9F9C71CB14729B3C1DEC0AFD27 /* Severity.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		0113432EF93B5122A9A227365E9DE46B /* NotificationName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationName.swift; path = ShipBookSDK/Classes/NotificationName.swift; sourceTree = "<group>"; };
 		05C0E4B8ADEAAC6C5699AEA12F0EAEC7 /* Pods-ShipBookSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ShipBookSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		07B2D06520F203FC001A30BD /* ScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenEvent.swift; sourceTree = "<group>"; };
 		07F3F32520EE60260042B796 /* String+ToDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ToDate.swift"; sourceTree = "<group>"; };
 		0B0A7F38039CF7F171DD08977AD64578 /* Pods-ShipBookSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ShipBookSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		0D2602D3BF0326417F2523DF8605E8B5 /* User.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				6F1E1BEA0EE068981DB1AFDFD2AFD43A /* TimeEvent.swift */,
 				0D2602D3BF0326417F2523DF8605E8B5 /* User.swift */,
 				72030AEE46ABEA25D5B6707C07B795DC /* ViewControllerEvent.swift */,
+				07B2D06520F203FC001A30BD /* ScreenEvent.swift */,
 				EDC4F516DCD3C426651FE316CE6F380A /* Response */,
 			);
 			name = Models;
@@ -655,6 +658,7 @@
 				2BD7F7DCFEED2A378BFAE6B4655878BF /* TimeEvent.swift in Sources */,
 				45AF162CEC2CE319F75C9E34348D9E4A /* UIDevice+ModelName.swift in Sources */,
 				3D9427DD03F41A5567EF4B79CE2C7A36 /* User.swift in Sources */,
+				07B2D06720F206EE001A30BD /* ScreenEvent.swift in Sources */,
 				83F9EB4BFFD1F2E42B7E9D27F6075983 /* ViewControllerEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

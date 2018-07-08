@@ -21,6 +21,11 @@ class SecondViewController: UIViewController {
     log.v("this is a verbose message in SecondViewController")
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    ShipBook.screen(name: "SecondViewController")
+  }
+
   @IBAction func back () {
     self.dismiss(animated: false)
   }

@@ -105,7 +105,7 @@ class SessionManager {
         ExceptionManager.shared.start()
       }
       if !(config.eventLoggingDisabled == true) {
-        EventManager.shared.enableViewController()
+        // EventManager.shared.enableViewController() it is bloating the logs
         EventManager.shared.enableAction()
         EventManager.shared.enableApp()
       }

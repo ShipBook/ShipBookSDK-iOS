@@ -46,4 +46,9 @@ public class ShipBook {
   static public func getLogger(_ tag: String) -> Log {
     return Log(tag)
   }
+  
+  static public func screen(name: String) {
+    let event = ScreenEvent(name: name)
+    LogManager.shared.push(log: event)
+  }
 }
