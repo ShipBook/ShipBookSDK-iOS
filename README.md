@@ -121,7 +121,9 @@ ShipBook.screen(name: "SCREEN_NAME")
 ```
 
 ## Wrapper on ShipBook
-If you want to create a wrapper on the logs you will need to implement all the parameters of each log.
+If you are already using some kind of a logging system, you may want to write wrappers to send the logs to both systems.
+
+When creating the wrapper on the logs, you will need to implement all the parameters of each log.
 
 For example a wrapper for `log.e()`:
 ```swift
