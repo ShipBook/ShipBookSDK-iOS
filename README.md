@@ -1,6 +1,6 @@
 # ShipBook SDK for iOS
 
-###User & Session-based mobile log analysis
+### User & Session-based mobile log analysis
 
 [ShipBook](https://www.shipbook.io) gives you the power to remotely gather, search and analyze your user logs and exceptions in the cloud, on a per-user & session basis.
 
