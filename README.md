@@ -1,8 +1,8 @@
 # ShipBook SDK for iOS
 
-ShipBook is a cloud service to collect mobile application logs. It also logs UI events and exceptions. By having all this information together it is possible to analyze problems easily.
+###User & Session-based mobile log analysis
 
-All logs go by default also to the console.
+[ShipBook](https://www.shipbook.io) gives you the power to remotely gather, search and analyze your user logs and exceptions in the cloud, on a per-user & session basis.
 
 The SDK has very special emphasis on being very fast in the case that the log is closed. Therefore feel free to put as many logs as needed, it won't impact the performance of the app (when logs are closed)
 
