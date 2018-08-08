@@ -1,39 +1,37 @@
 # ShipBook SDK for iOS
 
-### User & Session-based mobile log analysis
-
+## About Shipbook
 [ShipBook](https://www.shipbook.io) gives you the power to remotely gather, search and analyze your user logs and exceptions in the cloud, on a per-user & session basis.
 
-The SDK has very special emphasis on being very fast in the case that the log is closed. Therefore feel free to put as many logs as needed, it won't impact the performance of the app (when logs are closed)
-
 ---
+
 ## Requirements
-ShipBook works with SWIFT 4 (min. version 3) and from iOS 10
+ShipBook works with SWIFT 4 (min. version 3) and from iOS 10.
 
 ---
-## Installation
+## Installation via CocoaPods
 
-ShipBookSDK is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+ShipBookSDK is only available through [CocoaPods](http://cocoapods.org). Once you have installed CocoaPods, add the following line to your Podfile and run `pod install`:
 
 ```ruby
 pod 'ShipBookSDK'
 ```
 ---
-##  Using ShipBook
+##  Integrating ShipBook into your code
 
-In your AppDelegate file:
+In your AppDelegate file, add the following:
 ```swift
 import ShipBookSDK
 ```
 
-And add the following to `application(_:didFinishLaunchingWithOptions:)`:
+Then, add the following to `application(_:didFinishLaunchingWithOptions:)`:
 
 ```swift
 ShipBook.start(appId:"YOUR_APP_ID", appKey:"YOUR_APP_KEY")
 ```
 
-For to have a log on each class you should create a logger for Example for MainViewController:
+To have a log on each class you need to create a logger. 
+For Example, in MainViewController:
 ```swift
 import ShipBookSDK
 
@@ -50,27 +48,56 @@ log.d("the log message") // Debug log
 log.v("the log message") // Verbose log
 ```
 
-If you want to have your own tag that isn't the name of the class that you're using then you can put a tag that you want:
+If you’d like to add a tag that isn't the name of the class you're using then you can add a custom tag:
 ```swift
 import ShipBookSDK
 
 fileprivate let log = ShipBook.getLogger("CUSTOM_TAG")
 ```
 
-### Making that you don't need to import in each file `import ShipBookSDK`
-Add the following code in the AppDelegate file:
+## Linking ShipBook to a user’s information
+The SDK allows the option to associate each session with specific user information.
+
+### Register user:
+The best practice is to set registerUser before ShipBook.start. It will also work after this point however, it will require an additional api request.
+```swift
+ShipBook.registerUser(userId: "USER_ID",
+userName: "USER_NAME",
+fullName: "USER NAME",
+email: "USER_EMAIL",
+phoneNumber: "USER_PHONE_NUMBER",
+additionalInfo: "STRING DICTIONARY OF KEY VALUE")
+```
+The only required parameter is `userId`.
+
+### Logout
+To logout the user, add the following code to your app’s logout function.
+```swift
+ShipBook.logout()
+```
+---
+
+## Screen
+To log the user’s screen information, add the following code
+```swift
+ShipBook.screen(name: "SCREEN_NAME")
+```
+The best practice is to add this code to viewWillAppear in the view controller.
+
+---
+
+# Additional Information
+## Automatically Importing ShipBookSDK
+If you don’t want to manually add `import ShipBookSDK` to each source file, you may insert the following code to the AppDelegate file:
+
 ```swift
 import ShipBookSDK
 public typealias ShipBook = ShipBookSDK.ShipBook
 ```
 
-### Calling log without `getLogger`
-There are also static functions that implement the logger. In this case the tag will be the filename.
-
-Working with the static logger isn't ideal:
-* The implementation is much slower especially in cases that it the log is closed.
-* There is less granularity of the log information. Ideally you should create a logger for each class.
-* The Log name can have a name collision with a local Log class.
+## Static Function Alternative to getLogger
+You may use a static function in place of getLogger. This is not recommended and the caveats are listed below. When a static function activates the logger, the tag will become the filename.
+The usage of the log:
 
 The usage of the log:
 ```swift
@@ -80,47 +107,14 @@ Log.i("the log message") // Info log
 Log.d("the log message") // Debug log
 Log.v("the log message") // Verbose log
 ```
-
-
-#### Making that you don't need to import in each file `import ShipBookSDK` for `Log`
-```swift
-import ShipBookSDK
-public typealias Log = ShipBookSDK.Log
-```
+As mentioned, working with this static logger isn't ideal:
+* Performance is slower, especially in cases where the log is closed/
+* The log’s information is less detailed. Ideally, you should create a logger for each class.
+* The Log name can have a name collision with a local Log class.
 
 ---
 
-## User associated data
-The SDK enables the option to associate the session with specific user information
-
-### Register user:
-```swift
-ShipBook.registerUser(userId: "USER_ID",
-userName: "USER_NAME",
-fullName: "USER NAME",
-email: "USER_EMAIL",
-phoneNumber: "USER_PHONE_NUMBER",
-additionalInfo: "STRING DICTIONARY OF KEY VALUE")
-```
-The only parameter that must be entered is the `userId`.
-
-The best position to set the registerUser is before the `ShipBook.start`. It will also work after it, but there will need to be one more api request.
-
-### Logout
-When a user logs out of the system then a new session is created.
-```swift
-ShipBook.logout()
-```
-
----
-
-## Screen
-To add screen information to the log add to `viewWillAppear` in the view controller the following code:
-```swift
-ShipBook.screen(name: "SCREEN_NAME")
-```
-
-## Wrapper on ShipBook
+## Using Wrappers wit ShipBook
 If you are already using some kind of a logging system, you may want to write wrappers to send the logs to both systems.
 
 When creating the wrapper on the logs, you will need to implement all the parameters of each log.
@@ -136,7 +130,7 @@ log.e(msg: msg, tag: tag, function: function,file: file,line: line)
 }
 ```
 
-If you want you can also implement the function that is getting all the messages: `message()`:
+You can also implement the function that is receiving all the messages:  `message()`:
 
 ```swift
 func e(_ msg:String,
@@ -159,10 +153,12 @@ case Verbose
 }
 ```
 
-## Author
 
-Elisha Sterngold (ShipBook Ltd.)
 
-## License
+# Author
+
+Elisha Sterngold ([ShipBook Ltd.](https://www.shipbook.io))
+
+# License
 
 ShipBookSDK is available under the MIT license. See the LICENSE file for more info.
