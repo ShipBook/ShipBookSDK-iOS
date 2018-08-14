@@ -114,7 +114,7 @@ As mentioned, working with this static logger isn't ideal:
 
 ---
 
-## Using Wrappers wit ShipBook
+## Using Wrappers with ShipBook
 If you are already using some kind of a logging system, you may want to write wrappers to send the logs to both systems.
 
 When creating the wrapper on the logs, you will need to implement all the parameters of each log.
@@ -138,7 +138,7 @@ tag:String? = nil,
 function: String = #function,
 file: String = #file,
 line: Int = #line) {
-log.e(msg: msg, severity: .Error, tag: tag, function: function,file: file,line: line)
+log.message(msg: msg, severity: .Error, tag: tag, function: function,file: file,line: line)
 }
 ```
 The severity is an enum:
