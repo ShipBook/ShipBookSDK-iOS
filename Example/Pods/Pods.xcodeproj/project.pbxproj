@@ -46,7 +46,6 @@
 		9B7C382BAE674CB4FF73465B821687F1 /* BaseEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA8556506295C03247A463B15DEBB43 /* BaseEvent.swift */; };
 		A0B604CB95F3A7C0F69277B1A1FEC247 /* BaseLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB73B1CE7C82A860A70B13FD3F9A0B /* BaseLog.swift */; };
 		A9ADC94CD5C1B63F3E7F75DDD6404B1E /* Pods-ShipBookSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E859A1DA561C077F956A4D7FCD78F1B /* Pods-ShipBookSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA24EA4E38DEE1F9B27EFD38E33CE749 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 694110C87B5273EFE27DF03787C65BDF /* Info.plist */; };
 		B0F1B16973F285F6E6F1F122CE9D615B /* Pods-ShipBookSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A321CADDAF790352DE8E8F009D561B /* Pods-ShipBookSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFB57F710B29AA477A043F40B2F6ADFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		C052A660A8CE351BD87B253EEEFD3A74 /* Data+Write.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D314FAB02752CD453D38ED83335940C /* Data+Write.swift */; };
@@ -131,7 +130,6 @@
 		63E2D35484D55169CE412A25FE7FA748 /* LogManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogManager.swift; path = ShipBookSDK/Classes/LogManager.swift; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6869AC3ADEB8F6056E33C5BE3BBEA4EE /* InnerLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InnerLog.swift; path = ShipBookSDK/Classes/InnerLog.swift; sourceTree = "<group>"; };
-		694110C87B5273EFE27DF03787C65BDF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = ShipBookSDK/Classes/Info.plist; sourceTree = "<group>"; };
 		69483A05909D2038EBD677C390B3A44E /* ResourceBundle-ShipBookSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ShipBookSDK-Info.plist"; sourceTree = "<group>"; };
 		6F1E1BEA0EE068981DB1AFDFD2AFD43A /* TimeEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeEvent.swift; sourceTree = "<group>"; };
 		72030AEE46ABEA25D5B6707C07B795DC /* ViewControllerEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewControllerEvent.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 			children = (
 				84B14896F3CAFE1842582DF8B00D6467 /* EventManager.swift */,
 				E4BEBBEB84CBCCAC9F8C878D511B29BA /* ExceptionManager.swift */,
-				694110C87B5273EFE27DF03787C65BDF /* Info.plist */,
 				6869AC3ADEB8F6056E33C5BE3BBEA4EE /* InnerLog.swift */,
 				EF6D05A7B529986EADE77D55B1291F53 /* Log.swift */,
 				63E2D35484D55169CE412A25FE7FA748 /* LogManager.swift */,
@@ -632,7 +629,6 @@
 				824402021C43390C06A1E21FA5F97AB9 /* EventManager.swift in Sources */,
 				EE5BFF5244E1E5D3DAC71D1A19F4C038 /* Exception.swift in Sources */,
 				4A80C3F3D1F80D7377D8207B0D89562D /* ExceptionManager.swift in Sources */,
-				AA24EA4E38DEE1F9B27EFD38E33CE749 /* Info.plist in Sources */,
 				07B2D06420EE65EC001A30BD /* String+ToDate.swift in Sources */,
 				5328A3ADF77FF19F8D07DBA60B7C2997 /* InnerLog.swift in Sources */,
 				0A06D238139F34BBCE655572CC0B4630 /* Log.swift in Sources */,

@@ -62,11 +62,11 @@ The SDK allows the option to associate each session with specific user informati
 The best practice is to set registerUser before ShipBook.start. It will also work after this point however, it will require an additional api request.
 ```swift
 ShipBook.registerUser(userId: "USER_ID",
-userName: "USER_NAME",
-fullName: "USER NAME",
-email: "USER_EMAIL",
-phoneNumber: "USER_PHONE_NUMBER",
-additionalInfo: "STRING DICTIONARY OF KEY VALUE")
+                      userName: "USER_NAME",
+                      fullName: "USER NAME",
+                      email: "USER_EMAIL",
+                      phoneNumber: "USER_PHONE_NUMBER",
+                      additionalInfo: "STRING DICTIONARY OF KEY VALUE")
 ```
 The only required parameter is `userId`.
 
@@ -122,11 +122,11 @@ When creating the wrapper on the logs, you will need to implement all the parame
 For example a wrapper for `log.e()`:
 ```swift
 func e(_ msg:String,
-tag:String? = nil,
-function: String = #function,
-file: String = #file,
-line: Int = #line) {
-log.e(msg: msg, tag: tag, function: function,file: file,line: line)
+       tag:String? = nil,
+       function: String = #function,
+       file: String = #file,
+       line: Int = #line) {
+  log.e(msg: msg, tag: tag, function: function,file: file,line: line)
 }
 ```
 
@@ -134,22 +134,22 @@ You can also implement the function that is receiving all the messages:  `messag
 
 ```swift
 func e(_ msg:String,
-tag:String? = nil,
-function: String = #function,
-file: String = #file,
-line: Int = #line) {
-log.message(msg: msg, severity: .Error, tag: tag, function: function,file: file,line: line)
+       tag:String? = nil,
+       function: String = #function,
+       file: String = #file,
+       line: Int = #line) {
+  log.message(msg: msg, severity: .Error, tag: tag, function: function,file: file,line: line)
 }
 ```
 The severity is an enum:
 ```swift
 enum Severity : Int {
-case Off = 0
-case Error
-case Warning
-case Info
-case Debug
-case Verbose
+  case Off = 0
+  case Error
+  case Warning
+  case Info
+  case Debug
+  case Verbose
 }
 ```
 
