@@ -50,6 +50,16 @@ class SBCloudAppender: BaseAppender{
     
     update(config: config)
     
+  #if swift(>=4.2)
+    backgroundObserver = NotificationCenter.default.addObserver(
+      forName: UIApplication.didEnterBackgroundNotification,
+      object: nil,
+      queue: nil) {[weak self] notification in
+        InnerLog.d("I'm out of focus!")
+        // it will close soon so better send the information
+        self?.send()
+    }
+  #else
     backgroundObserver = NotificationCenter.default.addObserver(
       forName: NSNotification.Name.UIApplicationDidEnterBackground,
       object: nil,
@@ -58,6 +68,7 @@ class SBCloudAppender: BaseAppender{
         // it will close soon so better send the information
         self?.send()
     }
+  #endif
 
     connectedObserver = NotificationCenter.default.addObserver(
       forName: NotificationName.Connected,

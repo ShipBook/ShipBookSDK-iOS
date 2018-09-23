@@ -135,7 +135,11 @@ class CodableTests: XCTestCase {
 
   func testAppStateEvent() {
     let jsonEncoder = JSONEncoder()
+  #if swift(>=4.2)
+    let event = AppEvent(event: "event", state: UIApplication.State.active, orientation: UIInterfaceOrientation.landscapeLeft)
+  #else
     let event = AppEvent(event: "event", state: UIApplicationState.active, orientation: UIInterfaceOrientation.landscapeLeft)
+  #endif
     XCTAssertEqual(event.state, AppEvent.State.active)
     XCTAssertEqual(event.orientation, AppEvent.Orientation.landscapeLeft)
     var jsonData: Data? = nil
