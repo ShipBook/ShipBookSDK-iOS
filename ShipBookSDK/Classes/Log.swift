@@ -10,7 +10,8 @@ import Foundation
 
 fileprivate let appName = Bundle.main.infoDictionary?[kCFBundleExecutableKey as String] as? String ?? ""
 
-public class Log {
+@objcMembers
+public class Log: NSObject {
   // static part of the class
   public static func e(_ msg:String,tag:String? = nil,function: String = #function, file: String = #file, line: Int = #line){
     Log.message(msg: msg, severity: .Error, tag: tag, function: function,file: file,line: line)
@@ -52,6 +53,7 @@ public class Log {
     self.tag = "\(appName).\(tempTag!)"
     severity = LogManager.shared.getSeverity(self.tag)
     callStackSeverity = LogManager.shared.getCallStackSeverity(self.tag)
+    super.init()
     addNotification()
   }
   
@@ -59,6 +61,7 @@ public class Log {
     self.tag = String(reflecting: klass)
     self.severity = LogManager.shared.getSeverity(tag)
     self.callStackSeverity = LogManager.shared.getCallStackSeverity(tag)
+    super.init()
     addNotification()
   }
   

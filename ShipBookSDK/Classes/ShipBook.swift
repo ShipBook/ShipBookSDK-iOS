@@ -8,20 +8,20 @@
 
 import Foundation
 
-public class ShipBook {
-  static public func start(appId:String, appKey:String, url: URL? = nil) {
+public class ShipBook: NSObject {
+  @objc static public func start(appId:String, appKey:String, url: URL? = nil) {
     SessionManager.shared.login(appId: appId, appKey: appKey, userConfig: url)
   }
   
-  static public func enableInnerLog(enable: Bool) {
+  @objc static public func enableInnerLog(enable: Bool) {
     InnerLog.enabled = enable
   }
 
-  static public func setConnectionUrl(_ url: String) {
+  @objc static public func setConnectionUrl(_ url: String) {
     ConnectionClient.BASE_URL = url
   }
 
-  static public func registerUser(userId: String,
+  @objc static public func registerUser(userId: String,
                                   userName: String? = nil,
                                   fullName: String? = nil,
                                   email: String? = nil,
@@ -35,7 +35,7 @@ public class ShipBook {
                                          additionalInfo: additionalInfo)
   }
   
-  static public func logout() {
+  @objc static public func logout() {
     SessionManager.shared.logout()
   }
   
@@ -47,7 +47,7 @@ public class ShipBook {
     return Log(tag)
   }
   
-  static public func screen(name: String) {
+  @objc static public func screen(name: String) {
     let event = ScreenEvent(name: name)
     LogManager.shared.push(log: event)
   }

@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   A logging system for iOS. This logging system connects to the ShipBook server. It can also work by its' own without ShipBook Server
                        DESC
 
-  s.homepage         = 'https://github.com/ShipBook/ShipBookSDK-iOS'
+  s.homepage         = 'https://shipbook.io'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Elisha Sterngold' => '' }
@@ -39,4 +39,7 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
   # s.frameworks = 'UIKit', 'MapKit'
+
+  s.swift_version = '4.2'
+
 end
