@@ -9,7 +9,12 @@
 import Foundation
 
 public class ShipBook: NSObject {
-  @objc static public func start(appId:String, appKey:String, url: URL? = nil) {
+  @objc static public func start(appId:String, appKey:String) {
+    ShipBook.start(appId: appId, appKey: appKey, url: nil)
+  }
+  
+  
+  @objc static public func start(appId:String, appKey:String, url: URL?) { // not using default so that it will work on objc
     SessionManager.shared.login(appId: appId, appKey: appKey, userConfig: url)
   }
   
