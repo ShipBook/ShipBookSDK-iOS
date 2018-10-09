@@ -6,7 +6,7 @@
 ---
 
 ## Requirements
-ShipBook works with SWIFT 4.2 (min. version 3), Objective-C and from iOS 10. 
+ShipBook works with SWIFT 4.2 (min. version 3), Objective-C and from iOS 10.  
 Documentation for [Objective-C](README_ObjC.md)
 
 ---
@@ -31,7 +31,7 @@ Then, add the following to `application(_:didFinishLaunchingWithOptions:)`:
 ShipBook.start(appId:"YOUR_APP_ID", appKey:"YOUR_APP_KEY")
 ```
 
-To have a log on each class you need to create a logger. 
+To have a log on each class you need to create a logger.  
 For Example, in MainViewController:
 ```swift
 import ShipBookSDK

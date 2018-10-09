@@ -30,7 +30,7 @@ Then, add the following to `- (BOOL)application:(UIApplication *)application did
 [ShipBook startWithAppId:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
 ```
 
-To have a log on each class you need to create a logger. 
+To have a log on each class you need to create a logger.  
 For Example, in MainViewController:
 ```objc
 @import ShipBookSDK;
