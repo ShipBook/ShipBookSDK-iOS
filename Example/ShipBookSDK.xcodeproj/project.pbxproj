@@ -36,6 +36,7 @@
 		070A3CA72014CC4B00043849 /* AppenderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderTests.swift; sourceTree = "<group>"; };
 		070A3CA82014CC4C00043849 /* CodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		070A3CAC2014CC5400043849 /* LogManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManagerTests.swift; sourceTree = "<group>"; };
+		074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = ../README_ObjC.md; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ShipBookSDK.podspec; path = ../ShipBookSDK.podspec; sourceTree = "<group>"; };
 		3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +158,7 @@
 			children = (
 				3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */,
 				EDCAB9F07EF529B25D9B8B32 /* README.md */,
+				074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */,
 				903A3EE1AB241BB39EBA02C8 /* LICENSE */,
 			);
 			name = "Podspec Metadata";

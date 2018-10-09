@@ -7,6 +7,7 @@
 
 ## Requirements
 ShipBook works with SWIFT 4.2 (min. version 3), Objective-C and from iOS 10. 
+Documentation for [Objective-C](README_ObjC.md)
 
 ---
 ## Installation via CocoaPods
