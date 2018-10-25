@@ -109,7 +109,7 @@ Log.d("the log message") // Debug log
 Log.v("the log message") // Verbose log
 ```
 As mentioned, working with this static logger isn't ideal:
-* Performance is slower, especially in cases where the log is closed/
+* Performance is slower, especially in cases where the log is closed
 * The log’s information is less detailed. Ideally, you should create a logger for each class.
 * The Log name can have a name collision with a local Log class.
 

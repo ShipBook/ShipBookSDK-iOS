@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct User {
+struct User {
   var userId: String
   var userName: String?
   var fullName: String?
@@ -28,7 +28,7 @@ extension User: Codable {
     case additionalInfo
   }
   
-  public init(from decoder: Decoder) throws {
+  init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     userId = try container.decode(String.self, forKey: .userId)
     userName = try container.decodeIfPresent(String.self, forKey: .userName)
@@ -38,7 +38,7 @@ extension User: Codable {
     additionalInfo = try container.decodeIfPresent(Dictionary<String, String>.self, forKey: .additionalInfo)
   }
   
-  public func encode(to encoder: Encoder) throws {
+  func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(userId, forKey: .userId)
     try container.encodeIfPresent(userName, forKey: .userName)
@@ -50,7 +50,7 @@ extension User: Codable {
 }
 
 extension User: Equatable {}
-public  func ==(lhs: User, rhs: User) -> Bool {
+func ==(lhs: User, rhs: User) -> Bool {
   return lhs.userId == rhs.userId &&
     lhs.userName == rhs.userName &&
     lhs.fullName == rhs.fullName &&

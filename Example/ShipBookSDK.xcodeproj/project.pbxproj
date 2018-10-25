@@ -229,6 +229,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 5W26546L6E;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -542,6 +543,7 @@
 			baseConfigurationReference = 4928FF8D04C239E003B69ED0 /* Pods-ShipBookSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5W26546L6E;
 				INFOPLIST_FILE = ShipBookSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
@@ -558,6 +560,7 @@
 			baseConfigurationReference = 520BD48B197A20D267C4290B /* Pods-ShipBookSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5W26546L6E;
 				INFOPLIST_FILE = ShipBookSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
