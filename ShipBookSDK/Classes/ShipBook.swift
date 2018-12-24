@@ -114,7 +114,7 @@ public class ShipBook: NSObject {
     This will help you connect the logs to wich screen is open.
     The best practice is to add this code to viewWillAppear in the view controller.
    
-    - Parameter tag: The tag that the log class will use.
+    - Parameter name: The name of the new screen.
   */
   @objc static public func screen(name: String) {
     let event = ScreenEvent(name: name)
