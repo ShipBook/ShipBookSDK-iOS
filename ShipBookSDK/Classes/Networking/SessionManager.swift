@@ -13,6 +13,7 @@ class SessionManager {
   
   private var isInLoginRequest: Bool = false
   let configURL: URL
+  let dirURL: URL
   var appKey: String?
   var token: String?
   private var _login: Login?
@@ -38,8 +39,9 @@ class SessionManager {
   }
   
   private init(){
-    let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    configURL =  dir!.appendingPathComponent("config.json")
+    let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
+    dirURL = dir!.appendingPathComponent("shipbook")
+    configURL =  dirURL.appendingPathComponent("config.json")
   }
   
   static let shared = SessionManager()
@@ -55,6 +57,7 @@ class SessionManager {
     else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
       let url = URL(fileURLWithPath: filepath)
       self.readConfig(url: url)
+      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
     }
     else {
       InnerLog.e("there was a problem with initialization")
