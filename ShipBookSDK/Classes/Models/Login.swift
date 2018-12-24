@@ -28,7 +28,6 @@ struct Login : Codable {
   let manufacturer: String = "apple"
   let deviceName: String
   let deviceModel: String
-  var advertisementId: String? = nil
   let language: String
   var isDebug: Bool? = nil
   var user: User?
@@ -53,10 +52,6 @@ struct Login : Codable {
   #if DEBUG
     isDebug = true
   #endif
-    advertisementId = nil
-    if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-      advertisementId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-    }
   }
 
   enum CodingKeys: String, CodingKey {
@@ -77,7 +72,6 @@ struct Login : Codable {
     case manufacturer
     case deviceName
     case deviceModel
-    case advertisementId
     case language
     case isDebug
     case user
@@ -104,7 +98,6 @@ struct Login : Codable {
     // self.manufacturer - is initialized with let
     self.deviceName = try container.decode(String.self, forKey: .deviceName)
     self.deviceModel = try container.decode(String.self, forKey: .deviceModel)
-    self.advertisementId = try container.decode(String.self, forKey: .advertisementId)
     self.language = try container.decode(String.self, forKey: .language)
     self.isDebug = try container.decodeIfPresent(Bool.self, forKey: .isDebug)
     self.user = try container.decodeIfPresent(User.self, forKey: .user)
@@ -129,7 +122,6 @@ struct Login : Codable {
     try container.encode(manufacturer, forKey: .manufacturer)
     try container.encode(deviceName, forKey: .deviceName)
     try container.encode(deviceModel, forKey: .deviceModel)
-    try container.encode(advertisementId, forKey: .advertisementId)
     try container.encode(language, forKey: .language)
     
     try container.encodeIfPresent(isDebug, forKey: .isDebug)
@@ -154,8 +146,7 @@ func ==(lhs: Login, rhs: Login) -> Bool {
     lhs.manufacturer == rhs.manufacturer &&
     lhs.deviceModel == rhs.deviceModel &&
     lhs.deviceName == rhs.deviceName &&
-    lhs.language == rhs.language &&
-    lhs.advertisementId == rhs.advertisementId
+    lhs.language == rhs.language
 }
 
 

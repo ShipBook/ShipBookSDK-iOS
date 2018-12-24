@@ -39,9 +39,9 @@ class SBCloudAppender: BaseAppender{
     InnerLog.d("init of CloudAppender")
     self.name = name
     
-    let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    fileURL =  dir!.appendingPathComponent("CloudQueue.log")
-    tempFileURL =  dir!.appendingPathComponent("TempCloudQueue.log")
+    let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
+    fileURL =  dir!.appendingPathComponent("shipbook/CloudQueue.log")
+    tempFileURL =  dir!.appendingPathComponent("shipbook/TempCloudQueue.log")
     
     //checking if there exists a temp file.
     if FileManager.default.fileExists(atPath: tempFileURL.path) {
@@ -229,6 +229,9 @@ class SBCloudAppender: BaseAppender{
     }
     
     uploadingSavedData = true
+    defer {
+      uploadingSavedData = false
+    }
     do {
       try? FileManager.default.removeItem(at: tempFileURL) // for to be sure that the move item will happen
       try FileManager.default.moveItem(at: fileURL, to: tempFileURL)
@@ -236,7 +239,6 @@ class SBCloudAppender: BaseAppender{
       var sessionsData = try loadFromFile(url: tempFileURL)
       guard sessionsData.count > 0 else {
         InnerLog.w("empty session data eventhough loaded from file")
-        uploadingSavedData = false
         return
       }
       
@@ -259,19 +261,16 @@ class SBCloudAppender: BaseAppender{
       client.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
         if response.ok || response.statusCode > 0 {
           self.removeFile(url:self.tempFileURL)
-          self.uploadingSavedData = false
         }
         else {
           InnerLog.i("server is probably down")
           DispatchQueue.shipBook.async {
             self.concatTmpFile()
-            self.uploadingSavedData = false
           }
         }
       }
     } catch let error {
       InnerLog.e(error.localizedDescription)
-      uploadingSavedData = false
       return
     }
   }

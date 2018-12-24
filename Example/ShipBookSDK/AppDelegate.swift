@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         ShipBook.enableInnerLog(enable: true)
-        ShipBook.start(appId:"5b9a5c0fe0191c490e4c7081", appKey: "401b48781c6ce8e5fcaaea2db70996a5")
+        ShipBook.start(appId:"<your appId>", appKey: "<your appId>")
         return true
     }
   #else
