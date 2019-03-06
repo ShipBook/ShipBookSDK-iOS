@@ -118,6 +118,14 @@ class SBCloudAppender: BaseAppender{
         return
       }
       
+      if let attr = try? FileManager.default.attributesOfItem(atPath: fileURL.path) {
+        let fileSize = attr[FileAttributeKey.size] as! UInt64
+        if fileSize > maxFileSize {
+          removeFile(url: fileURL)
+          hasLog = false
+        }
+      }
+      
       if !hasLog {
         if let token = SessionManager.shared.token {
           let line = TOKEN + FILE_CLASS_SEPARATOR + token
