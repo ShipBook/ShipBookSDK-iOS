@@ -14,6 +14,9 @@ class AppenderTests: XCTestCase {
   override func setUp() {
     super.setUp()
     continueAfterFailure = false
+    let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
+    let dirURL = dir!.appendingPathComponent("shipbook")
+    try? FileManager.default.createDirectory(atPath: dirURL.path, withIntermediateDirectories: true, attributes: nil)
   }
   
   override func tearDown() {
@@ -63,6 +66,7 @@ class AppenderTests: XCTestCase {
     logs2.append(Message(message: "message3", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
     logs2.append(Message(message: "message4", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
     logs2.append(Message(message: "message5", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
+    logs2.append(Message(message: "message6 \nnew line", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
     logs2.append(Exception(name: "test"))
     
     for log in logs2 {

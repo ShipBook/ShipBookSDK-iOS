@@ -129,7 +129,7 @@ class LogManagerTests: XCTestCase {
     let log = Log("test")
     log.d("shouldn't do anything")
     log.e(msg)
-    waitForExpectations(timeout: 1, handler: nil)
+    waitForExpectations(timeout: 10, handler: nil)
   }
   
   func testConfigChange() {

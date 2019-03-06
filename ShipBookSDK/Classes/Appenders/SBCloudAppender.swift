@@ -22,7 +22,7 @@ class SBCloudAppender: BaseAppender{
   
   // consts/
   let FILE_CLASS_SEPARATOR = ": "
-  let NEW_LINE_SEPARATOR = "/n"
+  let NEW_LINE_SEPARATOR = " \n" //there is in purpose a space. In class will always be \\n
   let TOKEN = "token"
 
   //internal parameters
@@ -138,7 +138,7 @@ class SBCloudAppender: BaseAppender{
       }
       hasLog = true
     } catch let error {
-      InnerLog.e(error.localizedDescription)
+      InnerLog.e("save to file error: " + error.localizedDescription)
     }
   }
   
@@ -185,7 +185,7 @@ class SBCloudAppender: BaseAppender{
   
   private func createTimer () {
     if (timer == nil) {
-      InnerLog.d("the current time: " + String(maxTime))
+      InnerLog.d("the current max time: " + String(maxTime))
       timer = DispatchSource.makeTimerSource(queue: DispatchQueue.shipBook)
       #if swift(>=4.0)
         timer!.schedule(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(maxTime * 1000)))
@@ -260,6 +260,7 @@ class SBCloudAppender: BaseAppender{
       let client = ConnectionClient()
       client.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
         if response.ok || response.statusCode > 0 {
+          InnerLog.d("sent uploadSavedData")
           self.removeFile(url:self.tempFileURL)
         }
         else {
@@ -270,7 +271,7 @@ class SBCloudAppender: BaseAppender{
         }
       }
     } catch let error {
-      InnerLog.e(error.localizedDescription)
+      InnerLog.e("error in sending file: " + error.localizedDescription)
       return
     }
   }
@@ -342,7 +343,7 @@ class SBCloudAppender: BaseAppender{
     do {
       try FileManager.default.removeItem(at: url)
     } catch let error {
-      InnerLog.e(error.localizedDescription)
+      InnerLog.e("remove file error: " + error.localizedDescription)
     }
   }
   
@@ -354,7 +355,7 @@ class SBCloudAppender: BaseAppender{
       }
       try FileManager.default.moveItem(at: self.tempFileURL, to: self.fileURL)
     } catch let error {
-      InnerLog.e(error.localizedDescription)
+      InnerLog.e("concatTmpFile error: " + error.localizedDescription)
     }
   }
 }
