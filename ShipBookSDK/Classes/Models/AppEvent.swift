@@ -41,6 +41,7 @@ class AppEvent: BaseEvent {
   #endif
   }
   
+#if os(iOS)
   enum Orientation: String, Codable { // need so that the codable will return string
     case unknown
     case portrait
@@ -63,23 +64,32 @@ class AppEvent: BaseEvent {
       }
     }
   }
-  
+  #endif
+
   var event: String
   var state: State
-  var orientation: Orientation
   
-#if swift(>=4.2)
+#if os(iOS)
+  var orientation: Orientation
+  #if swift(>=4.2)
   init(event: String, state: UIApplication.State, orientation: UIInterfaceOrientation) {
     self.event = event
     self.state = State(state: state)
     self.orientation = Orientation(orientation: orientation)
     super.init(type: "appEvent")
   }
-#else
+  #else
   init(event: String, state: UIApplicationState, orientation: UIInterfaceOrientation) {
     self.event = event
     self.state = State(state: state)
     self.orientation = Orientation(orientation: orientation)
+    super.init(type: "appEvent")
+  }
+  #endif
+#else
+  init(event: String,  state: UIApplication.State) {
+    self.event = event
+    self.state = State(state: state)
     super.init(type: "appEvent")
   }
 #endif
@@ -94,7 +104,9 @@ class AppEvent: BaseEvent {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.event = try container.decode(String.self, forKey: .event)
     self.state = try container.decode(State.self, forKey: .state)
+#if os(iOS)
     self.orientation = try container.decode(Orientation.self, forKey: .orientation)
+#endif
     try super.init(from: decoder)
   }
   
@@ -102,7 +114,9 @@ class AppEvent: BaseEvent {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(event, forKey: .event)
     try container.encode(state, forKey: .state)
+#if os(iOS)
     try container.encode(orientation, forKey: .orientation)
+#endif
     try super.encode(to: encoder)
   }
 }
