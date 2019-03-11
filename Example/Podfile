@@ -9,3 +9,7 @@ target 'ShipBookSDK_Example' do
     pod 'ShipBookSDK', :path => '../'
   end
 end
+
+target 'tvOS' do
+  pod 'ShipBookSDK', :path => '../'
+end

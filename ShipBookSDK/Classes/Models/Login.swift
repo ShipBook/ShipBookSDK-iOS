@@ -18,8 +18,11 @@ struct Login : Codable {
   let udid: String
   let time: Date
   var deviceTime: Date // the device time in the time of the login request
-  
+#if os(iOS)
   let os: String = "ios"
+#elseif os(tvOS)
+  let os: String = "tvos"
+#endif
   let osVersion: String
   let appVersion: String
   let appBuild: String
