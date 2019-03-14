@@ -38,10 +38,9 @@ class SBCloudAppender: BaseAppender{
   required init(name: String, config: Config?) {
     InnerLog.d("init of CloudAppender")
     self.name = name
-    
-    let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
-    fileURL =  dir!.appendingPathComponent("shipbook/CloudQueue.log")
-    tempFileURL =  dir!.appendingPathComponent("shipbook/TempCloudQueue.log")
+    let dir = SessionManager.shared.dirURL
+    fileURL =  dir.appendingPathComponent("CloudQueue.log")
+    tempFileURL =  dir.appendingPathComponent("TempCloudQueue.log")
     
     //checking if there exists a temp file.
     if FileManager.default.fileExists(atPath: tempFileURL.path) {

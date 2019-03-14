@@ -39,7 +39,11 @@ class SessionManager {
   }
   
   private init(){
+  #if os(tvOS)
+    let dir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+  #else
     let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
+  #endif
     dirURL = dir!.appendingPathComponent("shipbook")
     configURL =  dirURL.appendingPathComponent("config.json")
   }
