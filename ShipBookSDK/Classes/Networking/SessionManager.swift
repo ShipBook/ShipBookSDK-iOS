@@ -16,6 +16,8 @@ class SessionManager {
   let dirURL: URL
   var appKey: String?
   var token: String?
+  var loginCompletion: ((_ sessionUrl: String)->())?
+  
   private var _login: Login?
   var login: Login? {
     get {
@@ -50,7 +52,7 @@ class SessionManager {
   
   static let shared = SessionManager()
   
-  func login(appId: String, appKey: String, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
+  func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
     if FileManager.default.fileExists(atPath: self.configURL.path) {
       self.readConfig(url: self.configURL)
@@ -68,9 +70,9 @@ class SessionManager {
     }
 
     self.appKey = appKey
-    
+    self.loginCompletion = completion
     self.login = Login(appId: appId,
-                  appKey: appKey)
+                       appKey: appKey)
     
     self.innerLogin()
   }
@@ -140,6 +142,9 @@ class SessionManager {
             }
             let login = try ConnectionClient.jsonDecoder.decode(LoginResponse.self, from: response.data!)
             self.token = login.token
+            
+            self.loginCompletion?(login.sessionUrl)
+            
             LogManager.shared.config(login.config)
             NotificationCenter.default.post(name: NotificationName.Connected, object: self)
             

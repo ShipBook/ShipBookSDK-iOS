@@ -21,7 +21,20 @@ public class ShipBook: NSObject {
 
   */
   @objc static public func start(appId:String, appKey:String) {
-    ShipBook.start(appId: appId, appKey: appKey, url: nil)
+    ShipBook.start(appId: appId, appKey: appKey, completion: nil, url: nil)
+  }
+  
+  /**
+   Starts the shipbook SDK should be called in `application(_:didFinishLaunchingWithOptions:)`
+   
+   - Parameters:
+   - appId: The app id. You get it from https://console.shipbook.io.
+   - appKey: The app key. You get it from https://console.shipbook.io.
+   - completion: Getting the url of the session. Usefull for integrating in 3rd party like crashlytics
+   
+   */
+  @objc static public func start(appId:String, appKey:String, completion: ((_ sessionUrl: String)->())?) {
+    ShipBook.start(appId: appId, appKey: appKey, completion: completion, url: nil)
   }
   
   /**
@@ -30,10 +43,11 @@ public class ShipBook: NSObject {
     - Parameters:
       - appId: The app id. You get it from https://console.shipbook.io.
       - appKey: The app key. You get it from https://console.shipbook.io.
+      - sessionUrlCallback: Getting the url of the session. Usefull for integrating in 3rd party like crashlytics
       - url: The url of the server. By default it goes to the Shipboook production server.
    */
-  @objc static public func start(appId:String, appKey:String, url: URL?) { // not using default so that it will work on objc
-    SessionManager.shared.login(appId: appId, appKey: appKey, userConfig: url)
+  @objc static public func start(appId:String, appKey:String,  completion: ((_ sessionUrl: String)->())?, url: URL?) { // not using default so that it will work on objc
+    SessionManager.shared.login(appId: appId, appKey: appKey, completion: completion, userConfig: url)
   }
   
   /**

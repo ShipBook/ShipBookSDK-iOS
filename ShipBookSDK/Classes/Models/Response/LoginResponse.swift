@@ -11,4 +11,5 @@ import Foundation
 struct LoginResponse : Decodable {
   let config: ConfigResponse
   let token: String
+  let sessionUrl: String
 }
