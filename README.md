@@ -56,6 +56,13 @@ import ShipBookSDK
 fileprivate let log = ShipBook.getLogger("CUSTOM_TAG")
 ```
 
+## Enable Shipbook debug logging
+If your logs weren't uploaded to Shipbook, or you're experiencing some other issue with Shipbook, you can enable Shipbook debug logging to track down the problem.
+
+```swift
+ShipBook.enableInnerLog(enable: true)
+```
+
 ## Linking ShipBook to a user’s information
 The SDK allows the option to associate each session with specific user information.
 
@@ -154,7 +161,16 @@ enum Severity : Int {
 }
 ```
 
+## Integrating Shipbook with Crashlytics
+To integrate Shipbook with crashlytics just implement the completion callback of `ShipBook.start` as following:
 
+```swift
+ShipBook.start("YOUR_APP_ID", appKey:"YOUR_APP_KEY") { (sessionUrl: String) -> () in
+  Crashlytics.sharedInstance().setObjectValue(sessionUrl, forKey: "ShipbookSession")
+}
+```
+
+Now you'll have in crashlytics a link to the logs of the specific session. The link is in the Keys tab of the a specific crash under the key `ShipbookSession`.   
 
 # Author
 
