@@ -16,7 +16,7 @@ ShipBookSDK is  available through:
 1. [CocoaPods](http://cocoapods.org). 
 2. [Carthage](https://github.com/Carthage/Carthage)
 
-### Installation via CocoaPods
+### Using CocoaPods
 Once you have installed CocoaPods, add the following line to your Podfile and run `pod install`:
 ```ruby
 pod 'ShipBookSDK'
