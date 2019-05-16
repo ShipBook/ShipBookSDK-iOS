@@ -23,8 +23,10 @@ pod 'ShipBookSDK'
 ```
 
 ### Using Carthage
-add the following line to your Cartfile:
+Add the following line to your Cartfile:
+```
 github "ShipBook/ShipBookSDK-iOS"
+```
 
 If you use Carthage to build your dependencies, make sure you have added ShipBookSDK.framework to the "Linked Frameworks and Libraries" section of your target, and have included them in your Carthage framework copying build phase.
 
