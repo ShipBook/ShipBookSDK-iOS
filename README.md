@@ -10,13 +10,24 @@ ShipBook works with SWIFT 4.2 (min. version 3), Objective-C and from iOS 10.
 Documentation for [Objective-C](README_ObjC.md)
 
 ---
-## Installation via CocoaPods
+## Installation 
 
-ShipBookSDK is only available through [CocoaPods](http://cocoapods.org). Once you have installed CocoaPods, add the following line to your Podfile and run `pod install`:
+ShipBookSDK is  available through:
+1. [CocoaPods](http://cocoapods.org). 
+2. [Carthage](https://github.com/Carthage/Carthage)
 
+### Installation via CocoaPods
+Once you have installed CocoaPods, add the following line to your Podfile and run `pod install`:
 ```ruby
 pod 'ShipBookSDK'
 ```
+
+### Using Carthage
+add the following line to your Cartfile:
+github "ShipBook/ShipBookSDK-iOS"
+
+If you use Carthage to build your dependencies, make sure you have added ShipBookSDK.framework to the "Linked Frameworks and Libraries" section of your target, and have included them in your Carthage framework copying build phase.
+
 ---
 ##  Integrating ShipBook into your code
 
