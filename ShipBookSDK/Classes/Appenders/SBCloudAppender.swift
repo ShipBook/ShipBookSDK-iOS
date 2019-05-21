@@ -195,16 +195,16 @@ class SBCloudAppender: BaseAppender{
       InnerLog.d("the current max time: " + String(maxTime))
       timer = DispatchSource.makeTimerSource(queue: DispatchQueue.shipBook)
       #if swift(>=4.0)
-        timer!.schedule(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(maxTime * 1000)))
+        timer?.schedule(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(maxTime * 1000)))
       #else
-        timer!.scheduleOneshot(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(maxTime * 1000)))
+        timer?.scheduleOneshot(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(maxTime * 1000)))
       #endif
-      timer!.setEventHandler { [weak self] in
+      timer?.setEventHandler { [weak self] in
         InnerLog.d("the current label: " + DispatchQueue.currentLabel)
         self?.timer = nil
         self?.send()
       }
-      timer!.resume()
+      timer?.resume()
     }
   }
 
