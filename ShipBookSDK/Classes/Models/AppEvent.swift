@@ -25,6 +25,8 @@ class AppEvent: BaseEvent {
         self = .inactive
       case .background:
         self = .background
+      @unknown default:
+        self = .active
       }
     }
   #else
@@ -61,6 +63,8 @@ class AppEvent: BaseEvent {
         self = .landscapeLeft
       case .landscapeRight:
         self = .landscapeRight
+      @unknown default:
+        self = .unknown
       }
     }
   }
