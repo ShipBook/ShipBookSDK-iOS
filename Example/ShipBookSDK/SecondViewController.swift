@@ -29,4 +29,11 @@ class SecondViewController: UIViewController {
   @IBAction func back () {
     self.dismiss(animated: false)
   }
+  
+  @IBAction func  crash() throws {
+    log.d("entered crash function")
+    var num = 0.2
+    num = 5 / floor(num)
+    print(" the crash \(num)")
+  }
 }
