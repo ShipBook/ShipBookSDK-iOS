@@ -39,7 +39,7 @@ struct Login : Codable {
     self.appId = appId
     self.appKey = appKey
     
-    udid = UIDevice.current.identifierForVendor!.uuidString
+    udid = UIDevice.current.identifierForVendor?.uuidString ?? ""
     time = Date()
     deviceTime = time
     bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
