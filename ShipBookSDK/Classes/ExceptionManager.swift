@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import MachO.dyld
+
 
 class ExceptionManager {
   static let shared = ExceptionManager()
+  let binaryImages: [BinaryImage]?
   func start(exception: Bool = true) {
     if (exception) {
       createException()
@@ -17,6 +20,19 @@ class ExceptionManager {
   }
   
   private init() {
+    print("binary images")
+    let c = _dyld_image_count()
+    var binaryImages: [BinaryImage] = Array.init()
+    for i in 0..<c {
+      let imageName = String(cString: _dyld_get_image_name(i))
+      let imageNameEnding = URL(fileURLWithPath: imageName).lastPathComponent
+      let header = _dyld_get_image_header(i);
+      let info = NXGetArchInfoFromCpuType(header!.pointee.cputype, header!.pointee.cpusubtype);
+      let arch = String(cString:info!.pointee.name)
+      let startAddress = unsafeBitCast(header, to: Int.self)
+      binaryImages.append(BinaryImage(startAddress: String(format: "%018p", startAddress), name: imageNameEnding, arch: arch, path: imageName))
+    }
+    self.binaryImages = binaryImages
   }
 
   public enum Signal : Int32 {
@@ -48,7 +64,7 @@ class ExceptionManager {
     let signalObj  = Signal(rawValue: sig)
     let exceptionName =  signalObj != nil ? signalObj!.name : "No Name";
     for (_, appender) in LogManager.shared.appenders {
-      appender.push(log: Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols))
+      appender.push(log: Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
     }
     signal(sig, SIG_DFL)
   }
@@ -56,7 +72,7 @@ class ExceptionManager {
     NSSetUncaughtExceptionHandler { exception in
       let callStackSymbols: [String] = exception.callStackSymbols
       for (_, appender) in LogManager.shared.appenders {
-        appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols))
+        appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
       }
     }
     

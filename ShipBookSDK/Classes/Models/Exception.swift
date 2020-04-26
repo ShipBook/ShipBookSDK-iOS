@@ -8,17 +8,33 @@
 
 import Foundation
 
+struct BinaryImage: Codable {
+  var startAddress: String
+  var name: String
+  var arch: String
+  var path: String
+  init(startAddress: String, name: String, arch: String, path: String) {
+    self.startAddress = startAddress
+    self.name = name
+    self.arch = arch
+    self.path = path
+  }
+}
+
 class Exception : BaseLog  {
   var name: String
   var reason: String? = nil
   //var userInfo: [AnyHashable : Any]?
   var callStackSymbols: [String]?
+  var binaryImages: [BinaryImage]?
+
   
-  init(name: String, reason: String? = nil, callStackSymbols: [String]? = nil) {
+  init(name: String, reason: String? = nil, callStackSymbols: [String]? = nil, binaryImages: [BinaryImage]? = nil) {
     self.name = name
     self.reason = reason
 //    self.threadInfo = ThreadInfo()
     self.callStackSymbols = callStackSymbols
+    self.binaryImages = binaryImages
     super.init(type:"exception")
   }
 
@@ -26,6 +42,7 @@ class Exception : BaseLog  {
     case name
     case reason
     case callStackSymbols
+    case binaryImages
   }
   
   required init(from decoder: Decoder) throws {
@@ -33,6 +50,7 @@ class Exception : BaseLog  {
     self.name = try container.decode(String.self, forKey: .name)
     self.reason = try container.decodeIfPresent(String.self, forKey: .reason)
     self.callStackSymbols = try container.decodeIfPresent(Array.self, forKey: .callStackSymbols)
+    self.binaryImages = try container.decodeIfPresent(Array.self, forKey: .binaryImages )
     try super.init(from: decoder)
   }
   
@@ -41,6 +59,7 @@ class Exception : BaseLog  {
     try container.encode(name, forKey: .name)
     try container.encodeIfPresent(reason, forKey: .reason)
     try container.encodeIfPresent(callStackSymbols, forKey: .callStackSymbols)
+    try container.encodeIfPresent(binaryImages, forKey: .binaryImages)
     try super.encode(to: encoder)
   }
 }
