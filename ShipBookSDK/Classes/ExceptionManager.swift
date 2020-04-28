@@ -27,10 +27,14 @@ class ExceptionManager {
       let imageName = String(cString: _dyld_get_image_name(i))
       let imageNameEnding = URL(fileURLWithPath: imageName).lastPathComponent
       let header = _dyld_get_image_header(i);
-      let info = NXGetArchInfoFromCpuType(header!.pointee.cputype, header!.pointee.cpusubtype);
-      let arch = String(cString:info!.pointee.name)
-      let startAddress = unsafeBitCast(header, to: Int.self)
-      binaryImages.append(BinaryImage(startAddress: String(format: "%018p", startAddress), name: imageNameEnding, arch: arch, path: imageName))
+      if let header = header {
+        let info = NXGetArchInfoFromCpuType(header.pointee.cputype, header.pointee.cpusubtype);
+        if let info = info {
+          let arch = String(cString:info.pointee.name)
+          let startAddress = Int(bitPattern: header)
+          binaryImages.append(BinaryImage(startAddress: String(format: "%018p", startAddress), name: imageNameEnding, arch: arch, path: imageName))
+        }
+      }
     }
     self.binaryImages = binaryImages
   }
