@@ -88,9 +88,9 @@ struct Login : Codable {
     self.appName = try container.decode(String.self, forKey: .appName)
     self.udid = try container.decode(String.self, forKey: .udid)
     let time = try container.decode(String.self, forKey: .time)
-    self.time = time.toDate()
+    self.time = try time.toDate()
     let deviceTime = try container.decode(String.self, forKey: .deviceTime)
-    self.deviceTime = deviceTime.toDate()
+    self.deviceTime = try deviceTime.toDate()
     
     // self.os - is initialized with let
     self.osVersion = try container.decode(String.self, forKey: .osVersion)

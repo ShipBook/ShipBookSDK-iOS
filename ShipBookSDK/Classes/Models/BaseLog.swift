@@ -38,7 +38,7 @@ class BaseLog: Codable  {
   required init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: BaseCodingKeys.self)
     let time = try container.decode(String.self, forKey: .time)
-    self.time = time.toDate()
+    self.time = try time.toDate()
     self.orderId = try container.decode(Int.self, forKey: .orderId)
     self.threadInfo = try container.decode(ThreadInfo.self, forKey: .threadInfo)
     self.type = try container.decode(String.self, forKey: .type)
