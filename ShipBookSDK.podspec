@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'ShipBookSDK' => ['ShipBookSDK/Assets/**/*']
   }
+  s.preserve_path = 'shipbook_build_dsym_upload.sh'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
