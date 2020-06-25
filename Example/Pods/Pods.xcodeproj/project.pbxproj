@@ -12,6 +12,7 @@
 		04B672CC80C56BF0D25B3A13BC0DB0C4 /* Thread+Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD455A0D198585178C216E5C50A468F /* Thread+Number.swift */; };
 		06220C85129DE3E85644940124BECCCF /* ShipBookSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F55C9779AAD6466D3F1D2DB08A1B8889 /* ShipBookSDK-iOS-dummy.m */; };
 		066032476F2404E211381929FBDB84B3 /* PatternLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13C21A07957651C0F41428019F53C63 /* PatternLayout.swift */; };
+		073579DC24A4C87D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */; };
 		0A3B6B6087C8E5DFC6E6DA516AB0E574 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B25F649497BE970BF69067D142FC0569 /* config.json */; };
 		0DE5121F1CCC3C3930AD66E0F4DFB99B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55892058789093456759385966FF587F /* User.swift */; };
 		0FE792D7F4FB2C667E4FCA0664311D39 /* Decodable+DictionaryAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A6FDA265875C65D39192597F475EE5 /* Decodable+DictionaryAny.swift */; };
@@ -174,6 +175,8 @@
 		05064E2E31DA05FDBE68084F11669ECA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../ShipBookSDK-tvOS/Info.plist"; sourceTree = "<group>"; };
 		052D3B43045E49C019F6A035CA3AAB0D /* ShipBookSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "ShipBookSDK-iOS.modulemap"; sourceTree = "<group>"; };
 		06EC612D61CB1CCB689AB58A325703D8 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = index.html; path = docs/docsets/ShipBookSDK.docset/Contents/Resources/Documents/index.html; sourceTree = "<group>"; };
+		073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
+		073579DD24A4C88D003D92B2 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = Example/../README_ObjC.md; sourceTree = "<group>"; };
 		08C88F051970D075FF835F259E03B10C /* Extensions.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html; name = Extensions.html; path = docs/Extensions.html; sourceTree = "<group>"; };
 		0BBD03467918C121C46B1E50BE52BD7B /* ExceptionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExceptionManager.swift; path = ShipBookSDK/Classes/ExceptionManager.swift; sourceTree = "<group>"; };
 		0C3F3E6214D44FE5D22336834F2ABB68 /* Pods-ShipBookSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ShipBookSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
@@ -494,6 +497,7 @@
 				C5FA2A0644D7AF0D0920CDC313C41958 /* Log.html */,
 				3042A5CB659F5717CA0646BA5C281A84 /* Log.html */,
 				6A7542C5832BC122CF7B2996B77F1111 /* README.md */,
+				073579DD24A4C88D003D92B2 /* README_ObjC.md */,
 				1D7AA314DB74232EB6A0E36BB2D352B5 /* search.json */,
 				93F31AF9DC1A61B1F4B1E6420DDF3A01 /* search.json */,
 				9D7D04992D6642B5AD0EA032E669282C /* Severity.html */,
@@ -502,6 +506,7 @@
 				2FD7C10C22E045A9B869853D79E2F0E3 /* ShipBook.html */,
 				E2643E912A7E580C5E44B46D5B8C78E1 /* ShipBookSDK.podspec */,
 				1DAFF3E487046880C83C658A6DE6FC16 /* ShipBookSDK.tgz */,
+				073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */,
 				35942F8F8FED5C26688A38417E97285A /* Structs.html */,
 				B6602BFE24F165A89D192484F87D837E /* Structs.html */,
 				97DA9C04D64BDDAC04B658C52800DEC4 /* UIDevice.html */,
@@ -905,6 +910,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				073579DC24A4C87D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */,
 				341EA25141270A2DB6F1A5459AEA864F /* ShipBookSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

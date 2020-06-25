@@ -120,16 +120,16 @@ The best practice is to add this code to viewWillAppear in the view controller.
 
 1. Open Xcode, select your project from the **Project Navigator**.
 2. Click on the application target.
-3. Select the **Build Phase** tab in the **Settings** editor.
+3. Select the **Build Phase** tab.
 4. Click the + icon in the upper left corner of the main panel.
-5. Select **New Run Script** Phase from the dropdown.
-6. In the script box, add the following lines:
+5. Select **New Run Script Phase** Phase from the dropdown.
+6. In the script box, add the following lines: (Don't forget to change the `SHIPBOOK_APPID` and `SHIPBOOK_SYMBOLS_KEY` )
 
 ```sh
-export SHIPBOOK_APPID="xxxxxxxxxx"
-export SHIPBOOK_SYMBOLS_KEY="xyxyxyxyxyxyxyxyux"
+export SHIPBOOK_APPID="YOUR_APP_ID"
+export SHIPBOOK_SYMBOLS_KEY="YOUR_SYMBOLS_KEY"
 
-SCRIPT=${PODS_ROOT}/ShipBookDSK/shipbook_build_dsym_upload.sh
+SCRIPT=${PODS_ROOT}/ShipBookSDK/shipbook_build_dsym_upload.sh
 
 if [ "${CONFIGURATION}" = "Release" ]; then
 /bin/sh "${SCRIPT}"
@@ -140,11 +140,11 @@ fi
 
 More often than not, dSYM files go missing because Xcode simply isn't producing them. Check that Xcode is producing the correct dSYM for every build:
 
-1. Open your project in Xcode and select the project file in the Xcode Navigator.
-2. Select your main build target.
-3. Open the target's Build Settings tab, then click All.
+1. Open Xcode, select your project from the **Project Navigator**.
+2. Click on the application target.
+3. Select the **Build Settings** tab, then click All.
 4. Search for "debug information format".
-5. Set Debug Information Format to DWARF with dSYM File for all your build types.
+5. Set **Debug Information Format** to `DWARF with dSYM File` for all your build types.
 6. Rebuild your app.
 
 
