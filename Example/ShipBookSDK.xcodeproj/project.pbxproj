@@ -14,6 +14,7 @@
 		07143B952236BA340002D0FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07143B932236BA340002D0FE /* Main.storyboard */; };
 		07143B972236BA350002D0FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07143B962236BA350002D0FE /* Assets.xcassets */; };
 		07143BA22236BA360002D0FE /* tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07143BA12236BA360002D0FE /* tvOSTests.swift */; };
+		073579D924A49C2D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */; };
 		075485FD2014F79E00E92F10 /* LogManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CAC2014CC5400043849 /* LogManagerTests.swift */; };
 		075485FE2014F7B400E92F10 /* CrashManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA62014CC4B00043849 /* CrashManagerTests.swift */; };
 		07DED7EA2015FDD000D63565 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DED7E92015FDD000D63565 /* SecondViewController.swift */; };
@@ -58,6 +59,7 @@
 		07143B9D2236BA360002D0FE /* tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07143BA12236BA360002D0FE /* tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvOSTests.swift; sourceTree = "<group>"; };
 		07143BA32236BA360002D0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = shipbook_build_dsym_upload.sh; path = ../shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
 		074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = ../README_ObjC.md; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		157A5C700529921C7E912AB5 /* Pods_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 				EDCAB9F07EF529B25D9B8B32 /* README.md */,
 				074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */,
 				903A3EE1AB241BB39EBA02C8 /* LICENSE */,
+				073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				073579D924A49C2D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,

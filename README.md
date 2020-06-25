@@ -107,6 +107,47 @@ The best practice is to add this code to viewWillAppear in the view controller.
 
 ---
 
+# Upload Dsym
+
+## Create an authentication key
+1. Open [shipbook console](https://console.shipbook.io).
+2. Open **Preferences**.
+3. Open the **Authentication Keys**.
+4. Create key with type **Symbols**.
+5. Copy the key.
+
+## Add upload script
+
+1. Open Xcode, select your project from the **Project Navigator**.
+2. Click on the application target.
+3. Select the **Build Phase** tab in the **Settings** editor.
+4. Click the + icon in the upper left corner of the main panel.
+5. Select **New Run Script** Phase from the dropdown.
+6. In the script box, add the following lines:
+
+```sh
+export SHIPBOOK_APPID="xxxxxxxxxx"
+export SHIPBOOK_SYMBOLS_KEY="xyxyxyxyxyxyxyxyux"
+
+SCRIPT=${PODS_ROOT}/ShipBookDSK/shipbook_build_dsym_upload.sh
+
+if [ "${CONFIGURATION}" = "Release" ]; then
+/bin/sh "${SCRIPT}"
+fi
+```
+
+## Troubleshooting
+
+More often than not, dSYM files go missing because Xcode simply isn't producing them. Check that Xcode is producing the correct dSYM for every build:
+
+1. Open your project in Xcode and select the project file in the Xcode Navigator.
+2. Select your main build target.
+3. Open the target's Build Settings tab, then click All.
+4. Search for "debug information format".
+5. Set Debug Information Format to DWARF with dSYM File for all your build types.
+6. Rebuild your app.
+
+
 # Additional Information
 ## Automatically Importing ShipBookSDK
 If you don’t want to manually add `import ShipBookSDK` to each source file, you may insert the following code to the AppDelegate file:
