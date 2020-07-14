@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ShipBookSDK'
-  s.version          = '1.1.12'
+  s.version          = '1.1.13'
   s.summary          = 'User & Session-based mobile log platform for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'ShipBookSDK' => ['ShipBookSDK/Assets/**/*']
   }
-  s.preserve_path = 'shipbook_build_dsym_upload.sh'
+  # s.preserve_path = 'shipbook_build_dsym_upload.sh'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
