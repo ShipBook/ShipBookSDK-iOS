@@ -54,18 +54,22 @@ class SBCloudAppender: BaseAppender{
       forName: UIApplication.didEnterBackgroundNotification,
       object: nil,
       queue: nil) {[weak self] notification in
-        InnerLog.d("I'm out of focus!")
-        // it will close soon so better send the information
-        self?.send()
+        DispatchQueue.shipBook.async {
+          InnerLog.d("I'm out of focus!")
+          // it will close soon so better send the information
+          self?.send()
+        }
     }
   #else
     backgroundObserver = NotificationCenter.default.addObserver(
       forName: NSNotification.Name.UIApplicationDidEnterBackground,
       object: nil,
       queue: nil) {[weak self] notification in
-        InnerLog.d("I'm out of focus!")
-        // it will close soon so better send the information
-        self?.send()
+        DispatchQueue.shipBook.async {
+          InnerLog.d("I'm out of focus!")
+          // it will close soon so better send the information
+          self?.send()
+        }
     }
   #endif
 
@@ -73,19 +77,23 @@ class SBCloudAppender: BaseAppender{
       forName: NotificationName.Connected,
       object: nil,
       queue: nil) {[weak self] notification in
-        InnerLog.d("Connected!")
-        InnerLog.d("++++++ the current label: " + DispatchQueue.currentLabel)
-        self?.send()
+        DispatchQueue.shipBook.async {
+          InnerLog.d("Connected!")
+          InnerLog.d("++++++ the current label: " + DispatchQueue.currentLabel)
+          self?.send()
+        }
     }
     
     userChangeObserver = NotificationCenter.default.addObserver(
       forName: NotificationName.UserChange,
       object: nil,
       queue: nil) {[weak self] notification in
-        InnerLog.d("user changed")
-        if let user = SessionManager.shared.login?.user {
-          self?.saveToFile(data: user)
-          self?.createTimer()
+        DispatchQueue.shipBook.async {
+          InnerLog.d("user changed")
+          if let user = SessionManager.shared.login?.user {
+            self?.saveToFile(data: user)
+            self?.createTimer()
+          }
         }
     }
   }
