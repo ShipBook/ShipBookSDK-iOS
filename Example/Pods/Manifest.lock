@@ -1,5 +1,5 @@
 PODS:
-  - ShipBookSDK (1.1.4)
+  - ShipBookSDK (1.1.14)
 
 DEPENDENCIES:
   - ShipBookSDK (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ShipBookSDK: 3857704793707f155d7337e94a75ad490388cae3
+  ShipBookSDK: 2deabae42445e52d528b647715da22032fc97cc4
 
 PODFILE CHECKSUM: 91ed91b93f6d3d2dde1a39e2fe7b270dfa90b61c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.3

@@ -435,8 +435,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-iOS/ShipBookSDK.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-iOS13.4/ShipBookSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -444,7 +444,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		57570C243B096C218E8AAD47 /* [CP] Check Pods Manifest.lock */ = {
@@ -471,8 +471,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-tvOS/ShipBookSDK.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-tvOS12.1/ShipBookSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -480,7 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B6CEE95571480384517787CD /* [CP] Check Pods Manifest.lock */ = {
@@ -507,8 +507,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-iOS/ShipBookSDK.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-iOS10.0/ShipBookSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -516,7 +516,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
