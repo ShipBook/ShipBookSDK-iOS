@@ -7,6 +7,7 @@
 //
 #if canImport(UIKit)
 import Foundation
+import UIKit
 
 class SBCloudAppender: BaseAppender{
   let name: String
