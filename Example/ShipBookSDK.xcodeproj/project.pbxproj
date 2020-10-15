@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		070A3CAA2014CC4C00043849 /* AppenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA72014CC4B00043849 /* AppenderTests.swift */; };
 		070A3CAB2014CC4C00043849 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA82014CC4C00043849 /* CodableTests.swift */; };
-		07143B902236BA340002D0FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07143B8F2236BA340002D0FE /* AppDelegate.swift */; };
-		07143B922236BA340002D0FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07143B912236BA340002D0FE /* ViewController.swift */; };
-		07143B952236BA340002D0FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07143B932236BA340002D0FE /* Main.storyboard */; };
-		07143B972236BA350002D0FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07143B962236BA350002D0FE /* Assets.xcassets */; };
-		07143BA22236BA360002D0FE /* tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07143BA12236BA360002D0FE /* tvOSTests.swift */; };
 		075485FD2014F79E00E92F10 /* LogManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CAC2014CC5400043849 /* LogManagerTests.swift */; };
 		075485FE2014F7B400E92F10 /* CrashManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA62014CC4B00043849 /* CrashManagerTests.swift */; };
 		07DED7EA2015FDD000D63565 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DED7E92015FDD000D63565 /* SecondViewController.swift */; };
@@ -22,19 +17,9 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		9E43C07C680C85978F504BE6 /* Pods_ShipBookSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */; };
-		C62683C9FDA283A42B532CC2 /* Pods_ShipBookSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */; };
-		EF914C3E95A208F009A7F8F9 /* Pods_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157A5C700529921C7E912AB5 /* Pods_tvOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		07143B9E2236BA360002D0FE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 07143B8C2236BA340002D0FE;
-			remoteInfo = tvOS;
-		};
 		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
@@ -49,22 +34,10 @@
 		070A3CA72014CC4B00043849 /* AppenderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderTests.swift; sourceTree = "<group>"; };
 		070A3CA82014CC4C00043849 /* CodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		070A3CAC2014CC5400043849 /* LogManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManagerTests.swift; sourceTree = "<group>"; };
-		07143B8D2236BA340002D0FE /* tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		07143B8F2236BA340002D0FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		07143B912236BA340002D0FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		07143B942236BA340002D0FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		07143B962236BA350002D0FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		07143B982236BA350002D0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		07143B9D2236BA360002D0FE /* tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		07143BA12236BA360002D0FE /* tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvOSTests.swift; sourceTree = "<group>"; };
-		07143BA32236BA360002D0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = shipbook_build_dsym_upload.sh; path = ../shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
 		074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = ../README_ObjC.md; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		157A5C700529921C7E912AB5 /* Pods_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ShipBookSDK.podspec; path = ../ShipBookSDK.podspec; sourceTree = "<group>"; };
-		3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4928FF8D04C239E003B69ED0 /* Pods-ShipBookSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		520BD48B197A20D267C4290B /* Pods-ShipBookSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -77,34 +50,16 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* ShipBookSDK_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipBookSDK_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74B54F3A7C4A84B477F03CD9 /* Pods-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS/Pods-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		903A3EE1AB241BB39EBA02C8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		EC603EFE07451B69988982DB /* Pods-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvOS/Pods-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		EDCAB9F07EF529B25D9B8B32 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipBookSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07143B8A2236BA340002D0FE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EF914C3E95A208F009A7F8F9 /* Pods_tvOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		07143B9A2236BA360002D0FE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		607FACCD1AFB9204008FA782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E43C07C680C85978F504BE6 /* Pods_ShipBookSDK_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,34 +67,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C62683C9FDA283A42B532CC2 /* Pods_ShipBookSDK_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07143B8E2236BA340002D0FE /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
-				07143B8F2236BA340002D0FE /* AppDelegate.swift */,
-				07143B912236BA340002D0FE /* ViewController.swift */,
-				07143B932236BA340002D0FE /* Main.storyboard */,
-				07143B962236BA350002D0FE /* Assets.xcassets */,
-				07143B982236BA350002D0FE /* Info.plist */,
-			);
-			path = tvOS;
-			sourceTree = "<group>";
-		};
-		07143BA02236BA360002D0FE /* tvOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				07143BA12236BA360002D0FE /* tvOSTests.swift */,
-				07143BA32236BA360002D0FE /* Info.plist */,
-			);
-			path = tvOSTests;
-			sourceTree = "<group>";
-		};
 		0E43E33288C8D62D8EDD4CC1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +80,6 @@
 				520BD48B197A20D267C4290B /* Pods-ShipBookSDK_Example.release.xcconfig */,
 				4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */,
 				F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */,
-				74B54F3A7C4A84B477F03CD9 /* Pods-tvOS.debug.xcconfig */,
-				EC603EFE07451B69988982DB /* Pods-tvOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -159,11 +90,8 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for ShipBookSDK */,
 				607FACE81AFB9204008FA782 /* Tests */,
-				07143B8E2236BA340002D0FE /* tvOS */,
-				07143BA02236BA360002D0FE /* tvOSTests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				0E43E33288C8D62D8EDD4CC1 /* Pods */,
-				87B27D6FD0FFE847D738A2F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,8 +100,6 @@
 			children = (
 				607FACD01AFB9204008FA782 /* ShipBookSDK_Example.app */,
 				607FACE51AFB9204008FA782 /* ShipBookSDK_Tests.xctest */,
-				07143B8D2236BA340002D0FE /* tvOS.app */,
-				07143B9D2236BA360002D0FE /* tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,56 +159,9 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		87B27D6FD0FFE847D738A2F0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3DCEB6C0691C739107E8FB68 /* Pods_ShipBookSDK_Example.framework */,
-				444638B5B1FD4A07AAEE6969 /* Pods_ShipBookSDK_Tests.framework */,
-				157A5C700529921C7E912AB5 /* Pods_tvOS.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		07143B8C2236BA340002D0FE /* tvOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 07143BA42236BA360002D0FE /* Build configuration list for PBXNativeTarget "tvOS" */;
-			buildPhases = (
-				B6CEE95571480384517787CD /* [CP] Check Pods Manifest.lock */,
-				07143B892236BA340002D0FE /* Sources */,
-				07143B8A2236BA340002D0FE /* Frameworks */,
-				07143B8B2236BA340002D0FE /* Resources */,
-				8002DCCB5B272BB6C7D4EEF2 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = tvOS;
-			productName = tvOS;
-			productReference = 07143B8D2236BA340002D0FE /* tvOS.app */;
-			productType = "com.apple.product-type.application";
-		};
-		07143B9C2236BA360002D0FE /* tvOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 07143BA72236BA360002D0FE /* Build configuration list for PBXNativeTarget "tvOSTests" */;
-			buildPhases = (
-				07143B992236BA360002D0FE /* Sources */,
-				07143B9A2236BA360002D0FE /* Frameworks */,
-				07143B9B2236BA360002D0FE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				07143B9F2236BA360002D0FE /* PBXTargetDependency */,
-			);
-			name = tvOSTests;
-			productName = tvOSTests;
-			productReference = 07143B9D2236BA360002D0FE /* tvOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		607FACCF1AFB9204008FA782 /* ShipBookSDK_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ShipBookSDK_Example" */;
@@ -329,18 +208,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "ShipBook Ltd.";
 				TargetAttributes = {
-					07143B8C2236BA340002D0FE = {
-						CreatedOnToolsVersion = 10.1;
-						ProvisioningStyle = Automatic;
-					};
-					07143B9C2236BA360002D0FE = {
-						CreatedOnToolsVersion = 10.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 07143B8C2236BA340002D0FE;
-					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 5W26546L6E;
@@ -368,29 +238,11 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* ShipBookSDK_Example */,
 				607FACE41AFB9204008FA782 /* ShipBookSDK_Tests */,
-				07143B8C2236BA340002D0FE /* tvOS */,
-				07143B9C2236BA360002D0FE /* tvOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		07143B8B2236BA340002D0FE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				07143B972236BA350002D0FE /* Assets.xcassets in Resources */,
-				07143B952236BA340002D0FE /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		07143B9B2236BA360002D0FE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		607FACCE1AFB9204008FA782 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,42 +317,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8002DCCB5B272BB6C7D4EEF2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ShipBookSDK-tvOS/ShipBookSDK.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShipBookSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tvOS/Pods-tvOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B6CEE95571480384517787CD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CE89E6FF7F3BCA6DE97D34CF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -522,23 +338,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		07143B892236BA340002D0FE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				07143B922236BA340002D0FE /* ViewController.swift in Sources */,
-				07143B902236BA340002D0FE /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		07143B992236BA360002D0FE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				07143BA22236BA360002D0FE /* tvOSTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		607FACCC1AFB9204008FA782 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -563,11 +362,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		07143B9F2236BA360002D0FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 07143B8C2236BA340002D0FE /* tvOS */;
-			targetProxy = 07143B9E2236BA360002D0FE /* PBXContainerItemProxy */;
-		};
 		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* ShipBookSDK_Example */;
@@ -576,14 +370,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		07143B932236BA340002D0FE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				07143B942236BA340002D0FE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -603,116 +389,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		07143BA52236BA360002D0FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74B54F3A7C4A84B477F03CD9 /* Pods-tvOS.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.shipbook.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.1;
-			};
-			name = Debug;
-		};
-		07143BA62236BA360002D0FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC603EFE07451B69988982DB /* Pods-tvOS.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.shipbook.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.1;
-			};
-			name = Release;
-		};
-		07143BA82236BA360002D0FE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.shipbook.tvOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvOS.app/tvOS";
-				TVOS_DEPLOYMENT_TARGET = 12.1;
-			};
-			name = Debug;
-		};
-		07143BA92236BA360002D0FE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tvOSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.shipbook.tvOSTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tvOS.app/tvOS";
-				TVOS_DEPLOYMENT_TARGET = 12.1;
-			};
-			name = Release;
-		};
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -736,6 +412,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -761,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -792,6 +469,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -810,7 +488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -862,7 +540,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -877,7 +555,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -889,24 +567,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		07143BA42236BA360002D0FE /* Build configuration list for PBXNativeTarget "tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				07143BA52236BA360002D0FE /* Debug */,
-				07143BA62236BA360002D0FE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		07143BA72236BA360002D0FE /* Build configuration list for PBXNativeTarget "tvOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				07143BA82236BA360002D0FE /* Debug */,
-				07143BA92236BA360002D0FE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "ShipBookSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
