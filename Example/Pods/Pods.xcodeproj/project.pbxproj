@@ -102,7 +102,6 @@
 		05064E2E31DA05FDBE68084F11669ECA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../ShipBookSDK-tvOS/Info.plist"; sourceTree = "<group>"; };
 		052D3B43045E49C019F6A035CA3AAB0D /* ShipBookSDK-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "ShipBookSDK-iOS.modulemap"; sourceTree = "<group>"; };
 		06EC612D61CB1CCB689AB58A325703D8 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = index.html; path = docs/docsets/ShipBookSDK.docset/Contents/Resources/Documents/index.html; sourceTree = "<group>"; };
-		07268DBF2538554800D42716 /* SPM */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SPM; path = ../../../SPM; sourceTree = "<group>"; };
 		073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
 		073579DD24A4C88D003D92B2 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = Example/../README_ObjC.md; sourceTree = "<group>"; };
 		08C88F051970D075FF835F259E03B10C /* Extensions.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html; name = Extensions.html; path = docs/Extensions.html; sourceTree = "<group>"; };
@@ -294,7 +293,6 @@
 		3662C952B39AA35EF0D6E1E95ADAE25B /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				07268DBF2538554800D42716 /* SPM */,
 				C78D46A2D6947A4A0EACCF389B09438F /* Pods-ShipBookSDK_Example */,
 				8233EC06FBA46A88ED491BADDA679126 /* Pods-ShipBookSDK_Tests */,
 			);
