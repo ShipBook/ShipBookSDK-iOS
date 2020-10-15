@@ -14,7 +14,7 @@ class SBCloudAppender: BaseAppender{
   var maxTime: Double = 3
   var maxFileSize: Int = 1048576
   var flushSeverity: Severity = .Verbose
-  var flushSize: Int = 40
+  var flushSize: Int = 1000
   
   // file names
   let fileURL: URL
