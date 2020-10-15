@@ -5,7 +5,7 @@
 //  Created by Elisha Sterngold on 14/11/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
 
 struct SessionLogData: Codable{
@@ -22,4 +22,4 @@ func ==(lhs: SessionLogData, rhs: SessionLogData) -> Bool {
     lhs.login == rhs.login &&
     lhs.logs == rhs.logs
 }
-
+#endif

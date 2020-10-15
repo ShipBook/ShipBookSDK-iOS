@@ -4,6 +4,7 @@ docs/
 .DS_Store
 
 # Xcode
+.build
 build/
 *.pbxuser
 !default.pbxuser

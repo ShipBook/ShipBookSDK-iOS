@@ -5,10 +5,8 @@
 //  Created by Elisha Sterngold on 07/11/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
-
-
 
 struct AppenderFactory {
   struct FactoryError : Error {
@@ -28,3 +26,4 @@ struct AppenderFactory {
     }
   }
 }
+#endif

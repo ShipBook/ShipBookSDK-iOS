@@ -5,7 +5,7 @@
 //  Created by Elisha Sterngold on 19/11/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
 import MachO.dyld
 
@@ -92,3 +92,4 @@ class ExceptionManager {
     sigaction(SIGPIPE, &sigAction, nil)
   }
 }
+#endif

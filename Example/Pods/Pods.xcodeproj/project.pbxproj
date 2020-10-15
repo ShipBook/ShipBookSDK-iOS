@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		030271E193BBE5295436C45753362DB6 /* Pods-ShipBookSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D42DAE9B1A0F00BDCF6E1B67622D657 /* Pods-ShipBookSDK_Example-dummy.m */; };
 		031054BF2756E74824B6DF0526D75465 /* InnerLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1B6BEE907E91AEC53402CBC64AE0F5 /* InnerLog.swift */; };
 		06220C85129DE3E85644940124BECCCF /* ShipBookSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F55C9779AAD6466D3F1D2DB08A1B8889 /* ShipBookSDK-iOS-dummy.m */; };
 		073579DC24A4C87D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */; };
 		0A3B6B6087C8E5DFC6E6DA516AB0E574 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B25F649497BE970BF69067D142FC0569 /* config.json */; };
 		0DE5121F1CCC3C3930AD66E0F4DFB99B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55892058789093456759385966FF587F /* User.swift */; };
-		1C22E30E1BB00A4CD84351389C78A48B /* Pods-ShipBookSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 628F0C7483F45028C04E692C3BA263BF /* Pods-ShipBookSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23553DD60F087E33FBF10BF5618097EF /* ExceptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD03467918C121C46B1E50BE52BD7B /* ExceptionManager.swift */; };
 		2A52180815B931A9395AD0C20554F304 /* ConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAB1206CD73A7406F0478C8187E5648 /* ConfigResponse.swift */; };
 		2D81DA8DBF7A042ABEB91045DE925794 /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8CA39448471ACEFD191B92BBB0FD6 /* RefreshToken.swift */; };
@@ -49,7 +47,6 @@
 		ADC1D813A00F7F52D36819AAFD5D9428 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73739A83D3D23F53CC699B683C35293 /* Login.swift */; };
 		B199C65C5A00880CCBDDB949AA748963 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D93999E999FFFDCBC1A12091951A5 /* LogManager.swift */; };
 		B4915326901B0C05F0E0DF00B53A04B5 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312F6AF53EA430D50C5DEF3D71EDC04 /* EventManager.swift */; };
-		B61FD44E890384EDA61155B8F7B2453C /* Pods-ShipBookSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60322FE9EB20FAE829299C3B51AB61 /* Pods-ShipBookSDK_Tests-dummy.m */; };
 		B70B7FDA86E880CF698890BA20689969 /* ShipBookSDK-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ED6404E7F360D8B0F52B3FFDDB2F6BA4 /* ShipBookSDK-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD351294544E1F6A0109EA41FDF49334 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E791BED5419FC97F03BE1B661161A37 /* LoginResponse.swift */; };
 		BDA0261A3EC47459AD5A6890101F5547 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62EA6F1ECE249526D74B8EBBB7EE5D /* NotificationName.swift */; };
@@ -57,7 +54,6 @@
 		C9C6781774966EA1E762F87D2FC33905 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5E9F2576581136FAFD025DED7462B /* Log.swift */; };
 		D4F570AF7F3DDA91A19131ACEE62F114 /* DispatchQueue+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7C0EB593013F64FF0F1D3014C3D6C /* DispatchQueue+Log.swift */; };
 		DBA388E0CC5DD51F6FF3562724430E20 /* ActionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FD77971366ACF7A3D1C4075C56D67 /* ActionEvent.swift */; };
-		E563DE756D2BE8984021A695B45A3317 /* Pods-ShipBookSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D4A20063C891C4433EDF940781BEC89 /* Pods-ShipBookSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA63B0E4AED7AAC1A7F6D079D16CF686 /* ScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78215F25F7CFFA37D1179B684FD4D523 /* ScreenEvent.swift */; };
 		FC168F10D8ED6F79442FD1D46B9D7786 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B8EE4EF64F026975D955F5E98EFFC /* Message.swift */; };
 		FE2B00FE7054DA0558AB84B3BAE4C3B9 /* UIDevice+ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77E6DCBC3F39B82D416E8BE363F471 /* UIDevice+ModelName.swift */; };
@@ -72,27 +68,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 647BCDE9B1E556E4E6D01B4D3ABF366C;
 			remoteInfo = "ShipBookSDK-iOS-ShipBookSDK";
-		};
-		45B51926BA528D1FEB5B1D494038EB2F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A04AC44FA7416AB14E1B6604A7192A34;
-			remoteInfo = "ShipBookSDK-iOS";
-		};
-		9B18E8FE342F9A2D1F0B29C1F020457E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D26C9BCECDB6426B814AA1CCE6397D6A;
-			remoteInfo = "Pods-ShipBookSDK_Example";
-		};
-		DD0A201727F23F3FD04A5AF01371A618 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A04AC44FA7416AB14E1B6604A7192A34;
-			remoteInfo = "ShipBookSDK-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -146,7 +121,6 @@
 		6A7542C5832BC122CF7B2996B77F1111 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6E45A0C3F326C3A14FCE708E9C8F7792 /* DispatchQueue+CurrentLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+CurrentLabel.swift"; sourceTree = "<group>"; };
 		7317B67F4401080BBF3D3CD23A82A424 /* ShipBook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ShipBook.h; path = ShipBookSDK/Classes/ShipBook.h; sourceTree = "<group>"; };
-		73BF1814544FCC32756FBEEFBEBC09FD /* Pods_ShipBookSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A8E9BAE8508F5F65C55A5D17E3E7E5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		75C91836279FEAB47DAB3509AB4567C5 /* ShipBookSDK-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ShipBookSDK-iOS-prefix.pch"; sourceTree = "<group>"; };
 		78215F25F7CFFA37D1179B684FD4D523 /* ScreenEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScreenEvent.swift; sourceTree = "<group>"; };
@@ -183,7 +157,6 @@
 		DEF06FCA0D5BCBB78A3133A0DF20BD49 /* SessionLogData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SessionLogData.swift; sourceTree = "<group>"; };
 		E2643E912A7E580C5E44B46D5B8C78E1 /* ShipBookSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = ShipBookSDK.podspec; sourceTree = "<group>"; };
 		E73739A83D3D23F53CC699B683C35293 /* Login.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		E80564BE61E1FEA17663F1E12DBD7DF2 /* Pods_ShipBookSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipBookSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE7C0EB593013F64FF0F1D3014C3D6C /* DispatchQueue+Log.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Log.swift"; sourceTree = "<group>"; };
 		ED6404E7F360D8B0F52B3FFDDB2F6BA4 /* ShipBookSDK-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ShipBookSDK-iOS-umbrella.h"; sourceTree = "<group>"; };
 		F029A3ED3A6211FBD5D8A61A06C33584 /* String+ToDate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "String+ToDate.swift"; sourceTree = "<group>"; };
@@ -200,20 +173,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5051C15A487C518FD409FB16793105CB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5435E39939BFCF0AF17A24DCCA223948 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D874069653EF25D95580C946B1875E40 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -394,8 +353,6 @@
 		BAD8B0B2682C08D8C79D802CCAD5B2D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				73BF1814544FCC32756FBEEFBEBC09FD /* Pods_ShipBookSDK_Example.framework */,
-				E80564BE61E1FEA17663F1E12DBD7DF2 /* Pods_ShipBookSDK_Tests.framework */,
 				43ECE8617862C6C0CA3098FE43F37401 /* ShipBookSDK.bundle */,
 				370261729295D183830B95163DF2E99A /* ShipBookSDK.framework */,
 			);
@@ -444,22 +401,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		CFA823ACC40FDC593B2C8E62EF7DE2F2 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E563DE756D2BE8984021A695B45A3317 /* Pods-ShipBookSDK_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F16F0F219674169485B36F2F72D1AB81 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1C22E30E1BB00A4CD84351389C78A48B /* Pods-ShipBookSDK_Tests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FD551EC52885C92D704EAF2816D40E1A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -508,43 +449,6 @@
 			productReference = 370261729295D183830B95163DF2E99A /* ShipBookSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D26C9BCECDB6426B814AA1CCE6397D6A /* Pods-ShipBookSDK_Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F1B71A2D7678BC935173B1A446332773 /* Build configuration list for PBXNativeTarget "Pods-ShipBookSDK_Example" */;
-			buildPhases = (
-				0D48D752DAC9B5A7E2D86E9857920FE6 /* Sources */,
-				D874069653EF25D95580C946B1875E40 /* Frameworks */,
-				CFA823ACC40FDC593B2C8E62EF7DE2F2 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F0650B68F9F71BC4CA97B700E7BA24FE /* PBXTargetDependency */,
-			);
-			name = "Pods-ShipBookSDK_Example";
-			productName = "Pods-ShipBookSDK_Example";
-			productReference = 73BF1814544FCC32756FBEEFBEBC09FD /* Pods_ShipBookSDK_Example.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		EE82DA4DBF06B2FCE43080F79B73F87D /* Pods-ShipBookSDK_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9932B33B6E63A61564E846E8683368DD /* Build configuration list for PBXNativeTarget "Pods-ShipBookSDK_Tests" */;
-			buildPhases = (
-				BDDDF81C77E4B048CFB0F431A1CC46C6 /* Sources */,
-				5435E39939BFCF0AF17A24DCCA223948 /* Frameworks */,
-				F16F0F219674169485B36F2F72D1AB81 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F32A78E3A9D9343ED4E07DAC5909E943 /* PBXTargetDependency */,
-				1F1305E136A6D53BCDA16A219D7C5650 /* PBXTargetDependency */,
-			);
-			name = "Pods-ShipBookSDK_Tests";
-			productName = "Pods-ShipBookSDK_Tests";
-			productReference = E80564BE61E1FEA17663F1E12DBD7DF2 /* Pods_ShipBookSDK_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -572,8 +476,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D26C9BCECDB6426B814AA1CCE6397D6A /* Pods-ShipBookSDK_Example */,
-				EE82DA4DBF06B2FCE43080F79B73F87D /* Pods-ShipBookSDK_Tests */,
 				A04AC44FA7416AB14E1B6604A7192A34 /* ShipBookSDK-iOS */,
 				647BCDE9B1E556E4E6D01B4D3ABF366C /* ShipBookSDK-iOS-ShipBookSDK */,
 			);
@@ -655,14 +557,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0D48D752DAC9B5A7E2D86E9857920FE6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				030271E193BBE5295436C45753362DB6 /* Pods-ShipBookSDK_Example-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5EE641AA69BE0D6FF453E1278A7408E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -670,40 +564,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDDDF81C77E4B048CFB0F431A1CC46C6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B61FD44E890384EDA61155B8F7B2453C /* Pods-ShipBookSDK_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1F1305E136A6D53BCDA16A219D7C5650 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ShipBookSDK-iOS";
-			target = A04AC44FA7416AB14E1B6604A7192A34 /* ShipBookSDK-iOS */;
-			targetProxy = DD0A201727F23F3FD04A5AF01371A618 /* PBXContainerItemProxy */;
-		};
 		64AC3EFAF98174C4DD44CBFBD0A63C8D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ShipBookSDK-iOS-ShipBookSDK";
 			target = 647BCDE9B1E556E4E6D01B4D3ABF366C /* ShipBookSDK-iOS-ShipBookSDK */;
 			targetProxy = 3C6B01CDDD5801C245C2B873ED564134 /* PBXContainerItemProxy */;
-		};
-		F0650B68F9F71BC4CA97B700E7BA24FE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ShipBookSDK-iOS";
-			target = A04AC44FA7416AB14E1B6604A7192A34 /* ShipBookSDK-iOS */;
-			targetProxy = 45B51926BA528D1FEB5B1D494038EB2F /* PBXContainerItemProxy */;
-		};
-		F32A78E3A9D9343ED4E07DAC5909E943 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-ShipBookSDK_Example";
-			target = D26C9BCECDB6426B814AA1CCE6397D6A /* Pods-ShipBookSDK_Example */;
-			targetProxy = 9B18E8FE342F9A2D1F0B29C1F020457E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -935,150 +803,6 @@
 			};
 			name = Debug;
 		};
-		84937E7B65D2B486219FF8FA37BDD23F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A897C506898484ACCF09DC448A9A7C3 /* Pods-ShipBookSDK_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ShipBookSDK_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9B8E8ADA75632507204E748A2C131D33 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A12BDD233F4197E467A1243E551A6D85 /* Pods-ShipBookSDK_Example.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ShipBookSDK_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ShipBookSDK_Example/Pods-ShipBookSDK_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B01D5D909BEF443675DB725B664546FC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A78BE5EE366BFD20E7A81482BFC86B45 /* Pods-ShipBookSDK_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ShipBookSDK_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		EE9F307838F4BE788026812893B2F67F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82114AC25F1245324E6A1B9CF63DDAA3 /* Pods-ShipBookSDK_Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ShipBookSDK_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ShipBookSDK_Tests/Pods-ShipBookSDK_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1100,29 +824,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9932B33B6E63A61564E846E8683368DD /* Build configuration list for PBXNativeTarget "Pods-ShipBookSDK_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EE9F307838F4BE788026812893B2F67F /* Debug */,
-				B01D5D909BEF443675DB725B664546FC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AC24D14CEC73DEE2C88EED4846340A71 /* Build configuration list for PBXNativeTarget "ShipBookSDK-iOS-ShipBookSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55A9F244D430129807FEC6655959FD82 /* Debug */,
 				78565D05EB0E6C19A3C6A60D495CF6EA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F1B71A2D7678BC935173B1A446332773 /* Build configuration list for PBXNativeTarget "Pods-ShipBookSDK_Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				84937E7B65D2B486219FF8FA37BDD23F /* Debug */,
-				9B8E8ADA75632507204E748A2C131D33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

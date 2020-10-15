@@ -5,7 +5,7 @@
 //  Created by Elisha Sterngold on 25/10/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
 
 fileprivate let appName = Bundle.main.infoDictionary?[kCFBundleExecutableKey as String] as? String ?? ""
@@ -233,3 +233,4 @@ public class Log: NSObject {
     LogManager.shared.push(log: messageObj)
   }
 }
+#endif

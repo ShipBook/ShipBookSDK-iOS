@@ -5,7 +5,7 @@
 //  Created by Elisha Sterngold on 27/11/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
 import UIKit
 
@@ -124,3 +124,4 @@ class AppEvent: BaseEvent {
     try super.encode(to: encoder)
   }
 }
+#endif

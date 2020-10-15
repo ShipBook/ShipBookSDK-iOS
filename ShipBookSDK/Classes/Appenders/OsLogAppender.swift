@@ -8,7 +8,7 @@
 
 import Foundation
 import os.log
-
+@available (macOS 12.3, *) // there is a bug with the swift builder it doesn't know that os_log also works on iOS
 class OsLogAppender : BaseAppender, PatternLayout {
   var pattern : String = "$message"
   let name: String
@@ -28,3 +28,4 @@ class OsLogAppender : BaseAppender, PatternLayout {
     }
   }
 }
+

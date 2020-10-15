@@ -5,7 +5,7 @@
 //  Created by Elisha Sterngold on 05/11/2017.
 //  Copyright © 2018 ShipBook Ltd. All rights reserved.
 //
-
+#if canImport(UIKit)
 import Foundation
 import AdSupport
 import UIKit
@@ -151,5 +151,4 @@ func ==(lhs: Login, rhs: Login) -> Bool {
     lhs.deviceName == rhs.deviceName &&
     lhs.language == rhs.language
 }
-
-
+#endif
