@@ -42,6 +42,6 @@ Pod::Spec.new do |s|
   
   # s.frameworks = 'UIKit', 'MapKit'
 
-  s.swift_version = ['4.2', '5.0', '5.1', '5,2', '5.3']
+  s.swift_version = ['4.2', '5.0', '5.1', '5.2', '5.3']
 
 end
