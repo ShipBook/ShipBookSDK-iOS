@@ -10,7 +10,6 @@
 		031054BF2756E74824B6DF0526D75465 /* InnerLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1B6BEE907E91AEC53402CBC64AE0F5 /* InnerLog.swift */; };
 		06220C85129DE3E85644940124BECCCF /* ShipBookSDK-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F55C9779AAD6466D3F1D2DB08A1B8889 /* ShipBookSDK-iOS-dummy.m */; };
 		073579DC24A4C87D003D92B2 /* shipbook_build_dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 073579DB24A4C87C003D92B2 /* shipbook_build_dsym_upload.sh */; };
-		0A3B6B6087C8E5DFC6E6DA516AB0E574 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = B25F649497BE970BF69067D142FC0569 /* config.json */; };
 		0DE5121F1CCC3C3930AD66E0F4DFB99B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55892058789093456759385966FF587F /* User.swift */; };
 		23553DD60F087E33FBF10BF5618097EF /* ExceptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBD03467918C121C46B1E50BE52BD7B /* ExceptionManager.swift */; };
 		2A52180815B931A9395AD0C20554F304 /* ConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAB1206CD73A7406F0478C8187E5648 /* ConfigResponse.swift */; };
@@ -143,7 +142,6 @@
 		AE54FA311DA6B20131DF681A10167AEF /* Pods-ShipBookSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ShipBookSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		AFF8CA39448471ACEFD191B92BBB0FD6 /* RefreshToken.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
 		B14781F9FFEE6AB4DD1BBFC34D6C6668 /* ShipBook.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShipBook.swift; path = ShipBookSDK/Classes/ShipBook.swift; sourceTree = "<group>"; };
-		B25F649497BE970BF69067D142FC0569 /* config.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = config.json; path = ShipBookSDK/Assets/config.json; sourceTree = "<group>"; };
 		B5679A537ED85172A8CEC8C37BB11BE5 /* SBCloudAppender.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SBCloudAppender.swift; sourceTree = "<group>"; };
 		B887ED50B85BADC2C3CFA05D6042ED4F /* AppEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppEvent.swift; sourceTree = "<group>"; };
 		B92D163CEF8BBEA401E5E884DA6C8080 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 		B52FEEA42EA68DFA2A4112A44F8A68E3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B25F649497BE970BF69067D142FC0569 /* config.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -496,7 +493,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A3B6B6087C8E5DFC6E6DA516AB0E574 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

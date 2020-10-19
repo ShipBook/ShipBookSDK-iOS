@@ -97,20 +97,6 @@ class SessionManager {
       self.readConfig(url: nil)
       try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
     }
-//    else if let filepath = Bundle.module.path(forResource: "config", ofType: "json")  {
-//      let url = URL(fileURLWithPath: filepath)
-//      self.readConfig(url: url)
-//      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
-//    }
-//    else
-//    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
-//      let url = URL(fileURLWithPath: filepath)
-//      self.readConfig(url: url)
-//      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
-//    }
-//    else {
-//      InnerLog.e("there was a problem with initialization")
-//    }
 
     self.appKey = appKey
     self.loginCompletion = completion

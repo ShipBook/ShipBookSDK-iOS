@@ -21,10 +21,7 @@ let package = Package(
         .target(
             name: "ShipBookSDK",
             dependencies: [],
-            path: "ShipBookSDK/Classes",
-            resources: [
-              .copy("ShipBookSDK/Assets/config.json")
-            ]
+            path: "ShipBookSDK/Classes"
           ),
 //        .testTarget(
 //            name: "ShipBookSDKTests",
