@@ -95,6 +95,7 @@ class SessionManager {
     }
     else {
       self.readConfig(url: nil)
+      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
     }
 //    else if let filepath = Bundle.module.path(forResource: "config", ofType: "json")  {
 //      let url = URL(fileURLWithPath: filepath)
