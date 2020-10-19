@@ -8,6 +8,39 @@
 #if canImport(UIKit)
 import Foundation
 
+let config = """
+{
+  "appenders" :
+  [{
+   "type" : "ConsoleAppender",
+   "name" : "console",
+   "config" : {
+   "pattern" : "$message"
+   }
+   },
+   {
+   "type" : "SBCloudAppender",
+   "name" : "cloud",
+   "config" :
+   {
+   "maxTime" : 5,
+   "flushSeverity" : "Warning"
+   }
+   }],
+  "loggers" :
+  [{
+   "name" : "",
+   "severity" : "Verbose",
+   "appenderRef" : "console"
+   },
+   {
+   "name" : "",
+   "severity" : "Verbose",
+   "appenderRef" : "cloud"
+   }]
+}
+"""
+
 let sdkBundle = Bundle(for: SessionManager.self)
 class SessionManager {
   
@@ -60,14 +93,23 @@ class SessionManager {
     else if let url = userConfig {
       self.readConfig(url: url)
     }
-    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
-      let url = URL(fileURLWithPath: filepath)
-      self.readConfig(url: url)
-      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
-    }
     else {
-      InnerLog.e("there was a problem with initialization")
+      self.readConfig(url: nil)
     }
+//    else if let filepath = Bundle.module.path(forResource: "config", ofType: "json")  {
+//      let url = URL(fileURLWithPath: filepath)
+//      self.readConfig(url: url)
+//      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
+//    }
+//    else
+//    else if let filepath = sdkBundle.path(forResource: "ShipBookSDK.bundle/config", ofType: "json")  {
+//      let url = URL(fileURLWithPath: filepath)
+//      self.readConfig(url: url)
+//      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
+//    }
+//    else {
+//      InnerLog.e("there was a problem with initialization")
+//    }
 
     self.appKey = appKey
     self.loginCompletion = completion
@@ -106,9 +148,9 @@ class SessionManager {
   struct NoDataError: Error {
   }
   
-  func readConfig(url: URL) {
+  func readConfig(url: URL?) {
     do {
-      let contents = try Data(contentsOf:url)
+      let contents = try url != nil ? Data(contentsOf:url!) : Data(config.utf8)
       let config = try JSONDecoder().decode(ConfigResponse.self, from: contents)
       if !(config.exceptionReportDisabled == true) {
         ExceptionManager.shared.start()
