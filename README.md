@@ -13,8 +13,12 @@ Documentation for [Objective-C](README_ObjC.md)
 ## Installation 
 
 ShipBookSDK is  available through:
-1. [CocoaPods](http://cocoapods.org). 
-2. [Carthage](https://github.com/Carthage/Carthage)
+1. [Swift Package Manager](https://swift.org/package-manager/)
+2. [CocoaPods](http://cocoapods.org).   
+3. [Carthage](https://github.com/Carthage/Carthage)
+
+### Using Swift Package Manager
+Select File > Swift Packages > Add Package Dependency and enter `https://github.com/ShipBook/ShipBookSDK-iOS.git`.
 
 ### Using CocoaPods
 Once you have installed CocoaPods, add the following line to your Podfile and run `pod install`:
