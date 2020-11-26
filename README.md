@@ -224,7 +224,7 @@ To integrate Shipbook with crashlytics just implement the completion callback of
 
 ```swift
 ShipBook.start("YOUR_APP_ID", appKey:"YOUR_APP_KEY") { (sessionUrl: String) -> () in
-  Crashlytics.sharedInstance().setObjectValue(sessionUrl, forKey: "ShipbookSession")
+  Crashlytics.crashlytics().setCustomValue(sessionUrl, forKey: "ShipbookSession")
 }
 ```
 
