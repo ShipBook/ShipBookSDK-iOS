@@ -36,7 +36,6 @@
 		070A3CAC2014CC5400043849 /* LogManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManagerTests.swift; sourceTree = "<group>"; };
 		071554852538648300957FA4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = shipbook_build_dsym_upload.sh; path = ../shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
-		074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README_ObjC.md; path = ../README_ObjC.md; sourceTree = "<group>"; };
 		07BC88152538810200D845B0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ShipBookSDK.podspec; path = ../ShipBookSDK.podspec; sourceTree = "<group>"; };
@@ -154,7 +153,6 @@
 			children = (
 				3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */,
 				EDCAB9F07EF529B25D9B8B32 /* README.md */,
-				074CAFAA216CF9CF00F7AD08 /* README_ObjC.md */,
 				903A3EE1AB241BB39EBA02C8 /* LICENSE */,
 				073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */,
 			);
