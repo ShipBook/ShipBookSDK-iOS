@@ -33,15 +33,15 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ShipBookSDK/Classes/**/*'
   
-  s.resource_bundles = {
-    'ShipBookSDK' => ['ShipBookSDK/Assets/**/*']
-  }
+  # s.resource_bundles = {
+  #  'ShipBookSDK' => ['ShipBookSDK/Assets/**/*']
+  # }
   # s.preserve_path = 'shipbook_build_dsym_upload.sh'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
   # s.frameworks = 'UIKit', 'MapKit'
 
-  s.swift_version = ['5.0', '5.1', '5.2', '5.3']
+  s.swift_version = ['4.2', '5.0', '5.1', '5.2', '5.3']
 
 end
