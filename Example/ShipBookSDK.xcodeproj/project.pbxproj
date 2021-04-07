@@ -218,6 +218,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 5W26546L6E;
 						LastSwiftMigration = 1120;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -534,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F510F8531F57800FC2A3BF5 /* Pods-ShipBookSDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 5W26546L6E;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -553,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F13AD5ACE601E68BFFEE73CC /* Pods-ShipBookSDK_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 5W26546L6E;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
