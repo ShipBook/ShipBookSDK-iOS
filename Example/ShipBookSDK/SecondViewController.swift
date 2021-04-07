@@ -19,6 +19,7 @@ class SecondViewController: UIViewController {
     log.i("this is an info message in SecondViewController")
     log.d("this is a debug message in SecondViewController")
     log.v("this is a verbose message in SecondViewController")
+    ShipBook.flush()
   }
   
   override func viewDidAppear(_ animated: Bool) {

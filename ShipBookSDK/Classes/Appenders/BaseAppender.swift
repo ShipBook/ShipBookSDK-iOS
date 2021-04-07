@@ -16,5 +16,7 @@ protocol BaseAppender {
   func update(config: Config?)
   
   func push(log: BaseLog)
+  
+  func flush()
 }
 

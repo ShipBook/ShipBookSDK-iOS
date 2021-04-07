@@ -108,6 +108,9 @@ class LogManagerTests: XCTestCase {
     func push(log: BaseLog) {
       pushHandler?(log)
     }
+    
+    func flush() {
+    }
   }
 
   func testPush() {

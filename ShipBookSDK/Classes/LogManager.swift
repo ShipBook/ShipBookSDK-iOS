@@ -80,6 +80,14 @@ class LogManager {
     }
   }
   
+  func flush() {
+    let appenders = self.appenders //so that if something happens asynchronous it won't disturb
+    for appender in appenders.values {
+      appender.flush()
+    }
+
+  }
+  
   func getSeverity(_ tag: String) -> Severity {
     let loggers = self.loggers // so that if something happens asynchronous it won't disturb
     var severity = Severity.Off

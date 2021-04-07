@@ -216,6 +216,11 @@ class SBCloudAppender: BaseAppender{
       timer?.resume()
     }
   }
+  
+  func flush() {
+    InnerLog.d("flushed logs")
+    send()
+  }
 
   private func send() {
     if let timer = timer {

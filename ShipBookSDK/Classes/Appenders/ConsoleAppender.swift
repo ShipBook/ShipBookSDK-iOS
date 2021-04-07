@@ -26,4 +26,7 @@ class ConsoleAppender : BaseAppender, PatternLayout {
       print(messageString)
     }
   }
+  
+  func flush() {
+  }
 }

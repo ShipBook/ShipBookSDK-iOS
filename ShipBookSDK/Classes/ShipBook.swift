@@ -123,6 +123,13 @@ public class ShipBook: NSObject {
   }
   
   /**
+    Flush all logs on the device and send them now to the server.
+  */
+  @objc static public func flush() {
+    LogManager.shared.flush()
+  }
+  
+  /**
     Entered in a new screen.
    
     This will help you connect the logs to wich screen is open.
