@@ -9,8 +9,7 @@
 ShipBook works from SWIFT 4.2 (min. version 3), Objective-C and from iOS 10.  
 
 ## Resources
----
-* [Shipbook Documentation](https://docs.shipbook.io))
+* [Shipbook Documentation](https://docs.shipbook.io)
 
 ## Author
 
@@ -18,4 +17,4 @@ Elisha Sterngold ([ShipBook Ltd.](https://www.shipbook.io))
 
 ## License
 
-ShipBookSDK is available under the MIT license. See the (LICENSE)[LICENSE.md] file for more info.
+ShipBookSDK is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
