@@ -31,6 +31,7 @@ class SBCloudAppender: BaseAppender{
   private var backgroundObserver: NSObjectProtocol? = nil
   private var connectedObserver: NSObjectProtocol? = nil
   private var userChangeObserver: NSObjectProtocol? = nil
+  private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
   
   private var uploadingSavedData = false
   var hasLog = false
@@ -58,6 +59,16 @@ class SBCloudAppender: BaseAppender{
         DispatchQueue.shipBook.async {
           InnerLog.d("I'm out of focus!")
           // it will close soon so better send the information
+          self?.backgroundTaskID = UIApplication.shared.beginBackgroundTask (withName: "Finish Network Tasks") {
+              // End the task if time expires.
+              guard let taskId = self?.backgroundTaskID else {
+                  return
+              }
+              UIApplication.shared.endBackgroundTask(taskId)
+              self?.backgroundTaskID = .invalid
+          }
+                
+          // Send the data synchronously.
           self?.send()
         }
     }
@@ -69,6 +80,16 @@ class SBCloudAppender: BaseAppender{
         DispatchQueue.shipBook.async {
           InnerLog.d("I'm out of focus!")
           // it will close soon so better send the information
+          self?.backgroundTaskID = UIApplication.shared.beginBackgroundTask (withName: "Finish Network Tasks") {
+              // End the task if time expires.
+              guard let taskId = self?.backgroundTaskID else {
+                  return
+              }
+              UIApplication.shared.endBackgroundTask(taskId)
+              self?.backgroundTaskID = .invalid
+          }
+                
+          // Send the data synchronously.
           self?.send()
         }
     }
