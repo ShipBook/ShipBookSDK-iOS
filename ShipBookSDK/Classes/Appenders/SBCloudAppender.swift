@@ -69,6 +69,13 @@ class SBCloudAppender: BaseAppender{
                 
           // Send the data synchronously.
           self?.send()
+          
+          // end task
+          guard let taskId = self?.backgroundTaskID else {
+              return
+          }
+          UIApplication.shared.endBackgroundTask(taskId)
+          self?.backgroundTaskID = .invalid
         }
     }
 
