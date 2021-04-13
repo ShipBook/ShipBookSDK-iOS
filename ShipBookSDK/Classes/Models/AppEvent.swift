@@ -16,7 +16,6 @@ class AppEvent: BaseEvent {
     case inactive
     case background
     
-  #if swift(>=4.2)
     init(state: UIApplication.State) {
       switch state {
       case .active:
@@ -29,18 +28,6 @@ class AppEvent: BaseEvent {
         self = .active
       }
     }
-  #else
-    init(state: UIApplicationState) {
-      switch state {
-      case .active:
-        self = .active
-      case .inactive:
-        self = .inactive
-      case .background:
-        self = .background
-      }
-    }
-  #endif
   }
   
 #if os(iOS)
@@ -75,21 +62,12 @@ class AppEvent: BaseEvent {
   
 #if os(iOS)
   var orientation: Orientation
-  #if swift(>=4.2)
   init(event: String, state: UIApplication.State, orientation: UIInterfaceOrientation) {
     self.event = event
     self.state = State(state: state)
     self.orientation = Orientation(orientation: orientation)
     super.init(type: "appEvent")
   }
-  #else
-  init(event: String, state: UIApplicationState, orientation: UIInterfaceOrientation) {
-    self.event = event
-    self.state = State(state: state)
-    self.orientation = Orientation(orientation: orientation)
-    super.init(type: "appEvent")
-  }
-  #endif
 #else
   init(event: String,  state: UIApplication.State) {
     self.event = event

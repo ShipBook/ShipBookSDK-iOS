@@ -47,7 +47,6 @@ class EventManager {
       LogManager.shared.push(log: event)
     }
     
-  #if swift(>=4.2)
     NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil, using: block)
     NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: block)
     NotificationCenter.default.addObserver(forName: UIApplication.didFinishLaunchingNotification, object: nil, queue: nil, using: block)
@@ -61,21 +60,6 @@ class EventManager {
     NotificationCenter.default.addObserver(forName: UIApplication.didChangeStatusBarOrientationNotification, object: nil, queue: nil, using: block)
     NotificationCenter.default.addObserver(forName: UIApplication.willChangeStatusBarOrientationNotification, object: nil, queue: nil, using: block)
     #endif
-  #else
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidFinishLaunching, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillResignActive, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillTerminate, object: nil, queue: nil, using: block)
-
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationSignificantTimeChange, object: nil, queue: nil, using: block)
-    #if os(iOS)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil, queue: nil, using: block)
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillChangeStatusBarOrientation, object: nil, queue: nil, using: block)
-    #endif
-  #endif
   }
   
   

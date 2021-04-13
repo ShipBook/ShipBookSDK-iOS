@@ -51,7 +51,6 @@ class SBCloudAppender: BaseAppender{
     
     update(config: config)
     
-  #if swift(>=4.2)
     backgroundObserver = NotificationCenter.default.addObserver(
       forName: UIApplication.didEnterBackgroundNotification,
       object: nil,
@@ -72,28 +71,6 @@ class SBCloudAppender: BaseAppender{
           self?.send()
         }
     }
-  #else
-    backgroundObserver = NotificationCenter.default.addObserver(
-      forName: NSNotification.Name.UIApplicationDidEnterBackground,
-      object: nil,
-      queue: nil) {[weak self] notification in
-        DispatchQueue.shipBook.async {
-          InnerLog.d("I'm out of focus!")
-          // it will close soon so better send the information
-          self?.backgroundTaskID = UIApplication.shared.beginBackgroundTask (withName: "Finish Network Tasks") {
-              // End the task if time expires.
-              guard let taskId = self?.backgroundTaskID else {
-                  return
-              }
-              UIApplication.shared.endBackgroundTask(taskId)
-              self?.backgroundTaskID = .invalid
-          }
-                
-          // Send the data synchronously.
-          self?.send()
-        }
-    }
-  #endif
 
     connectedObserver = NotificationCenter.default.addObserver(
       forName: NotificationName.Connected,
