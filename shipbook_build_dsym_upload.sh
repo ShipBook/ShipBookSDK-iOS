@@ -19,4 +19,4 @@ marketingVersion=$MARKETING_VERSION
 
 
 curl -X POST -H "Authorization: Bearer $symbolsKey" -F "data=@$filePath/Contents/Resources/DWARF/$PRODUCT_NAME" \
-"https://api.shipbook.io/v1/app/$appId/upload/dsym?version=$marketingVersion&build=$buildNumber"
+"https://api.shipbook.io/v1/apps/$appId/upload/dsym?version=$marketingVersion&build=$buildNumber"
