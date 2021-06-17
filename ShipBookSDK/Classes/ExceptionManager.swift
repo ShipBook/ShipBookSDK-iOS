@@ -67,16 +67,20 @@ class ExceptionManager {
     let callStackSymbols: [String] = Thread.callStackSymbols
     let signalObj  = Signal(rawValue: sig)
     let exceptionName =  signalObj != nil ? signalObj!.name : "No Name";
-    for (_, appender) in LogManager.shared.appenders {
-      appender.push(log: Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
+    DispatchQueue.shipBook.sync {
+      for (_, appender) in LogManager.shared.appenders {
+        appender.push(log: Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
+      }
     }
     signal(sig, SIG_DFL)
   }
   private func createException() {
     NSSetUncaughtExceptionHandler { exception in
       let callStackSymbols: [String] = exception.callStackSymbols
-      for (_, appender) in LogManager.shared.appenders {
-        appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
+      DispatchQueue.shipBook.sync {
+        for (_, appender) in LogManager.shared.appenders {
+          appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
+        }
       }
     }
     

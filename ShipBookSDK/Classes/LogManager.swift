@@ -81,11 +81,11 @@ class LogManager {
   }
   
   func flush() {
-    let appenders = self.appenders //so that if something happens asynchronous it won't disturb
-    for appender in appenders.values {
-      appender.flush()
+    DispatchQueue.shipBook.async { //sync so
+      for (_, appender) in self.appenders {
+        appender.flush()
+      }
     }
-
   }
   
   func getSeverity(_ tag: String) -> Severity {

@@ -36,7 +36,7 @@ class InnerLog{
     if !enabled {
       return
     }
-    print("Shipbook: \(Date().toTimeFormat()) \(severity.name) \(msg)")
+    print("Shipbook: \(Date().toTimeFormat()) \(severity.name) - \(msg)")
   }
 
 }
