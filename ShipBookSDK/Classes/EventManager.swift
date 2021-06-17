@@ -38,7 +38,9 @@ class EventManager {
   
   func enableApp() {
     let block = {(notification: Notification) in
-      let application = notification.object as! UIApplication
+      guard let application = notification.object as? UIApplication else {
+        return
+      }
   #if os(iOS)
       let event = AppEvent(event:notification.name.rawValue, state:application.applicationState, orientation: application.statusBarOrientation)
   #else
