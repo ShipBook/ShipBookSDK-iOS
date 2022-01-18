@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIs-Xh-dKN">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIs-Xh-dKN">
                                 <rect key="frame" x="90.5" y="318.5" width="194" height="30"/>
                                 <state key="normal" title="Open SecondViewController"/>
                                 <connections>
@@ -29,7 +29,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShipBook" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="pWp-GQ-ubc">
                                 <rect key="frame" x="22" y="25" width="331" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqn-Yz-ifQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqn-Yz-ifQ">
                                 <rect key="frame" x="89.5" y="308.5" width="196" height="30"/>
                                 <state key="normal" title="Close SecondViewController"/>
                                 <connections>
@@ -69,24 +69,52 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ShipBook" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-56-A6r">
                                 <rect key="frame" x="22" y="31" width="331" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnI-Cv-UKT">
-                                <rect key="frame" x="152" y="365" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnI-Cv-UKT">
+                                <rect key="frame" x="152" y="352" width="71" height="30"/>
                                 <state key="normal" title="Crash app"/>
                                 <connections>
                                     <action selector="crash" destination="a2g-us-4RJ" eventType="touchUpInside" id="3ET-Ik-0CP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgy-IV-yMr">
+                                <rect key="frame" x="142.5" y="390" width="90" height="30"/>
+                                <state key="normal" title="Change User"/>
+                                <connections>
+                                    <action selector="changeUser" destination="a2g-us-4RJ" eventType="touchUpInside" id="QxU-9N-f7o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chg-rj-EJB">
+                                <rect key="frame" x="172.5" y="428" width="30" height="30"/>
+                                <state key="normal" title="logs"/>
+                                <connections>
+                                    <action selector="logs" destination="a2g-us-4RJ" eventType="touchUpInside" id="i4R-iR-HWK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlf-EQ-NRy">
+                                <rect key="frame" x="165.5" y="466" width="44" height="30"/>
+                                <state key="normal" title="logout"/>
+                                <connections>
+                                    <action selector="logout" destination="a2g-us-4RJ" eventType="touchUpInside" id="Gfh-kV-6Om"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Qlf-EQ-NRy" firstAttribute="top" secondItem="Chg-rj-EJB" secondAttribute="bottom" constant="8" symbolic="YES" id="1AB-Qc-vyx"/>
                             <constraint firstItem="vGY-56-A6r" firstAttribute="top" secondItem="Pfb-98-u93" secondAttribute="bottom" constant="31" id="52C-hX-HZQ"/>
+                            <constraint firstItem="sgy-IV-yMr" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="7Xp-qW-XlN"/>
+                            <constraint firstItem="Chg-rj-EJB" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="AFA-id-hlY"/>
                             <constraint firstItem="rqn-Yz-ifQ" firstAttribute="centerY" secondItem="OFy-oY-Cer" secondAttribute="centerY" id="Mx3-0u-Pna"/>
+                            <constraint firstItem="Chg-rj-EJB" firstAttribute="top" secondItem="sgy-IV-yMr" secondAttribute="bottom" constant="8" symbolic="YES" id="NVY-aK-BTC"/>
+                            <constraint firstItem="sgy-IV-yMr" firstAttribute="top" secondItem="QnI-Cv-UKT" secondAttribute="bottom" constant="8" symbolic="YES" id="PkP-Sn-yBl"/>
+                            <constraint firstItem="Qlf-EQ-NRy" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="RCJ-mx-LTE"/>
+                            <constraint firstItem="QnI-Cv-UKT" firstAttribute="top" secondItem="rqn-Yz-ifQ" secondAttribute="bottom" constant="13.5" id="SOD-Au-zLz"/>
                             <constraint firstItem="vGY-56-A6r" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="ehU-Oc-gSv"/>
                             <constraint firstItem="vGY-56-A6r" firstAttribute="leading" secondItem="OFy-oY-Cer" secondAttribute="leadingMargin" constant="6" id="hI4-4b-nNm"/>
+                            <constraint firstItem="QnI-Cv-UKT" firstAttribute="centerX" secondItem="OFy-oY-Cer" secondAttribute="centerX" id="jLW-ni-xz2"/>
                             <constraint firstItem="vGY-56-A6r" firstAttribute="centerX" secondItem="rqn-Yz-ifQ" secondAttribute="centerX" id="rxC-x1-b65"/>
                         </constraints>
                     </view>
@@ -96,4 +124,9 @@
             <point key="canvasLocation" x="1416.8" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -11,7 +11,7 @@ import ShipBookSDK
 
 fileprivate let log = ShipBook.getLogger(SecondViewController.self)
 class SecondViewController: UIViewController {
-  
+  var userId = 0
   override func viewDidLoad() {
     super.viewDidLoad()
     log.e("this is an error message in SecondViewController")
@@ -36,5 +36,19 @@ class SecondViewController: UIViewController {
     var num = 0.2
     num = 5 / floor(num)
     print(" the crash \(num)")
+  }
+  
+  @IBAction func changeUser() {
+    userId = userId + 1
+    ShipBook.registerUser(userId: String(userId))
+    print("new user id " + String(userId))
+  }
+  
+  @IBAction func logs() {
+    log.i("entered new log with user id: " + String(userId))
+  }
+  
+  @IBAction func logout() {
+    ShipBook.logout()
   }
 }

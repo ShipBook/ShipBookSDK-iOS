@@ -48,6 +48,7 @@ class SessionManager {
   let configURL: URL
   let dirURL: URL
   var appKey: String?
+  var appId: String?
   var token: String?
   var loginCompletion: ((_ sessionUrl: String)->())?
   
@@ -99,6 +100,7 @@ class SessionManager {
     }
 
     self.appKey = appKey
+    self.appId = appId
     self.loginCompletion = completion
     self.login = Login(appId: appId,
                        appKey: appKey)
@@ -109,7 +111,14 @@ class SessionManager {
   func logout() {
     DispatchQueue.shipBook.async {
       self.token = nil
-      self.login = nil
+      self.user = nil
+      if self.appId == nil || self.appKey == nil {
+        self.login = nil
+      }
+      else {
+        self.login = Login(appId: self.appId!,
+                           appKey: self.appKey!)
+      }
     }
   }
   
@@ -215,6 +224,8 @@ class SessionManager {
       if response.ok {
         guard response.data != nil else {
           InnerLog.e("missing data")
+          self.token = refresh.token; // there is an error the refresh token should be called again.
+          completionHandler(false)
           return
         }
         let refreshResp = try? ConnectionClient.jsonDecoder.decode(RefreshTokenResponse.self, from: response.data!)
@@ -222,6 +233,7 @@ class SessionManager {
         completionHandler(true)
       }
       else {
+        self.token = refresh.token; // there is an error the refresh token should be called again.
         completionHandler(false)
       }
     }

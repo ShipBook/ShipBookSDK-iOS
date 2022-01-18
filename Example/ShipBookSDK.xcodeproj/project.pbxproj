@@ -11,6 +11,7 @@
 		070A3CAB2014CC4C00043849 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA82014CC4C00043849 /* CodableTests.swift */; };
 		075485FD2014F79E00E92F10 /* LogManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CAC2014CC5400043849 /* LogManagerTests.swift */; };
 		075485FE2014F7B400E92F10 /* CrashManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070A3CA62014CC4B00043849 /* CrashManagerTests.swift */; };
+		079A806F2796BD560098CAA5 /* ShipBookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079A806E2796BD560098CAA5 /* ShipBookSDK.framework */; };
 		07DED7EA2015FDD000D63565 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DED7E92015FDD000D63565 /* SecondViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -35,7 +36,7 @@
 		070A3CA82014CC4C00043849 /* CodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		070A3CAC2014CC5400043849 /* LogManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManagerTests.swift; sourceTree = "<group>"; };
 		071554852538648300957FA4 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
-		073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = shipbook_build_dsym_upload.sh; path = ../shipbook_build_dsym_upload.sh; sourceTree = "<group>"; };
+		079A806E2796BD560098CAA5 /* ShipBookSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ShipBookSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07BC88152538810200D845B0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07DED7E92015FDD000D63565 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ShipBookSDK.podspec; path = ../ShipBookSDK.podspec; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079A806F2796BD560098CAA5 /* ShipBookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		079A806D2796BD560098CAA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				079A806E2796BD560098CAA5 /* ShipBookSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		07BC880825387E8400D845B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				0E43E33288C8D62D8EDD4CC1 /* Pods */,
+				079A806D2796BD560098CAA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,7 +165,6 @@
 				3061FC99A4A7B06962B6815C /* ShipBookSDK.podspec */,
 				EDCAB9F07EF529B25D9B8B32 /* README.md */,
 				903A3EE1AB241BB39EBA02C8 /* LICENSE */,
-				073579D824A49C2D003D92B2 /* shipbook_build_dsym_upload.sh */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -505,10 +515,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5W26546L6E;
 				INFOPLIST_FILE = ShipBookSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,10 +537,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 5W26546L6E;
 				INFOPLIST_FILE = ShipBookSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 1.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
