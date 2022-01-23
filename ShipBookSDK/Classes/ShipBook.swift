@@ -110,8 +110,8 @@ public class ShipBook: NSObject {
     Create a Log class
     - Parameter klass: The class that you want to create the log class with. It will use the class name as tag for the log class.
   */
-  static public func getLogger(_ klass: AnyClass) -> Log {
-    return Log(klass)
+  static public func getLogger(_ any: Any) -> Log {
+    return Log(String(describing: any))
   }
 
   /**
