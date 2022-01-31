@@ -112,13 +112,11 @@ class SessionManager {
     DispatchQueue.shipBook.async {
       self.token = nil
       self.user = nil
-      if self.appId == nil || self.appKey == nil {
-        self.login = nil
-      }
-      else {
+      if self.login != nil {
         self.login = Login(appId: self.appId!,
                            appKey: self.appKey!)
       }
+      self.innerLogin()
     }
   }
   
