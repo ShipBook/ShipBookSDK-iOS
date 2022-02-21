@@ -12,7 +12,6 @@ import MachO.dyld
 class ExceptionManager {
   static let shared = ExceptionManager()
   let binaryImages: [BinaryImage]?
-  var prefActions: []?
   func start(exception: Bool = true) {
     if (exception) {
       createException()
@@ -38,6 +37,14 @@ class ExceptionManager {
     }
     self.binaryImages = binaryImages
   }
+
+  private struct OldSigAction {
+      public var __sigaction_u: __sigaction_u /* signal handler */
+      public var sa_mask: sigset_t /* signal mask to apply */
+      public var sa_flags: Int32 /* see signal options below */
+  }
+      
+  private var oldSignalHandlers = [Signal:OldSigAction]()
 
   public enum Signal : Int32, CaseIterable {
     case SIGABRT = 6
@@ -71,33 +78,47 @@ class ExceptionManager {
     let exceptionName =  signalObj != nil ? signalObj!.name : "No Name";
     let exception = Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages)
     let appenders = LogManager.shared.appenders //copying so that it can be changed in the middle
-    for (_, appender) in LogManager.shared.appenders {
+    for (_, appender) in appenders {
       appender.saveCrash(exception: exception)
     }
 
-    signal(sig, SIG_DFL)
+    if let signal = Signal(rawValue: sig), let oldHandler = ExceptionManager.shared.oldSignalHandlers[signal] {
+        if (Int32(oldHandler.sa_mask) & SA_SIGINFO) == 0 {
+            oldHandler.__sigaction_u.__sa_handler(sig)
+        } else {
+            oldHandler.__sigaction_u.__sa_sigaction(sig,siginfo,p)
+        }
+    } else {
+        signal(sig, SIG_DFL)
+    }
   }
   
+  var oldExceptionHandler : (@convention(c) (NSException) -> Void)? = nil
   private func createException() {
+    oldExceptionHandler = NSGetUncaughtExceptionHandler()
     NSSetUncaughtExceptionHandler { exception in
       let callStackSymbols: [String] = exception.callStackSymbols
-//      DispatchQueue.shipBook.sync {
-        for (_, appender) in LogManager.shared.appenders {
-          appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
-        }
-//      }
+      let appenders = LogManager.shared.appenders //copying so that it can be changed in the middle
+      let exc = Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages)
+      for (_, appender) in appenders {
+        appender.saveCrash(exception: exc)
+      }
+      if let oldExcHandler = ExceptionManager.shared.oldExceptionHandler {
+        oldExcHandler(exception)
+      }
     }
     
     var sigAction = sigaction()
     sigAction.sa_flags = SA_SIGINFO|SA_RESETHAND;
     sigAction.__sigaction_u.__sa_sigaction = signalHandler
     
-    var sigActionPrev = sigaction()
-    
+    var old = sigaction()
     for sig in Signal.allCases {
-      sigaction(sig.rawValue, &sigAction, &sigActionPrev)
-      
+      sigaction(sig.rawValue, &sigAction, &old)
+      let convertedOld = OldSigAction(__sigaction_u: old.__sigaction_u, sa_mask: old.sa_mask, sa_flags: old.sa_flags)
+      oldSignalHandlers[sig] = convertedOld
     }
+    
   }
 }
 #endif
