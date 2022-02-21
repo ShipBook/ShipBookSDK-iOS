@@ -17,4 +17,10 @@ extension String {
     let data = self.data(using: String.Encoding.utf8)!
     try data.write(append: url)
   }
+  
+  func write(to url: URL) throws {
+    let data = self.data(using: String.Encoding.utf8)!
+    try data.write(to: url, options: .atomic)
+
+  }
 }

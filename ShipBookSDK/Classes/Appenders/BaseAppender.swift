@@ -18,5 +18,7 @@ protocol BaseAppender {
   func push(log: BaseLog)
   
   func flush()
+  
+  func saveCrash(exception: Exception)
 }
 

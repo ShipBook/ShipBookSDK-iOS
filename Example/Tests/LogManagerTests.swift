@@ -91,7 +91,6 @@ class LogManagerTests: XCTestCase {
   typealias PushHandlerType = (BaseLog) -> Void
   class TestAppender : BaseAppender {
     func update(config: Config?) {
-
     }
     
     var pushHandler : PushHandlerType?
@@ -110,6 +109,9 @@ class LogManagerTests: XCTestCase {
     }
     
     func flush() {
+    }
+    
+    func saveCrash(exception: Exception) {
     }
   }
 

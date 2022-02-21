@@ -20,6 +20,7 @@ class SBCloudAppender: BaseAppender{
   // file names
   let fileURL: URL
   let tempFileURL: URL
+  let crashFile: URL
   
   // consts/
   let FILE_CLASS_SEPARATOR = ": "
@@ -43,10 +44,17 @@ class SBCloudAppender: BaseAppender{
     let dir = SessionManager.shared.dirURL
     fileURL =  dir.appendingPathComponent("CloudQueue.log")
     tempFileURL =  dir.appendingPathComponent("TempCloudQueue.log")
+    crashFile = dir.appendingPathComponent("Crash.log")
+
     
     //checking if there exists a temp file.
     if FileManager.default.fileExists(atPath: tempFileURL.path) {
       self.concatTmpFile()
+    }
+    
+    //checking if there exist a crash file
+    if FileManager.default.fileExists(atPath: crashFile.path) {
+      self.concatCrashFile()
     }
     
     update(config: config)
@@ -382,6 +390,42 @@ class SBCloudAppender: BaseAppender{
       try FileManager.default.moveItem(at: self.tempFileURL, to: self.fileURL)
     } catch let error {
       InnerLog.e("concatTmpFile error: " + error.localizedDescription)
+    }
+  }
+  
+  func concatCrashFile() {
+    do {
+      try String(contentsOf: self.crashFile).write(append: self.fileURL, separatedBy: self.NEW_LINE_SEPARATOR)
+      try FileManager.default.removeItem(at: self.crashFile) // so that it won't be on the next session
+    } catch let error {
+      InnerLog.e("concatCrashFile error: " + error.localizedDescription)
+    }
+  }
+  
+  func saveCrash(exception: Exception) {
+    do {
+      if let token = SessionManager.shared.token {
+        let line = TOKEN + FILE_CLASS_SEPARATOR + token
+        try line.write(append: crashFile, separatedBy: NEW_LINE_SEPARATOR)
+      }
+      else if let login = SessionManager.shared.login {
+        let prefix = String(describing: Login.self) + FILE_CLASS_SEPARATOR
+        if let jsonString = try login.toJsonString() {
+          let line = prefix.appending(jsonString)
+          try line.write(append: crashFile, separatedBy: NEW_LINE_SEPARATOR)
+        }
+      }
+      else {
+        InnerLog.e("Didn't have token or login therefor can't save crash")
+        return;
+      }
+      let prefix = String(describing: type(of: exception)) + FILE_CLASS_SEPARATOR
+      if let jsonString = try exception.toJsonString() {
+        let line = prefix.appending(jsonString)
+        try line.write(append: crashFile, separatedBy: NEW_LINE_SEPARATOR)
+      }
+    } catch let error {
+      InnerLog.e("save exception file error: " + error.localizedDescription)
     }
   }
 }

@@ -28,5 +28,10 @@ class ConsoleAppender : BaseAppender, PatternLayout {
   }
   
   func flush() {
+    // empty
+  }
+  
+  func saveCrash(exception: Exception) {
+    // empty
   }
 }

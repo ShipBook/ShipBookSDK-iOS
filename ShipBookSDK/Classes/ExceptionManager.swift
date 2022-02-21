@@ -9,10 +9,10 @@
 import Foundation
 import MachO.dyld
 
-
 class ExceptionManager {
   static let shared = ExceptionManager()
   let binaryImages: [BinaryImage]?
+  var prefActions: []?
   func start(exception: Bool = true) {
     if (exception) {
       createException()
@@ -39,13 +39,14 @@ class ExceptionManager {
     self.binaryImages = binaryImages
   }
 
-  public enum Signal : Int32 {
-    case SIGABRT
-    case SIGILL
-    case SIGSEGV
-    case SIGFPE
-    case SIGBUS
-    case SIGPIPE
+  public enum Signal : Int32, CaseIterable {
+    case SIGABRT = 6
+    case SIGILL = 4
+    case SIGSEGV = 11
+    case SIGFPE = 8
+    case SIGBUS = 10
+    case SIGPIPE = 13
+    case SIGTRAP = 5
     
     
     var name: String {
@@ -56,6 +57,7 @@ class ExceptionManager {
       case .SIGFPE: return "SIGFPE"
       case .SIGBUS: return "SIGBUS"
       case .SIGPIPE: return "SIGPIPE"
+      case .SIGTRAP: return "SIGTRAP"
       }
     }
   }
@@ -67,33 +69,35 @@ class ExceptionManager {
     let callStackSymbols: [String] = Thread.callStackSymbols
     let signalObj  = Signal(rawValue: sig)
     let exceptionName =  signalObj != nil ? signalObj!.name : "No Name";
-    DispatchQueue.shipBook.sync {
-      for (_, appender) in LogManager.shared.appenders {
-        appender.push(log: Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
-      }
+    let exception = Exception(name:exceptionName, reason: signalName, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages)
+    let appenders = LogManager.shared.appenders //copying so that it can be changed in the middle
+    for (_, appender) in LogManager.shared.appenders {
+      appender.saveCrash(exception: exception)
     }
+
     signal(sig, SIG_DFL)
   }
+  
   private func createException() {
     NSSetUncaughtExceptionHandler { exception in
       let callStackSymbols: [String] = exception.callStackSymbols
-      DispatchQueue.shipBook.sync {
+//      DispatchQueue.shipBook.sync {
         for (_, appender) in LogManager.shared.appenders {
           appender.push(log: Exception(name: exception.name.rawValue, reason: exception.reason, callStackSymbols: callStackSymbols, binaryImages: ExceptionManager.shared.binaryImages))
         }
-      }
+//      }
     }
     
     var sigAction = sigaction()
     sigAction.sa_flags = SA_SIGINFO|SA_RESETHAND;
     sigAction.__sigaction_u.__sa_sigaction = signalHandler
     
-    sigaction(SIGABRT, &sigAction, nil)
-    sigaction(SIGILL, &sigAction, nil)
-    sigaction(SIGSEGV, &sigAction, nil)
-    sigaction(SIGFPE, &sigAction, nil)
-    sigaction(SIGBUS, &sigAction, nil)
-    sigaction(SIGPIPE, &sigAction, nil)
+    var sigActionPrev = sigaction()
+    
+    for sig in Signal.allCases {
+      sigaction(sig.rawValue, &sigAction, &sigActionPrev)
+      
+    }
   }
 }
 #endif

@@ -31,14 +31,14 @@ class SecondViewController: UIViewController {
     self.dismiss(animated: false)
   }
   
-  @IBAction func  crash() throws {
+  @IBAction func  crash() {
     log.d("entered crash function")
-    var num = 0.2
-    num = 5 / floor(num)
-    print(" the crash \(num)")
+    let numbers = [0]
+    let _ = numbers[1]
   }
   
   @IBAction func changeUser() {
+
     userId = userId + 1
     ShipBook.registerUser(userId: String(userId))
     print("new user id " + String(userId))
