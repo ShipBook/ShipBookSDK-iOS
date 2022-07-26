@@ -115,10 +115,11 @@ class ExceptionManager {
     var old = sigaction()
     for sig in Signal.allCases {
       sigaction(sig.rawValue, &sigAction, &old)
-      let convertedOld = OldSigAction(__sigaction_u: old.__sigaction_u, sa_mask: old.sa_mask, sa_flags: old.sa_flags)
-      oldSignalHandlers[sig] = convertedOld
+      if old.sa_flags != 0 || old.sa_mask != 0 || old.__sigaction_u.__sa_sigaction != nil || old.__sigaction_u.__sa_handler != nil {
+        let convertedOld = OldSigAction(__sigaction_u: old.__sigaction_u, sa_mask: old.sa_mask, sa_flags: old.sa_flags)
+        oldSignalHandlers[sig] = convertedOld
+      }
     }
-    
   }
 }
 #endif
