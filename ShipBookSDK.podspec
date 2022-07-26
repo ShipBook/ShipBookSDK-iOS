@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ShipBookSDK'
-  s.version          = '1.1.19'
+  s.version          = '1.1.20'
   s.summary          = 'User & Session-based mobile log platform for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -42,6 +42,6 @@ Pod::Spec.new do |s|
   
   # s.frameworks = 'UIKit', 'MapKit'
 
-  s.swift_version = ['4.2', '5.0', '5.1', '5.2', '5.3']
+  s.swift_version = ['4.2', '5.0', '5.1', '5.2', '5.3', '5.5', '5.6']
 
 end
