@@ -39,8 +39,12 @@ class ResponseData {
 }
 
 class ConnectionClient {
+  private init(){
+  }
+  static let shared = ConnectionClient()
+  
   static var BASE_URL = "https://api.shipbook.io/v1/"
-  static let dateFormatter: DateFormatter = {
+  let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     return formatter
@@ -48,16 +52,22 @@ class ConnectionClient {
   
   static let jsonDecoder: JSONDecoder = {
     let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(ConnectionClient.dateFormatter)
+    decoder.dateDecodingStrategy = JSONDecoder.DateDecodingStrategy.formatted(ConnectionClient.shared.dateFormatter)
     return decoder
   }()
   
   static let jsonEncoder: JSONEncoder = {
     let encoder = JSONEncoder()
-    encoder.dateEncodingStrategy = JSONEncoder.DateEncodingStrategy.formatted(ConnectionClient.dateFormatter)
+    encoder.dateEncodingStrategy = JSONEncoder.DateEncodingStrategy.formatted(ConnectionClient.shared.dateFormatter)
     return encoder
   }()
-  
+
+  let session: URLSession  = {
+    let configuration = URLSessionConfiguration.default
+    configuration.timeoutIntervalForRequest = 30
+    return URLSession(configuration: configuration)
+  }()
+
   func request<T : Encodable>(url: String, data: T?, method: HttpMethod?, completionHandler:@escaping(ResponseData)->Void) -> Void {
     var urlRequest = URLRequest(url: URL(string: ConnectionClient.BASE_URL + url)!)
     if let data = data {
@@ -73,9 +83,6 @@ class ConnectionClient {
       urlRequest.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
     }
     
-    let configuration = URLSessionConfiguration.default
-    configuration.timeoutIntervalForRequest = 30
-    let session = URLSession(configuration: configuration)
     session.dataTask(with: urlRequest as URLRequest) { (data, response, error) -> Void in
       let response = ResponseData(response: response as? HTTPURLResponse, data: data)
       if !response.ok && response.statusCode == 401 && response.error?.name == "TokenExpired"  { // call refresh token

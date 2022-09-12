@@ -166,9 +166,8 @@ class SessionManager {
     isInLoginRequest = true
     let url = "auth/loginSdk"
     
-    let client = ConnectionClient()
     login?.deviceTime = Date()
-    client.request(url: url, data: login, method: HttpMethod.POST) { response in
+    ConnectionClient.shared.request(url: url, data: login, method: HttpMethod.POST) { response in
       DispatchQueue.shipBook.async {
         self.isInLoginRequest = false
         if response.ok {
@@ -216,8 +215,7 @@ class SessionManager {
     let refresh = RefreshToken(token: token!, appKey: appKey!)
     isInLoginRequest = true
     self.token = nil
-    let client = ConnectionClient()
-    client.request(url: "auth/refreshSdkToken", data: refresh, method: HttpMethod.POST) { response in
+    ConnectionClient.shared.request(url: "auth/refreshSdkToken", data: refresh, method: HttpMethod.POST) { response in
       self.isInLoginRequest = false
       if response.ok {
         guard response.data != nil else {

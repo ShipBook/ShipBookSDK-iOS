@@ -291,8 +291,7 @@ class SBCloudAppender: BaseAppender{
         sessionsData[i].login?.deviceTime = currentTime
       }
       
-      let client = ConnectionClient()
-      client.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
+      ConnectionClient.shared.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
         if response.ok || response.statusCode > 0 {
           InnerLog.d("sent uploadSavedData")
           self.removeFile(url:self.tempFileURL)
