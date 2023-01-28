@@ -19,7 +19,6 @@ class ExceptionManager {
   }
   
   private init() {
-    print("binary images")
     let c = _dyld_image_count()
     var binaryImages: [BinaryImage] = Array.init()
     for i in 0..<c {
