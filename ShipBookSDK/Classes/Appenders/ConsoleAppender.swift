@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 class ConsoleAppender : BaseAppender, PatternLayout {
   var pattern: String = "$message"
@@ -22,8 +23,29 @@ class ConsoleAppender : BaseAppender, PatternLayout {
   
   func push(log: BaseLog) {
     if let message = log as? Message {
-      let messageString = toString(message: message);
-      print(messageString)
+      
+      if #available(iOS 14.0, *) {
+        let subsystem = Bundle.main.bundleIdentifier!
+        let logger = Logger(subsystem: subsystem, category: message.tag)
+        switch message.severity {
+          case Severity.Verbose:
+            logger.trace("\(message.message)")
+          case Severity.Debug:
+            logger.debug("\(message.message)")
+          case Severity.Info:
+            logger.info("\(message.message)")
+          case Severity.Warning:
+            logger.warning("\(message.message)")
+          case Severity.Error:
+            logger.error("\(message.message)")
+          default:
+            logger.log(level: .default, "\(message.message)")
+        }
+      }
+      else {
+        let messageString = toString(message: message);
+        print(messageString)
+      }
     }
   }
   
