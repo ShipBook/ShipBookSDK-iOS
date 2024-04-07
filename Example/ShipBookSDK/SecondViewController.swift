@@ -26,7 +26,25 @@ class SecondViewController: UIViewController {
     super.viewDidAppear(animated)
     ShipBook.screen(name: "SecondViewController")
   }
+    
+  @IBAction func raceCondition () {
+    let threadCount = 1000
 
+    // Create a concurrent queue
+    let queue = DispatchQueue(label: "io.shipbook.logQueue", attributes: .concurrent)
+
+    for i in 1...threadCount {
+      queue.async {
+        Log.i("The current log for count \(i)")
+      }
+    }
+
+    // Optionally, you can add a barrier to wait for all logging to complete
+    // before the program exits or moves to the next phase
+    queue.async(flags: .barrier) {
+        print("All logging completed.")
+    }
+  }
   @IBAction func back () {
     self.dismiss(animated: false)
   }

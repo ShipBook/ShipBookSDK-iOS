@@ -180,7 +180,7 @@ class SBCloudAppender: BaseAppender{
   }
 
   func push(message: Message) {
-      if flushSeverity.rawValue < message.severity.rawValue {
+    if flushSeverity.rawValue < message.severity.rawValue {
       flushQueue.append(message)
       if flushQueue.count > flushSize {
         flushQueue.remove(at: 0)
