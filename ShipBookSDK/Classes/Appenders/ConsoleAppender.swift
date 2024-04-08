@@ -24,7 +24,7 @@ class ConsoleAppender : BaseAppender, PatternLayout {
   func push(log: BaseLog) {
     if let message = log as? Message {
       
-      if #available(iOS 14.0, *) {
+      if #available(iOS 14.0, tvOS 14.0, *) {
         let subsystem = Bundle.main.bundleIdentifier!
         let logger = Logger(subsystem: subsystem, category: message.tag)
         switch message.severity {
