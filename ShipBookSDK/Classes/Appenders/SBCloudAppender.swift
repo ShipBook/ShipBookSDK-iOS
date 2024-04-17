@@ -131,14 +131,6 @@ class SBCloudAppender: BaseAppender{
   
   func saveToFile(data: Encodable) {
     do {
-      let systemAttributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory() as String)
-      let freeSpace = (systemAttributes[FileAttributeKey.systemFreeSize] as? NSNumber)?.int64Value
-      
-      if (freeSpace ?? 0 < Int64(10485760)) { // at least 10mb
-        InnerLog.w("The disk is almost full")
-        return
-      }
-      
       if let attr = try? FileManager.default.attributesOfItem(atPath: fileURL.path) {
         let fileSize = attr[FileAttributeKey.size] as! UInt64
         if fileSize > maxFileSize {
