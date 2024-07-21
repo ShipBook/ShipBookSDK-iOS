@@ -284,14 +284,29 @@ class SBCloudAppender: BaseAppender{
       }
       
       ConnectionClient.shared.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
-        if response.ok || response.statusCode > 0 {
+        if response.ok {
           InnerLog.d("sent uploadSavedData")
           self.removeFile(url:self.tempFileURL)
         }
         else {
-          InnerLog.i("server is probably down")
-          DispatchQueue.shipBook.async {
-            self.concatTmpFile()
+          if response.statusCode <= 0 {
+            InnerLog.i("no internet")
+            DispatchQueue.shipBook.async {
+              self.concatTmpFile()
+            }
+          }
+          else if (502...504).contains(response.statusCode) {
+            InnerLog.i("server is probably down")
+            DispatchQueue.shipBook.async {
+              self.concatTmpFile()
+            }
+          }
+          else {
+            InnerLog.e("error in sending file: " + response.error!.message)
+            if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
+              self.saveToFile(data: sessionLogData)
+              self.createTimer()
+            }
           }
         }
       }
