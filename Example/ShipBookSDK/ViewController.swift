@@ -14,7 +14,6 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    Log.d("testing")
     log.e("this is an error message")
     log.w("this is a warning message")
     log.i("this is an info message")
