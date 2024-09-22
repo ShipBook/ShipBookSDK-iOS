@@ -302,7 +302,7 @@ class SBCloudAppender: BaseAppender{
             }
           }
           else {
-            InnerLog.e("error in sending file: " + response.error!.message)
+            InnerLog.e("error in sending file: " + (response.error?.message ?? "(empty error)"))
             if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
               self.saveToFile(data: sessionLogData)
               self.createTimer()
