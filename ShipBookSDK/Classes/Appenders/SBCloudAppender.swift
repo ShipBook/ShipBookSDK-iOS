@@ -283,29 +283,28 @@ class SBCloudAppender: BaseAppender{
         sessionsData[i].login?.deviceTime = currentTime
       }
       
-      ConnectionClient.shared.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { response in
-        if response.ok {
-          InnerLog.d("sent uploadSavedData")
-          self.removeFile(url:self.tempFileURL)
-        }
-        else {
-          if response.statusCode <= 0 {
-            InnerLog.i("no internet")
-            DispatchQueue.shipBook.async {
-              self.concatTmpFile()
-            }
-          }
-          else if (502...504).contains(response.statusCode) {
-            InnerLog.i("server is probably down")
-            DispatchQueue.shipBook.async {
-              self.concatTmpFile()
-            }
+      ConnectionClient.shared.request(url: "sessions/uploadSavedData", data: sessionsData, method: HttpMethod.POST) { [weak self] response in
+        DispatchQueue.shipBook.async {
+          guard let self = self else { return }
+          if response.ok {
+            InnerLog.d("sent uploadSavedData")
+            self.removeFile(url: self.tempFileURL)
           }
           else {
-            InnerLog.e("error in sending file: " + (response.error?.message ?? "(empty error)"))
-            if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
-              self.saveToFile(data: sessionLogData)
-              self.createTimer()
+            if response.statusCode <= 0 {
+              InnerLog.i("no internet")
+              self.concatTmpFile()
+            }
+            else if (502...504).contains(response.statusCode) {
+              InnerLog.i("server is probably down")
+              self.concatTmpFile()
+            }
+            else {
+              InnerLog.e("error in sending file: " + (response.error?.message ?? "(empty error)"))
+              if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
+                self.saveToFile(data: sessionLogData)
+                self.createTimer()
+              }
             }
           }
         }
