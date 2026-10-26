@@ -69,6 +69,19 @@ ShipBook.registerUser(userId: "user-123",
 ShipBook.logout()
 ```
 
+### Link Sessions with Your Backend
+
+Add the session headers to requests toward your own backend, and the Shipbook console links this app session to the sessions those requests create in your Node.js backend:
+
+```swift
+var request = URLRequest(url: URL(string: "https://api.your-backend.com/checkout")!)
+for (name, value) in ShipBook.getSessionHeaders() {
+  request.setValue(value, forHTTPHeaderField: name)
+}
+```
+
+It returns an empty dictionary until login completes, so adding it is always safe.
+
 ### Screen Tracking
 
 ```swift

@@ -104,6 +104,15 @@ public class ShipBook: NSObject {
   @objc static public func logout() {
     SessionManager.shared.logout()
   }
+
+  /**
+    Headers to attach to requests toward your own backend so its Shipbook sessions link back to this app session.
+
+    Returns an empty dictionary until login completes, so merging it into a request is always safe.
+  */
+  @objc static public func getSessionHeaders() -> [String: String] {
+    return SessionManager.shared.getSessionHeaders()
+  }
   
   
   /**

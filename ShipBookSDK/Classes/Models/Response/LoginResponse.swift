@@ -12,4 +12,5 @@ struct LoginResponse : Decodable {
   let config: ConfigResponse
   let token: String
   let sessionUrl: String
+  let sessionLink: String? // Opaque x-shipbook-session value; absent when the device is silenced
 }
