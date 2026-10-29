@@ -232,8 +232,33 @@ class CodableTests: XCTestCase {
     XCTAssertEqual(appenderResponse?.type, "ConsoleAppender")
     XCTAssertNotNil(appenderResponse?.config)
     XCTAssertEqual(appenderResponse?.config?["pattern"] as? String, "test")
-    
-    
+
+
+  }
+
+  func testLoginResponseSessionLink() throws {
+    let loginString = """
+    {
+      "token": "token",
+      "sessionUrl": "https://console.shipbook.io/session",
+      "sessionLink": "1:698ad6e6595b3f6a7590b24f:66f1c2a9e4b0d3f8a1b2c3d4",
+      "config": { "appenders": [], "loggers": [] }
+    }
+    """
+    let login = try JSONDecoder().decode(LoginResponse.self, from: loginString.data(using: .utf8)!)
+    XCTAssertEqual(login.sessionLink, "1:698ad6e6595b3f6a7590b24f:66f1c2a9e4b0d3f8a1b2c3d4")
+  }
+
+  func testLoginResponseWithoutSessionLink() throws {
+    let loginString = """
+    {
+      "token": "token",
+      "sessionUrl": "https://console.shipbook.io/session",
+      "config": { "appenders": [], "loggers": [] }
+    }
+    """
+    let login = try JSONDecoder().decode(LoginResponse.self, from: loginString.data(using: .utf8)!)
+    XCTAssertNil(login.sessionLink)
   }
   
   

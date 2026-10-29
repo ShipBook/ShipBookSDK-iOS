@@ -42,6 +42,7 @@ let config = """
 """
 
 class SessionManager {
+  private static let sessionLinkHeader = "x-shipbook-session"
 
   private var isInLoginRequest: Bool = false
   // Set when loginSdk got a 4xx — integration is wrong (bad appId/appKey, app deleted, etc.). Retrying won't fix it; suppress further attempts in this process so we don't hammer the server.
@@ -51,6 +52,7 @@ class SessionManager {
   var appKey: String?
   var appId: String?
   var token: String?
+  var sessionLink: String?
   var loginCompletion: ((_ sessionUrl: String)->())?
   
   private var _login: Login?
@@ -166,6 +168,7 @@ class SessionManager {
   private func innerLogin() {
     if !Reachability.isConnectedToNetwork() || isInLoginRequest || appKey == nil || loginFailedPermanently { return }
     isInLoginRequest = true
+    sessionLink = nil
     let url = "auth/loginSdk"
 
     login?.deviceTime = Date()
@@ -179,6 +182,7 @@ class SessionManager {
             }
             let login = try ConnectionClient.jsonDecoder.decode(LoginResponse.self, from: response.data!)
             self.token = login.token
+            self.sessionLink = login.sessionLink
 
             self.loginCompletion?(login.sessionUrl)
 
@@ -246,6 +250,12 @@ class SessionManager {
         completionHandler(false)
       }
     }
+  }
+
+  // Empty until login completes and on silenced devices, so callers can always merge it.
+  func getSessionHeaders() -> [String: String] {
+    guard let sessionLink = sessionLink else { return [:] }
+    return [SessionManager.sessionLinkHeader: sessionLink]
   }
 }
 #endif
