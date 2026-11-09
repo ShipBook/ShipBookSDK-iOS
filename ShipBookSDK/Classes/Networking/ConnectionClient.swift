@@ -17,18 +17,15 @@ enum HttpMethod : String {
 }
 
 class ResponseData {
-  private static let defaultPause: TimeInterval = 60 * 60
-  private static let maxPause: TimeInterval = 30 * 24 * 60 * 60
-
   var response: HTTPURLResponse?
   var ok: Bool = false
   var statusCode: Int = 0
   var data: Data?
   var error: ErrorResponse?
+  var pause: Int?
   var retryAfter: Int?
-  var pause: TimeInterval? {
-    if let retryAfter = retryAfter { return min(TimeInterval(retryAfter), ResponseData.maxPause) }
-    return statusCode == 429 ? ResponseData.defaultPause : nil
+  var busy: Bool {
+    return (statusCode == 429 || statusCode == 503) && pause == nil
   }
   
   init(response: HTTPURLResponse?,data: Data?) {
@@ -43,11 +40,17 @@ class ResponseData {
         error = try? ConnectionClient.jsonDecoder.decode(ErrorResponse.self, from:data)
       }
     }
-    // HTTP/2 sends header names in lowercase and allHeaderFields is case sensitive in Swift
-    let header = response?.allHeaderFields.first { ($0.key as? String)?.lowercased() == "retry-after" }?.value as? String
-    if statusCode >= 400, let seconds = Int(header ?? ""), seconds > 0 {
-      retryAfter = seconds
+    if statusCode >= 400 {
+      pause = seconds(header: "x-shipbook-pause")
+      retryAfter = seconds(header: "retry-after")
     }
+  }
+
+  private func seconds(header: String) -> Int? {
+    // HTTP/2 sends header names in lowercase and allHeaderFields is case sensitive in Swift
+    let value = response?.allHeaderFields.first { ($0.key as? String)?.lowercased() == header }?.value as? String
+    guard let seconds = Int(value ?? ""), seconds > 0 else { return nil }
+    return seconds
   }
 }
 
@@ -85,7 +88,7 @@ class ConnectionClient {
 
   func request<T : Encodable>(url: String, data: T?, method: HttpMethod?, completionHandler:@escaping(ResponseData)->Void) -> Void {
     let requestURL = URL(string: ConnectionClient.BASE_URL + url)!
-    if SessionManager.shared.paused {
+    if SessionManager.shared.requestsBlocked {
       completionHandler(ResponseData(response: HTTPURLResponse(url: requestURL, statusCode: 429, httpVersion: nil, headerFields: nil), data: nil))
       return
     }
@@ -108,9 +111,10 @@ class ConnectionClient {
     session.dataTask(with: urlRequest as URLRequest) { (data, response, error) -> Void in
       let response = ResponseData(response: response as? HTTPURLResponse, data: data)
       if let pause = response.pause {
-        SessionManager.shared.pause(for: pause)
-        let retryAfter = response.retryAfter.map { "with Retry-After \($0)" } ?? "without Retry-After"
-        InnerLog.w("Shipbook paused until \(SessionManager.shared.pausedUntil.toISO8601Format()): the server answered \(response.statusCode) \(retryAfter)")
+        SessionManager.shared.pause(for: pause, status: response.statusCode)
+      }
+      else if response.busy {
+        SessionManager.shared.backOff(for: response.retryAfter, status: response.statusCode)
       }
       if !response.ok && response.statusCode == 401 && response.error?.name == "TokenExpired"  { // call refresh token
         SessionManager.shared.refreshToken() {(succeeded) in
