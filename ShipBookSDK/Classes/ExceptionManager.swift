@@ -12,10 +12,12 @@ import MachO.dyld
 class ExceptionManager {
   static let shared = ExceptionManager()
   let binaryImages: [BinaryImage]?
+  private var started = false
+  // A second install would save ShipBook's own handlers as the previous ones and recurse into them on a crash.
   func start(exception: Bool = true) {
-    if (exception) {
-      createException()
-    }
+    if !exception || started { return }
+    started = true
+    createException()
   }
   
   private init() {
@@ -39,7 +41,6 @@ class ExceptionManager {
 
   private struct OldSigAction {
       public var __sigaction_u: __sigaction_u /* signal handler */
-      public var sa_mask: sigset_t /* signal mask to apply */
       public var sa_flags: Int32 /* see signal options below */
   }
       
@@ -82,7 +83,7 @@ class ExceptionManager {
     }
 
     if let signal = Signal(rawValue: sig), let oldHandler = ExceptionManager.shared.oldSignalHandlers[signal] {
-        if (Int32(oldHandler.sa_mask) & SA_SIGINFO) == 0 {
+        if (oldHandler.sa_flags & SA_SIGINFO) == 0 {
             oldHandler.__sigaction_u.__sa_handler(sig)
         } else {
             oldHandler.__sigaction_u.__sa_sigaction(sig,siginfo,p)
@@ -106,18 +107,26 @@ class ExceptionManager {
         oldExcHandler(exception)
       }
     }
-    
+    installSignalHandlers()
+  }
+
+  func installSignalHandlers() {
     var sigAction = sigaction()
     sigAction.sa_flags = SA_SIGINFO|SA_RESETHAND;
     sigAction.__sigaction_u.__sa_sigaction = signalHandler
     
-    var old = sigaction()
+    let ignoreHandler = unsafeBitCast(SIG_IGN, to: Int.self)
     for sig in Signal.allCases {
+      var old = sigaction()
       sigaction(sig.rawValue, &sigAction, &old)
-      if old.sa_flags != 0 || old.sa_mask != 0 || old.__sigaction_u.__sa_sigaction != nil || old.__sigaction_u.__sa_handler != nil {
-        let convertedOld = OldSigAction(__sigaction_u: old.__sigaction_u, sa_mask: old.sa_mask, sa_flags: old.sa_flags)
-        oldSignalHandlers[sig] = convertedOld
+      let oldHandler = unsafeBitCast(old.__sigaction_u, to: Int.self)
+      if oldHandler == ignoreHandler {
+        sigaction(sig.rawValue, &old, nil) // the app ignores this signal (commonly SIGPIPE), so it is not a crash
+        oldSignalHandlers[sig] = nil
+        continue
       }
+      // 0 is SIG_DFL, which has no function to chain to
+      oldSignalHandlers[sig] = oldHandler == 0 ? nil : OldSigAction(__sigaction_u: old.__sigaction_u, sa_flags: old.sa_flags)
     }
   }
 }
