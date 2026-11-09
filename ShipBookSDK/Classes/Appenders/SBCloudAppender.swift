@@ -132,6 +132,7 @@ class SBCloudAppender: BaseAppender{
   }
   
   func saveToFile(data: Encodable) {
+    if SessionManager.shared.paused { return }
     do {
       if let attr = try? FileManager.default.attributesOfItem(atPath: fileURL.path) {
         let fileSize = attr[FileAttributeKey.size] as! UInt64
@@ -167,6 +168,7 @@ class SBCloudAppender: BaseAppender{
   
   func push(log: BaseLog) {
     DispatchQueue.shipBook.async {
+      if SessionManager.shared.paused { return }
       if let message = log as? Message { self.push(message: message) }
       else if let exception = log as? Exception { self.push(exception: exception) }
       else if let event = log as? BaseEvent { self.push(event: event) }
@@ -410,6 +412,7 @@ class SBCloudAppender: BaseAppender{
   }
   
   func saveCrash(exception: Exception) {
+    if SessionManager.shared.paused { return }
     do {
       if let token = SessionManager.shared.token {
         let line = TOKEN + FILE_CLASS_SEPARATOR + token
