@@ -139,6 +139,9 @@ class SessionManager {
     self.login = Login(appId: appId,
                        appKey: appKey)
     self.loginFailedPermanently = false
+    self.token = nil
+    self.sessionLink = nil
+    self.sessionUrl = nil
 
     self.pausedUntil = .distantPast
     // a pause further ahead than the cap was saved while the device clock was wrong

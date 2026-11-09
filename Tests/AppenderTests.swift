@@ -164,7 +164,7 @@ class AppenderTests: XCTestCase {
     XCTAssertEqual(sessionsData![0].logs, [message])
     XCTAssertNoThrow (sessionsData = try cloudAppender.loadFromFile(url: cloudAppender.crashFile))
     XCTAssertEqual(sessionsData!.count, 1)
-    XCTAssertEqual((sessionsData![0].logs[0] as? Exception)?.name, "crash while backing off")
+    XCTAssertEqual((sessionsData![0].logs.first as? Exception)?.name, "crash while backing off")
     try? FileManager.default.removeItem(at: cloudAppender.fileURL)
     try? FileManager.default.removeItem(at: cloudAppender.crashFile)
   }
