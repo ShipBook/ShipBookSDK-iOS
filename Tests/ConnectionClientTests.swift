@@ -105,6 +105,7 @@ class ConnectionClientTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
+    continueAfterFailure = false
     StubURLProtocol.install()
     resetSession()
   }
@@ -198,20 +199,20 @@ class ConnectionClientTests: XCTestCase {
 
   // MARK: request headers
 
-  func testRequestsIdentifyTheAppAndTheSdk() {
+  func testRequestsIdentifyTheAppAndTheSdk() throws {
     session.appId = appId
 
     XCTAssertTrue(send().ok)
 
-    let request = StubURLProtocol.requests[0]
+    let request = try XCTUnwrap(StubURLProtocol.requests.first)
     XCTAssertEqual(request.value(forHTTPHeaderField: "x-shipbook-app-id"), appId)
     XCTAssertEqual(request.value(forHTTPHeaderField: "x-shipbook-sdk"), "ios/\(shipBookSDKVersion)")
   }
 
-  func testRequestsBeforeStartCarryNoAppId() {
+  func testRequestsBeforeStartCarryNoAppId() throws {
     XCTAssertTrue(send().ok)
 
-    let request = StubURLProtocol.requests[0]
+    let request = try XCTUnwrap(StubURLProtocol.requests.first)
     XCTAssertNil(request.value(forHTTPHeaderField: "x-shipbook-app-id"))
     XCTAssertEqual(request.value(forHTTPHeaderField: "x-shipbook-sdk"), "ios/\(shipBookSDKVersion)")
   }
