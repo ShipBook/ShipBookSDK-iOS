@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.1]
+- Fixed crash reports from other crash reporters (such as Sentry) when they start before Shipbook. Shipbook called their signal handler with the wrong arguments, so a crash like `abort()` was reported as an `EXC_BAD_ACCESS` inside that reporter and the original crash was lost.
+- A signal your app ignores (commonly `SIGPIPE`) now stays ignored. Before, Shipbook recorded it as a crash and then crashed the app.
+- Calling `ShipBook.start` a second time no longer reinstalls the crash handlers, which could make a crash loop into Shipbook's own handler.
+
 ## [2.1.0]
 
 ### Added
