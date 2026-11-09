@@ -26,6 +26,8 @@ public class ShipBook: NSObject {
   
   /**
    Starts the shipbook SDK should be called in `application(_:didFinishLaunchingWithOptions:)`
+
+   Calling it again with the same appId and appKey doesn't log in again: a new `completion` replaces the earlier one.
    
    - Parameters:
    - appId: The app id. You get it from https://console.shipbook.io.
@@ -39,6 +41,8 @@ public class ShipBook: NSObject {
   
   /**
     Starts the shipbook SDK should be called in `application(_:didFinishLaunchingWithOptions:)`
+
+    Calling it again with the same appId and appKey doesn't log in again: a new `completion` replaces the earlier one.
    
     - Parameters:
       - appId: The app id. You get it from https://console.shipbook.io.

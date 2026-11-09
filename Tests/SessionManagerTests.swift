@@ -2,10 +2,70 @@ import XCTest
 @testable import ShipBookSDK
 
 class SessionManagerTests: XCTestCase {
+  private static let quietConfig = #"{"appenders":[],"loggers":[],"exceptionReportDisabled":true,"eventLoggingDisabled":true}"#
+
+  private let session = SessionManager.shared
+  private let appId = "5f0000000000000000000001"
+  private let appKey = "key-1"
+  private let sessionUrl = "https://console.shipbook.io/session/1"
+
+  private var loginRequests: [URLRequest] {
+    return StubURLProtocol.requests.filter { $0.url?.lastPathComponent == "loginSdk" }
+  }
+
+  override func setUp() {
+    super.setUp()
+    StubURLProtocol.install()
+    resetSession()
+    try? FileManager.default.createDirectory(at: session.dirURL, withIntermediateDirectories: true, attributes: nil)
+    try? Data(SessionManagerTests.quietConfig.utf8).write(to: session.configURL)
+  }
 
   override func tearDown() {
-    SessionManager.shared.sessionLink = nil
+    XCTAssertTrue(loginFinished())
+    StubURLProtocol.uninstall()
+    resetSession()
+    try? FileManager.default.removeItem(at: session.configURL)
+    DispatchQueue.shipBook.sync {}
     super.tearDown()
+  }
+
+  private func resetSession() {
+    session.appId = nil
+    session.appKey = nil
+    session.token = nil
+    session.sessionLink = nil
+    session.login = nil
+    session.loginCompletion = nil
+    session.pausedUntil = .distantPast
+    try? FileManager.default.removeItem(at: session.pauseURL)
+  }
+
+  private func loginFinished() -> Bool {
+    return waitUntil { DispatchQueue.shipBook.sync { !self.session.isInLoginRequest } }
+  }
+
+  private func loginSucceeds() -> StubURLProtocol.Response {
+    let body = #"{"token":"token-1","sessionUrl":"\#(sessionUrl)","sessionLink":"1:app:session","config":\#(SessionManagerTests.quietConfig)}"#
+    return StubURLProtocol.Response(body: Data(body.utf8))
+  }
+
+  private func storePause(appId: String, sdkVersion: String, until: Date) throws {
+    let record = #"{"appId":"\#(appId)","sdkVersion":"\#(sdkVersion)","until":\#(Int64(until.timeIntervalSince1970 * 1000))}"#
+    try Data(record.utf8).write(to: session.pauseURL)
+  }
+
+  private func assertStartLogsInAndDeletesTheStoredPause(file: StaticString = #filePath, line: UInt = #line) throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+
+    ShipBook.start(appId: appId, appKey: appKey)
+
+    XCTAssertFalse(session.paused, file: file, line: line)
+    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), file: file, line: line)
+    XCTAssertTrue(loginFinished(), file: file, line: line)
+    XCTAssertEqual(loginRequests.count, 1, file: file, line: line)
+    XCTAssertEqual(session.token, "token-1", file: file, line: line)
   }
 
   func testSessionHeadersCarryTheSessionLink() {
@@ -16,5 +76,226 @@ class SessionManagerTests: XCTestCase {
   func testSessionHeadersAreEmptyBeforeLogin() {
     SessionManager.shared.sessionLink = nil
     XCTAssertEqual(ShipBook.getSessionHeaders(), [:])
+  }
+
+  func testStartStaysPausedOnAStoredPause() throws {
+    let until = Date().addingTimeInterval(600)
+    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: until)
+    var completions = 0
+
+    let log = captureInnerLog {
+      ShipBook.start(appId: appId, appKey: appKey) { _ in completions += 1 }
+    }
+
+    XCTAssertTrue(session.paused)
+    XCTAssertEqual(session.pausedUntil.timeIntervalSince1970, until.timeIntervalSince1970, accuracy: 0.001)
+    XCTAssertTrue(log.contains("Warning - Shipbook is paused until \(session.pausedUntil.toISO8601Format()) (from an earlier run); nothing will be sent\n"), log)
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    assertNoRequest()
+    XCTAssertEqual(completions, 0)
+    XCTAssertTrue(FileManager.default.fileExists(atPath: session.pauseURL.path))
+  }
+
+  func testStartDeletesAPauseStoredForAnotherApp() throws {
+    try storePause(appId: "5f0000000000000000000002", sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
+    try assertStartLogsInAndDeletesTheStoredPause()
+  }
+
+  func testStartDeletesAPauseStoredByAnotherSdkVersion() throws {
+    try storePause(appId: appId, sdkVersion: "0.0.1", until: Date().addingTimeInterval(600))
+    try assertStartLogsInAndDeletesTheStoredPause()
+  }
+
+  func testStartDeletesAPauseThatIsOver() throws {
+    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(-1))
+    try assertStartLogsInAndDeletesTheStoredPause()
+  }
+
+  func testStartTreatsACorruptPauseFileAsAbsent() throws {
+    for corrupt in ["", "not json", "{\"appId\":", "[]", "{\"appId\":\"\(appId)\",\"sdkVersion\":\"\(shipBookSDKVersion)\",\"until\":\"tomorrow\"}"] {
+      try Data(corrupt.utf8).write(to: session.pauseURL)
+      session.appId = nil
+
+      ShipBook.start(appId: appId, appKey: appKey)
+
+      XCTAssertFalse(session.paused, corrupt)
+      XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), corrupt)
+      XCTAssertTrue(loginFinished(), corrupt)
+    }
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    XCTAssertEqual(loginRequests.count, 5)
+  }
+
+  func testWhilePausedNothingLogsIn() throws {
+    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
+    ShipBook.start(appId: appId, appKey: appKey)
+
+    session.token = "left over"
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    session.token = nil
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    ShipBook.logout()
+    ShipBook.start(appId: appId, appKey: appKey)
+    ShipBook.start(appId: appId, appKey: "key-2")
+    DispatchQueue.shipBook.sync {}
+    let refreshed = expectation(description: "refresh")
+    session.token = "left over"
+    session.refreshToken { succeeded in
+      XCTAssertFalse(succeeded)
+      refreshed.fulfill()
+    }
+    wait(for: [refreshed], timeout: 5)
+
+    assertNoRequest()
+    XCTAssertTrue(session.paused)
+  }
+
+  func testSecondStartDoesNotLogInAgain() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+    let first = expectation(description: "first completion")
+    ShipBook.start(appId: appId, appKey: appKey) { url in
+      XCTAssertEqual(url, self.sessionUrl)
+      first.fulfill()
+    }
+    wait(for: [first], timeout: 5)
+    XCTAssertTrue(loginFinished())
+
+    let second = expectation(description: "second completion")
+    ShipBook.start(appId: appId, appKey: appKey) { url in
+      XCTAssertEqual(url, self.sessionUrl)
+      second.fulfill()
+    }
+    wait(for: [second], timeout: 5)
+    ShipBook.start(appId: appId, appKey: appKey)
+
+    DispatchQueue.shipBook.sync {}
+    RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+    XCTAssertEqual(loginRequests.count, 1)
+    XCTAssertEqual(loginRequests[0].value(forHTTPHeaderField: "x-shipbook-app-id"), appId)
+    XCTAssertEqual(loginRequests[0].value(forHTTPHeaderField: "x-shipbook-sdk"), "ios/\(shipBookSDKVersion)")
+    XCTAssertEqual(session.token, "token-1")
+  }
+
+  func testSecondStartBeforeLoginFinishedKeepsTheNewestCompletion() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+    let gate = DispatchSemaphore(value: 0)
+    StubURLProtocol.gate = gate
+    var firstCompletions = 0
+    let newest = expectation(description: "newest completion")
+
+    ShipBook.start(appId: appId, appKey: appKey) { _ in firstCompletions += 1 }
+    ShipBook.start(appId: appId, appKey: appKey) { url in
+      XCTAssertEqual(url, self.sessionUrl)
+      newest.fulfill()
+    }
+    DispatchQueue.shipBook.sync {}
+    gate.signal()
+
+    wait(for: [newest], timeout: 5)
+    XCTAssertTrue(loginFinished())
+    XCTAssertEqual(firstCompletions, 0)
+    XCTAssertEqual(loginRequests.count, 1)
+  }
+
+  func testSecondStartWithoutCompletionKeepsTheEarlierOne() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+    let gate = DispatchSemaphore(value: 0)
+    StubURLProtocol.gate = gate
+    let earlier = expectation(description: "earlier completion")
+
+    ShipBook.start(appId: appId, appKey: appKey) { url in
+      XCTAssertEqual(url, self.sessionUrl)
+      earlier.fulfill()
+    }
+    ShipBook.start(appId: appId, appKey: appKey)
+    DispatchQueue.shipBook.sync {}
+    gate.signal()
+
+    wait(for: [earlier], timeout: 5)
+    XCTAssertTrue(loginFinished())
+    XCTAssertEqual(loginRequests.count, 1)
+  }
+
+  func testStartWithAnotherAppKeyLogsInAgain() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+    ShipBook.start(appId: appId, appKey: appKey)
+    XCTAssertTrue(loginFinished())
+
+    ShipBook.start(appId: appId, appKey: "key-2")
+    XCTAssertTrue(loginFinished())
+
+    XCTAssertEqual(loginRequests.count, 2)
+    XCTAssertEqual(session.appKey, "key-2")
+  }
+
+  func testLoginPausedByTheServerLogsInAgainWhenThePauseIsOver() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in StubURLProtocol.Response(status: 401, headers: ["Retry-After": "600"]) }
+    var completions = 0
+    ShipBook.start(appId: appId, appKey: appKey) { _ in completions += 1 }
+    XCTAssertTrue(loginFinished())
+
+    XCTAssertTrue(session.paused)
+    XCTAssertFalse(session.loginFailedPermanently)
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    ShipBook.start(appId: appId, appKey: appKey) { _ in completions += 1 }
+    DispatchQueue.shipBook.sync {}
+    RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+    XCTAssertEqual(loginRequests.count, 1)
+    XCTAssertEqual(completions, 0)
+
+    StubURLProtocol.respond = { _ in self.loginSucceeds() }
+    session.pausedUntil = Date()
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    XCTAssertTrue(loginFinished())
+
+    XCTAssertEqual(loginRequests.count, 2)
+    XCTAssertEqual(completions, 1)
+    DispatchQueue.shipBook.sync { XCTAssertTrue(session.connected) }
+  }
+
+  func testLogin4xxWithoutPauseSignalIsNotRetriedUntilTheNextAppStart() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { _ in StubURLProtocol.Response(status: 401) }
+    ShipBook.start(appId: appId, appKey: appKey)
+    XCTAssertTrue(loginFinished())
+
+    XCTAssertFalse(session.paused)
+    XCTAssertTrue(session.loginFailedPermanently)
+    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
+    ShipBook.start(appId: appId, appKey: appKey)
+    DispatchQueue.shipBook.sync {}
+    RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+    XCTAssertEqual(loginRequests.count, 1)
+  }
+
+  func testRefreshPausedByTheServerIsNotAPermanentFailure() throws {
+    try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
+    StubURLProtocol.respond = { request in
+      switch request.url!.lastPathComponent {
+      case "loginSdk": return self.loginSucceeds()
+      case "refreshSdkToken": return StubURLProtocol.Response(status: 429, headers: ["Retry-After": "600"])
+      default: return StubURLProtocol.Response(status: 401, body: Data(#"{"name":"TokenExpired","message":"expired"}"#.utf8))
+      }
+    }
+    ShipBook.start(appId: appId, appKey: appKey)
+    XCTAssertTrue(loginFinished())
+
+    let uploaded = expectation(description: "upload")
+    ConnectionClient.shared.request(url: "sessions/uploadSavedData", data: String?.none, method: .POST) { response in
+      XCTAssertEqual(response.statusCode, 401)
+      uploaded.fulfill()
+    }
+    wait(for: [uploaded], timeout: 5)
+
+    XCTAssertEqual(StubURLProtocol.requests.map { $0.url!.lastPathComponent }, ["loginSdk", "uploadSavedData", "refreshSdkToken"])
+    XCTAssertTrue(session.paused)
+    XCTAssertNil(session.token)
+    XCTAssertFalse(session.loginFailedPermanently)
   }
 }

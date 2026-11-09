@@ -20,7 +20,7 @@ class AppenderTests: XCTestCase {
   }
   
   override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    SessionManager.shared.pausedUntil = .distantPast
     super.tearDown()
   }
   
@@ -103,5 +103,38 @@ class AppenderTests: XCTestCase {
     XCTAssertNil(sessionLogData2.token)
     XCTAssertEqual(sessionLogData2.login, SessionManager.shared.login)
     XCTAssertEqual(sessionLogData2.logs, logs2)
+  }
+
+  func testCloudAppenderDropsLogsWhilePaused() {
+    let cloudAppender = SBCloudAppender(name: "cloud", config: ["maxTime": 3600, "flushSeverity": "Warning"])
+    try? FileManager.default.removeItem(at: cloudAppender.fileURL)
+    try? FileManager.default.removeItem(at: cloudAppender.crashFile)
+    SessionManager.shared.token = nil
+    SessionManager.shared.login = Login(appId:"59f196837211df173c430c51", appKey:"5a4b2e7f82416460bd2afc1cdb002e743ac25ce9")
+
+    SessionManager.shared.pausedUntil = Date().addingTimeInterval(600)
+    cloudAppender.push(log: Message(message: "kept in memory if not dropped", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
+    cloudAppender.push(log: ScreenEvent(name: "paused screen"))
+    cloudAppender.push(log: Message(message: "flushed if not dropped", severity: .Error, tag: "test", function: #function, file: #file, line: #line))
+    cloudAppender.push(log: Exception(name: "paused exception"))
+    DispatchQueue.shipBook.sync {
+      cloudAppender.saveToFile(data: Message(message: "saved if not dropped", severity: .Error, tag: "test", function: #function, file: #file, line: #line))
+    }
+    cloudAppender.saveCrash(exception: Exception(name: "paused crash"))
+
+    XCTAssertFalse(FileManager.default.fileExists(atPath: cloudAppender.fileURL.path))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: cloudAppender.crashFile.path))
+
+    SessionManager.shared.pausedUntil = Date()
+    let message = Message(message: "after the pause", severity: .Error, tag: "test", function: #function, file: #file, line: #line)
+    cloudAppender.push(log: message)
+    DispatchQueue.shipBook.sync {}
+
+    var sessionsData: [SessionLogData]? = nil
+    XCTAssertNoThrow (sessionsData = try cloudAppender.loadFromFile(url: cloudAppender.fileURL))
+    XCTAssertEqual(sessionsData!.count, 1)
+    XCTAssertEqual(sessionsData![0].login, SessionManager.shared.login)
+    XCTAssertEqual(sessionsData![0].logs, [message])
+    try? FileManager.default.removeItem(at: cloudAppender.fileURL)
   }
 }
