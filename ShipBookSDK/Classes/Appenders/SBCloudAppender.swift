@@ -301,6 +301,10 @@ class SBCloudAppender: BaseAppender{
               InnerLog.i("server is probably down")
               self.concatTmpFile()
             }
+            else if response.pause != nil || response.busy || SessionManager.shared.requestsBlocked {
+              // requestsBlocked: the signal can also come on the token refresh this upload set off
+              self.concatTmpFile()
+            }
             else {
               InnerLog.e("error in sending file: " + (response.error?.message ?? "(empty error)"))
               if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
