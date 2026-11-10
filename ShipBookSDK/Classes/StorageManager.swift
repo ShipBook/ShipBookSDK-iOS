@@ -1,4 +1,3 @@
-#if canImport(UIKit)
 import Foundation
 
 // The SDK's own suite, never UserDefaults.standard, so its keys can't collide with the app's.
@@ -22,4 +21,3 @@ class StorageManager {
     defaults.removeObject(forKey: key)
   }
 }
-#endif
