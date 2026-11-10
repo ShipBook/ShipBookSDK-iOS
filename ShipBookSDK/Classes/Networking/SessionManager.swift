@@ -46,7 +46,6 @@ class SessionManager {
   private static let maxPause: TimeInterval = 30 * 24 * 60 * 60
   private static let defaultBackOff: TimeInterval = 5 * 60
   private static let maxBackOff: TimeInterval = 60 * 60
-  private static let innerLogTimeFormatter = ISO8601DateFormatter()
 
   struct Pause: Codable {
     let appId: String
@@ -151,7 +150,7 @@ class SessionManager {
       self.pausedUntil = Date(timeIntervalSince1970: TimeInterval(stored.until) / 1000)
     }
     if self.paused {
-      InnerLog.w("paused until \(SessionManager.innerLogTimeFormatter.string(from: self.pausedUntil)) (from an earlier run); nothing will be sent")
+      InnerLog.w("paused until \(self.pausedUntil.toISO8601Format()) (from an earlier run); nothing will be sent")
     }
     else {
       try? FileManager.default.removeItem(at: self.pauseURL)
@@ -164,7 +163,7 @@ class SessionManager {
     token = nil
     sessionLink = nil
     sessionUrl = nil
-    InnerLog.w("paused until \(SessionManager.innerLogTimeFormatter.string(from: pausedUntil)): the server answered \(status) with x-shipbook-pause \(seconds)")
+    InnerLog.w("paused until \(pausedUntil.toISO8601Format()): the server answered \(status) with x-shipbook-pause \(seconds)")
     guard let appId = appId else { return }
     let stored = Pause(appId: appId, sdkVersion: shipBookSDKVersion, until: Int64(pausedUntil.timeIntervalSince1970 * 1000))
     try? FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
@@ -173,7 +172,7 @@ class SessionManager {
 
   func backOff(for retryAfter: Int?, status: Int) {
     backOffUntil = Date().addingTimeInterval(min(retryAfter.map { TimeInterval($0) } ?? SessionManager.defaultBackOff, SessionManager.maxBackOff))
-    InnerLog.w("backing off until \(SessionManager.innerLogTimeFormatter.string(from: backOffUntil)): the server answered \(status)")
+    InnerLog.w("backing off until \(backOffUntil.toISO8601Format()): the server answered \(status)")
   }
 
   func logout() {

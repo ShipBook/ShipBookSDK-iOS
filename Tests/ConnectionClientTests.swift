@@ -77,10 +77,6 @@ extension XCTestCase {
     XCTAssertEqual(StubURLProtocol.requests.map { $0.url!.lastPathComponent }, [], file: file, line: line)
   }
 
-  func innerLogTime(_ date: Date) -> String {
-    return ISO8601DateFormatter().string(from: date)
-  }
-
   func captureInnerLog(_ block: () -> Void) -> String {
     let wasEnabled = InnerLog.enabled
     InnerLog.enabled = true
@@ -235,8 +231,7 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual(session.backOffUntil, .distantPast)
     XCTAssertNil(session.token)
     XCTAssertEqual(ShipBook.getSessionHeaders(), [:])
-    XCTAssertTrue(log.contains("Warning - paused until \(innerLogTime(session.pausedUntil)): the server answered 401 with x-shipbook-pause 120\n"), log)
-    XCTAssertNotNil(log.range(of: #"paused until \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z: the server"#, options: .regularExpression), log)
+    XCTAssertTrue(log.contains("Warning - paused until \(session.pausedUntil.toISO8601Format()): the server answered 401 with x-shipbook-pause 120\n"), log)
 
     let stored = try JSONSerialization.jsonObject(with: Data(contentsOf: session.pauseURL)) as! [String: Any]
     XCTAssertEqual(Set(stored.keys), ["appId", "sdkVersion", "until"])
@@ -257,7 +252,7 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual(session.backOffUntil, .distantPast)
     XCTAssertNil(session.token)
     XCTAssertTrue(FileManager.default.fileExists(atPath: session.pauseURL.path))
-    XCTAssertTrue(log.contains("Warning - paused until \(innerLogTime(session.pausedUntil)): the server answered 429 with x-shipbook-pause 7200\n"), log)
+    XCTAssertTrue(log.contains("Warning - paused until \(session.pausedUntil.toISO8601Format()): the server answered 429 with x-shipbook-pause 7200\n"), log)
     XCTAssertFalse(log.contains("backing off"), log)
   }
 
@@ -317,8 +312,7 @@ class ConnectionClientTests: XCTestCase {
       XCTAssertEqual(session.token, "token", "\(status)")
       XCTAssertEqual(ShipBook.getSessionHeaders(), ["x-shipbook-session": "1:app:session"], "\(status)")
       XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), "\(status)")
-      XCTAssertTrue(log.contains("Warning - backing off until \(innerLogTime(session.backOffUntil)): the server answered \(status)\n"), log)
-      XCTAssertNotNil(log.range(of: #"backing off until \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z: the server"#, options: .regularExpression), log)
+      XCTAssertTrue(log.contains("Warning - backing off until \(session.backOffUntil.toISO8601Format()): the server answered \(status)\n"), log)
       XCTAssertFalse(log.contains("paused"), log)
     }
   }

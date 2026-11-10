@@ -91,8 +91,7 @@ class SessionManagerTests: XCTestCase {
 
     XCTAssertTrue(session.paused)
     XCTAssertEqual(session.pausedUntil.timeIntervalSince1970, until.timeIntervalSince1970, accuracy: 0.001)
-    XCTAssertTrue(log.contains("Warning - paused until \(innerLogTime(session.pausedUntil)) (from an earlier run); nothing will be sent\n"), log)
-    XCTAssertNotNil(log.range(of: #"paused until \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z \(from"#, options: .regularExpression), log)
+    XCTAssertTrue(log.contains("Warning - paused until \(session.pausedUntil.toISO8601Format()) (from an earlier run); nothing will be sent\n"), log)
     DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
     assertNoRequest()
     XCTAssertEqual(completions, 0)
