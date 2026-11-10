@@ -91,20 +91,31 @@ class SessionManager {
   
   func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
+    var loadedCachedConfig = false
     if let cachedConfig = StorageManager.shared.data(forKey: SessionManager.configKey) {
-      self.readConfig(data: cachedConfig)
-    }
-    else if let url = userConfig {
       do {
-        self.readConfig(data: try Data(contentsOf: url))
+        try self.readConfig(data: cachedConfig)
+        loadedCachedConfig = true
+      }
+      catch {
+        // A config saved by another SDK version may no longer decode; drop it instead of starting with no config until the next login.
+        InnerLog.w("cached config is corrupt, deleting it and falling back to the default config: \(error.localizedDescription)")
+        StorageManager.shared.remove(forKey: SessionManager.configKey)
+      }
+    }
+    if !loadedCachedConfig {
+      do {
+        if let url = userConfig {
+          try self.readConfig(data: Data(contentsOf: url))
+        }
+        else {
+          try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
+          try self.readConfig(data: Data(config.utf8))
+        }
       }
       catch {
         InnerLog.e(error.localizedDescription)
       }
-    }
-    else {
-      self.readConfig(data: Data(config.utf8))
-      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
     }
 
     self.appKey = appKey
@@ -150,22 +161,17 @@ class SessionManager {
   struct NoDataError: Error {
   }
   
-  func readConfig(data: Data) {
-    do {
-      let config = try JSONDecoder().decode(ConfigResponse.self, from: data)
-      if !(config.exceptionReportDisabled == true) {
-        ExceptionManager.shared.start()
-      }
-      if !(config.eventLoggingDisabled == true) {
-        // EventManager.shared.enableViewController() it is bloating the logs
-        EventManager.shared.enableAction()
-        EventManager.shared.enableApp()
-      }
-      LogManager.shared.config(config)
+  func readConfig(data: Data) throws {
+    let config = try JSONDecoder().decode(ConfigResponse.self, from: data)
+    if !(config.exceptionReportDisabled == true) {
+      ExceptionManager.shared.start()
     }
-    catch {
-      InnerLog.e(error.localizedDescription)
+    if !(config.eventLoggingDisabled == true) {
+      // EventManager.shared.enableViewController() it is bloating the logs
+      EventManager.shared.enableAction()
+      EventManager.shared.enableApp()
     }
+    LogManager.shared.config(config)
   }
   
   private func innerLogin() {
