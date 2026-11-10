@@ -130,6 +130,7 @@ class SBCloudAppender: BaseAppender{
   }
   
   func saveToFile(data: Encodable) {
+    if SessionManager.shared.paused { return }
     do {
       if let attr = try? FileManager.default.attributesOfItem(atPath: fileURL.path) {
         let fileSize = attr[FileAttributeKey.size] as! UInt64
@@ -165,6 +166,7 @@ class SBCloudAppender: BaseAppender{
   
   func push(log: BaseLog) {
     DispatchQueue.shipBook.async {
+      if SessionManager.shared.paused { return }
       if let message = log as? Message { self.push(message: message) }
       else if let exception = log as? Exception { self.push(exception: exception) }
       else if let event = log as? BaseEvent { self.push(event: event) }
@@ -299,6 +301,10 @@ class SBCloudAppender: BaseAppender{
               InnerLog.i("server is probably down")
               self.concatTmpFile()
             }
+            else if response.pause != nil || response.busy || SessionManager.shared.requestsBlocked {
+              // requestsBlocked: the signal can also come on the token refresh this upload set off
+              self.concatTmpFile()
+            }
             else {
               InnerLog.e("error in sending file: " + (response.error?.message ?? "(empty error)"))
               if let sessionLogData = sessionsData.first(where: { $0.user != nil }) {
@@ -408,6 +414,7 @@ class SBCloudAppender: BaseAppender{
   }
   
   func saveCrash(exception: Exception) {
+    if SessionManager.shared.paused { return }
     do {
       if let token = SessionManager.shared.token {
         let line = TOKEN + FILE_CLASS_SEPARATOR + token

@@ -43,16 +43,35 @@ let config = """
 
 class SessionManager {
   private static let sessionLinkHeader = "x-shipbook-session"
+  private static let maxPause: TimeInterval = 30 * 24 * 60 * 60
+  private static let defaultBackOff: TimeInterval = 5 * 60
+  private static let maxBackOff: TimeInterval = 60 * 60
 
-  private var isInLoginRequest: Bool = false
+  struct Pause: Codable {
+    let appId: String
+    let sdkVersion: String
+    let until: Int64
+  }
+
+  private(set) var isInLoginRequest: Bool = false
   // Set when loginSdk got a 4xx — integration is wrong (bad appId/appKey, app deleted, etc.). Retrying won't fix it; suppress further attempts in this process so we don't hammer the server.
-  private var loginFailedPermanently: Bool = false
+  private(set) var loginFailedPermanently: Bool = false
   let configURL: URL
+  let pauseURL: URL
   let dirURL: URL
   var appKey: String?
   var appId: String?
   var token: String?
   var sessionLink: String?
+  private var sessionUrl: String?
+  var pausedUntil = Date.distantPast
+  var backOffUntil = Date.distantPast
+  var paused: Bool {
+    return pausedUntil > Date()
+  }
+  var requestsBlocked: Bool {
+    return paused || backOffUntil > Date()
+  }
   var loginCompletion: ((_ sessionUrl: String)->())?
   
   private var _login: Login?
@@ -71,6 +90,7 @@ class SessionManager {
   
   var connected: Bool {
     get {
+      if requestsBlocked { return false }
       if token != nil { return true }
       if loginFailedPermanently { return false }
       innerLogin()
@@ -86,12 +106,21 @@ class SessionManager {
   #endif
     dirURL = dir!.appendingPathComponent("shipbook")
     configURL =  dirURL.appendingPathComponent("config.json")
+    pauseURL = dirURL.appendingPathComponent("pause.json")
   }
   
   static let shared = SessionManager()
   
   func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
+    if appId == self.appId && appKey == self.appKey {
+      DispatchQueue.shipBook.async {
+        self.loginCompletion = completion ?? self.loginCompletion
+        if let sessionUrl = self.sessionUrl { completion?(sessionUrl) }
+      }
+      return
+    }
+
     if FileManager.default.fileExists(atPath: self.configURL.path) {
       self.readConfig(url: self.configURL)
     }
@@ -109,7 +138,41 @@ class SessionManager {
     self.login = Login(appId: appId,
                        appKey: appKey)
     self.loginFailedPermanently = false
+    self.token = nil
+    self.sessionLink = nil
+    self.sessionUrl = nil
+
+    self.pausedUntil = .distantPast
+    // a pause further ahead than the cap was saved while the device clock was wrong
+    if let stored = try? JSONDecoder().decode(Pause.self, from: Data(contentsOf: self.pauseURL)),
+       stored.appId == appId, stored.sdkVersion == shipBookSDKVersion,
+       TimeInterval(stored.until) / 1000 <= Date().timeIntervalSince1970 + SessionManager.maxPause {
+      self.pausedUntil = Date(timeIntervalSince1970: TimeInterval(stored.until) / 1000)
+    }
+    if self.paused {
+      InnerLog.w("paused until \(self.pausedUntil.toISO8601Format()) (from an earlier run); nothing will be sent")
+    }
+    else {
+      try? FileManager.default.removeItem(at: self.pauseURL)
+    }
     self.innerLogin()
+  }
+
+  func pause(for seconds: Int, status: Int) {
+    pausedUntil = Date().addingTimeInterval(min(TimeInterval(seconds), SessionManager.maxPause))
+    token = nil
+    sessionLink = nil
+    sessionUrl = nil
+    InnerLog.w("paused until \(pausedUntil.toISO8601Format()): the server answered \(status) with x-shipbook-pause \(seconds)")
+    guard let appId = appId else { return }
+    let stored = Pause(appId: appId, sdkVersion: shipBookSDKVersion, until: Int64(pausedUntil.timeIntervalSince1970 * 1000))
+    try? FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
+    try? JSONEncoder().encode(stored).write(to: pauseURL, options: .atomic)
+  }
+
+  func backOff(for retryAfter: Int?, status: Int) {
+    backOffUntil = Date().addingTimeInterval(min(retryAfter.map { TimeInterval($0) } ?? SessionManager.defaultBackOff, SessionManager.maxBackOff))
+    InnerLog.w("backing off until \(backOffUntil.toISO8601Format()): the server answered \(status)")
   }
 
   func logout() {
@@ -166,9 +229,10 @@ class SessionManager {
   }
   
   private func innerLogin() {
-    if !Reachability.isConnectedToNetwork() || isInLoginRequest || appKey == nil || loginFailedPermanently { return }
+    if !Reachability.isConnectedToNetwork() || isInLoginRequest || appKey == nil || loginFailedPermanently || requestsBlocked { return }
     isInLoginRequest = true
     sessionLink = nil
+    sessionUrl = nil
     let url = "auth/loginSdk"
 
     login?.deviceTime = Date()
@@ -183,6 +247,7 @@ class SessionManager {
             let login = try ConnectionClient.jsonDecoder.decode(LoginResponse.self, from: response.data!)
             self.token = login.token
             self.sessionLink = login.sessionLink
+            self.sessionUrl = login.sessionUrl
 
             self.loginCompletion?(login.sessionUrl)
 
@@ -202,7 +267,7 @@ class SessionManager {
           }
 
         }
-        else if (400...499).contains(response.statusCode) {
+        else if (400...499).contains(response.statusCode) && response.pause == nil && !response.busy {
           // 4xx on loginSdk = integration error (bad appId/appKey, app deleted). Retrying won't help — stop until the app is restarted or logout/login is called.
           self.loginFailedPermanently = true
           InnerLog.e("loginSdk rejected with \(response.statusCode) — check appId/appKey. Will not retry until next app start.")
@@ -215,7 +280,7 @@ class SessionManager {
   }
   
   func refreshToken (completionHandler:@escaping(Bool)->()) {
-    if !Reachability.isConnectedToNetwork() {
+    if requestsBlocked || !Reachability.isConnectedToNetwork() {
       completionHandler(false)
       return
     }
@@ -238,7 +303,7 @@ class SessionManager {
         self.token = refreshResp?.token
         completionHandler(true)
       }
-      else if (400...499).contains(response.statusCode) {
+      else if (400...499).contains(response.statusCode) && response.pause == nil && !response.busy {
         // 4xx on refresh = integration error (app deleted, wrong appKey, bad JWT). Same as loginSdk failure — stop retrying until next app start.
         self.loginFailedPermanently = true
         InnerLog.e("refreshSdkToken rejected with \(response.statusCode) — check appId/appKey. Will not retry until next app start.")

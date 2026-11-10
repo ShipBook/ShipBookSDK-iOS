@@ -22,6 +22,11 @@ class ResponseData {
   var statusCode: Int = 0
   var data: Data?
   var error: ErrorResponse?
+  var pause: Int?
+  var retryAfter: Int?
+  var busy: Bool {
+    return (statusCode == 429 || statusCode == 503) && pause == nil
+  }
   
   init(response: HTTPURLResponse?,data: Data?) {
     self.response = response
@@ -35,6 +40,17 @@ class ResponseData {
         error = try? ConnectionClient.jsonDecoder.decode(ErrorResponse.self, from:data)
       }
     }
+    if statusCode >= 400 {
+      pause = seconds(header: "x-shipbook-pause")
+      retryAfter = seconds(header: "retry-after")
+    }
+  }
+
+  private func seconds(header: String) -> Int? {
+    // HTTP/2 sends header names in lowercase and allHeaderFields is case sensitive in Swift
+    let value = response?.allHeaderFields.first { ($0.key as? String)?.lowercased() == header }?.value as? String
+    guard let seconds = Int(value ?? ""), seconds > 0 else { return nil }
+    return seconds
   }
 }
 
@@ -42,6 +58,8 @@ class ConnectionClient {
   private init(){
   }
   static let shared = ConnectionClient()
+  private static let appIdHeader = "x-shipbook-app-id"
+  private static let sdkHeader = "x-shipbook-sdk"
   
   static var BASE_URL = "https://api.shipbook.io/v2/"
   let dateFormatter: DateFormatter = {
@@ -62,14 +80,19 @@ class ConnectionClient {
     return encoder
   }()
 
-  let session: URLSession  = {
+  var session: URLSession  = {
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 30
     return URLSession(configuration: configuration)
   }()
 
   func request<T : Encodable>(url: String, data: T?, method: HttpMethod?, completionHandler:@escaping(ResponseData)->Void) -> Void {
-    var urlRequest = URLRequest(url: URL(string: ConnectionClient.BASE_URL + url)!)
+    let requestURL = URL(string: ConnectionClient.BASE_URL + url)!
+    if SessionManager.shared.requestsBlocked {
+      completionHandler(ResponseData(response: HTTPURLResponse(url: requestURL, statusCode: 429, httpVersion: nil, headerFields: nil), data: nil))
+      return
+    }
+    var urlRequest = URLRequest(url: requestURL)
     if let data = data {
       let jsonData = try? ConnectionClient.jsonEncoder.encode(data)
       urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -82,9 +105,17 @@ class ConnectionClient {
     if let token = SessionManager.shared.token {
       urlRequest.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
     }
+    urlRequest.setValue(SessionManager.shared.appId, forHTTPHeaderField: ConnectionClient.appIdHeader)
+    urlRequest.setValue("ios/" + shipBookSDKVersion, forHTTPHeaderField: ConnectionClient.sdkHeader)
     
     session.dataTask(with: urlRequest as URLRequest) { (data, response, error) -> Void in
       let response = ResponseData(response: response as? HTTPURLResponse, data: data)
+      if let pause = response.pause {
+        SessionManager.shared.pause(for: pause, status: response.statusCode)
+      }
+      else if response.busy {
+        SessionManager.shared.backOff(for: response.retryAfter, status: response.statusCode)
+      }
       if !response.ok && response.statusCode == 401 && response.error?.name == "TokenExpired"  { // call refresh token
         SessionManager.shared.refreshToken() {(succeeded) in
           guard succeeded else {
