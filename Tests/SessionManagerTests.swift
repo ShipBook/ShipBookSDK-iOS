@@ -62,7 +62,7 @@ class SessionManagerTests: XCTestCase {
   func testCorruptCachedConfigIsRemovedAndTheDefaultConfigUsed() {
     StorageManager.shared.set(Data("not json".utf8), forKey: "config")
 
-    SessionManager.shared.login(appId: "appId", appKey: "appKey", completion: nil, userConfig: nil)
+    SessionManager.shared.login(appId: "appId", appKey: "appKey", completion: nil)
     DispatchQueue.shipBook.sync {}
 
     XCTAssertNil(StorageManager.shared.data(forKey: "config"), "a corrupt cache must be removed so the next start doesn't hit it again")
@@ -72,7 +72,7 @@ class SessionManagerTests: XCTestCase {
   func testValidCachedConfigIsUsed() {
     StorageManager.shared.set(Data(cachedConfig.utf8), forKey: "config")
 
-    SessionManager.shared.login(appId: "appId", appKey: "appKey", completion: nil, userConfig: nil)
+    SessionManager.shared.login(appId: "appId", appKey: "appKey", completion: nil)
     DispatchQueue.shipBook.sync {}
 
     XCTAssertEqual(StorageManager.shared.data(forKey: "config"), Data(cachedConfig.utf8))

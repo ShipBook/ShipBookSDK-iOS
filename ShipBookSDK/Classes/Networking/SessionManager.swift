@@ -89,7 +89,7 @@ class SessionManager {
   
   static let shared = SessionManager()
   
-  func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
+  func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
     var loadedCachedConfig = false
     if let cachedConfig = StorageManager.shared.data(forKey: SessionManager.configKey) {
@@ -104,18 +104,9 @@ class SessionManager {
       }
     }
     if !loadedCachedConfig {
-      do {
-        if let url = userConfig {
-          try self.readConfig(data: Data(contentsOf: url))
-        }
-        else {
-          try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
-          try self.readConfig(data: Data(config.utf8))
-        }
-      }
-      catch {
-        InnerLog.e(error.localizedDescription)
-      }
+      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
+      // The built-in config is a constant of this SDK; failing to decode it is a bug to surface, not a state to handle.
+      try! self.readConfig(data: Data(config.utf8))
     }
 
     self.appKey = appKey
