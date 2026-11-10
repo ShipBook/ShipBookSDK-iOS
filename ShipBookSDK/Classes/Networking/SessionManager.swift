@@ -43,11 +43,11 @@ let config = """
 
 class SessionManager {
   private static let sessionLinkHeader = "x-shipbook-session"
+  private static let configKey = "config"
 
   private var isInLoginRequest: Bool = false
   // Set when loginSdk got a 4xx — integration is wrong (bad appId/appKey, app deleted, etc.). Retrying won't fix it; suppress further attempts in this process so we don't hammer the server.
   private var loginFailedPermanently: Bool = false
-  let configURL: URL
   let dirURL: URL
   var appKey: String?
   var appId: String?
@@ -85,21 +85,25 @@ class SessionManager {
     let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
   #endif
     dirURL = dir!.appendingPathComponent("shipbook")
-    configURL =  dirURL.appendingPathComponent("config.json")
   }
   
   static let shared = SessionManager()
   
   func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
-    if FileManager.default.fileExists(atPath: self.configURL.path) {
-      self.readConfig(url: self.configURL)
+    if let cachedConfig = StorageManager.shared.data(forKey: SessionManager.configKey) {
+      self.readConfig(data: cachedConfig)
     }
     else if let url = userConfig {
-      self.readConfig(url: url)
+      do {
+        self.readConfig(data: try Data(contentsOf: url))
+      }
+      catch {
+        InnerLog.e(error.localizedDescription)
+      }
     }
     else {
-      self.readConfig(url: nil)
+      self.readConfig(data: Data(config.utf8))
       try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
     }
 
@@ -146,10 +150,9 @@ class SessionManager {
   struct NoDataError: Error {
   }
   
-  func readConfig(url: URL?) {
+  func readConfig(data: Data) {
     do {
-      let contents = try url != nil ? Data(contentsOf:url!) : Data(config.utf8)
-      let config = try JSONDecoder().decode(ConfigResponse.self, from: contents)
+      let config = try JSONDecoder().decode(ConfigResponse.self, from: data)
       if !(config.exceptionReportDisabled == true) {
         ExceptionManager.shared.start()
       }
@@ -189,10 +192,10 @@ class SessionManager {
             LogManager.shared.config(login.config)
             NotificationCenter.default.post(name: NotificationName.Connected, object: self)
 
-            // saving the config to a file. need to do an hack because there is no way to encode String:any with encode
+            // saving the config. need to do an hack because there is no way to encode String:any with encode
             let jsonObject = try JSONSerialization.jsonObject(with: response.data!) as! [String:Any]
             let configData =  try JSONSerialization.data(withJSONObject: jsonObject["config"]!)
-            try? configData.write(to: self.configURL)
+            StorageManager.shared.set(configData, forKey: SessionManager.configKey)
           }
           catch let error {
             InnerLog.e("didn't succeed to decode \(error)")
