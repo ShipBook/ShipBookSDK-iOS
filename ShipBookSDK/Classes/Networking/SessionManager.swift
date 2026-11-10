@@ -43,11 +43,11 @@ let config = """
 
 class SessionManager {
   private static let sessionLinkHeader = "x-shipbook-session"
+  private static let configKey = "config"
 
   private var isInLoginRequest: Bool = false
   // Set when loginSdk got a 4xx — integration is wrong (bad appId/appKey, app deleted, etc.). Retrying won't fix it; suppress further attempts in this process so we don't hammer the server.
   private var loginFailedPermanently: Bool = false
-  let configURL: URL
   let dirURL: URL
   var appKey: String?
   var appId: String?
@@ -85,22 +85,28 @@ class SessionManager {
     let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
   #endif
     dirURL = dir!.appendingPathComponent("shipbook")
-    configURL =  dirURL.appendingPathComponent("config.json")
   }
   
   static let shared = SessionManager()
   
-  func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?, userConfig: URL?){ // should be called in the start of the app. if it would have async then there
+  func login(appId: String, appKey: String, completion: ((_ sessionUrl: String)->())?){ // should be called in the start of the app. if it would have async then there
                                                                // would be messages it missed
-    if FileManager.default.fileExists(atPath: self.configURL.path) {
-      self.readConfig(url: self.configURL)
+    var loadedCachedConfig = false
+    if let cachedConfig = StorageManager.shared.data(forKey: SessionManager.configKey) {
+      do {
+        try self.readConfig(data: cachedConfig)
+        loadedCachedConfig = true
+      }
+      catch {
+        // A config saved by another SDK version may no longer decode; drop it instead of starting with no config until the next login.
+        InnerLog.w("cached config is corrupt, deleting it and falling back to the default config: \(error.localizedDescription)")
+        StorageManager.shared.remove(forKey: SessionManager.configKey)
+      }
     }
-    else if let url = userConfig {
-      self.readConfig(url: url)
-    }
-    else {
-      self.readConfig(url: nil)
+    if !loadedCachedConfig {
       try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
+      // The built-in config is a constant of this SDK; failing to decode it is a bug to surface, not a state to handle.
+      try! self.readConfig(data: Data(config.utf8))
     }
 
     self.appKey = appKey
@@ -146,23 +152,17 @@ class SessionManager {
   struct NoDataError: Error {
   }
   
-  func readConfig(url: URL?) {
-    do {
-      let contents = try url != nil ? Data(contentsOf:url!) : Data(config.utf8)
-      let config = try JSONDecoder().decode(ConfigResponse.self, from: contents)
-      if !(config.exceptionReportDisabled == true) {
-        ExceptionManager.shared.start()
-      }
-      if !(config.eventLoggingDisabled == true) {
-        // EventManager.shared.enableViewController() it is bloating the logs
-        EventManager.shared.enableAction()
-        EventManager.shared.enableApp()
-      }
-      LogManager.shared.config(config)
+  func readConfig(data: Data) throws {
+    let config = try JSONDecoder().decode(ConfigResponse.self, from: data)
+    if !(config.exceptionReportDisabled == true) {
+      ExceptionManager.shared.start()
     }
-    catch {
-      InnerLog.e(error.localizedDescription)
+    if !(config.eventLoggingDisabled == true) {
+      // EventManager.shared.enableViewController() it is bloating the logs
+      EventManager.shared.enableAction()
+      EventManager.shared.enableApp()
     }
+    LogManager.shared.config(config)
   }
   
   private func innerLogin() {
@@ -189,10 +189,10 @@ class SessionManager {
             LogManager.shared.config(login.config)
             NotificationCenter.default.post(name: NotificationName.Connected, object: self)
 
-            // saving the config to a file. need to do an hack because there is no way to encode String:any with encode
+            // saving the config. need to do an hack because there is no way to encode String:any with encode
             let jsonObject = try JSONSerialization.jsonObject(with: response.data!) as! [String:Any]
             let configData =  try JSONSerialization.data(withJSONObject: jsonObject["config"]!)
-            try? configData.write(to: self.configURL)
+            StorageManager.shared.set(configData, forKey: SessionManager.configKey)
           }
           catch let error {
             InnerLog.e("didn't succeed to decode \(error)")
