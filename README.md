@@ -12,6 +12,8 @@ Add the package URL in Xcode via Swift Package Manager:
 https://github.com/ShipBook/ShipBookSDK-iOS.git
 ```
 
+Supports iOS 12+ and tvOS 12+.
+
 ## Quick Start
 
 ```swift
