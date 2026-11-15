@@ -42,6 +42,7 @@ class AppenderTests: XCTestCase {
   
   func testCloudAppender() {
     let cloudAppender = SBCloudAppender(name: "cloud", config: nil)
+    try? FileManager.default.createDirectory(at: SessionManager.shared.dirURL, withIntermediateDirectories: true)
     try? FileManager.default.removeItem(at: cloudAppender.fileURL)
     let token = "testing"
     SessionManager.shared.token = token

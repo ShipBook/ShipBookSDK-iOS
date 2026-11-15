@@ -27,4 +27,4 @@
 
 ### Removed
 - CocoaPods and Carthage support — SPM is now the only installation method
-- tvOS target
+- The CocoaPods tvOS target, together with CocoaPods. tvOS itself is still supported: add the package to a tvOS target through SPM.
