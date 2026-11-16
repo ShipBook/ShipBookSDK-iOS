@@ -104,7 +104,6 @@ class SessionManager {
       }
     }
     if !loadedCachedConfig {
-      try? FileManager.default.createDirectory(atPath: self.dirURL.path, withIntermediateDirectories: true, attributes: nil)
       // The built-in config is a constant of this SDK; failing to decode it is a bug to surface, not a state to handle.
       try! self.readConfig(data: Data(config.utf8))
     }

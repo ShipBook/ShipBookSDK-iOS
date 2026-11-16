@@ -42,6 +42,8 @@ class SBCloudAppender: BaseAppender{
     InnerLog.d("init of CloudAppender")
     self.name = name
     let dir = SessionManager.shared.dirURL
+    // Always created: tvOS can purge Caches while the config cached in UserDefaults survives.
+    try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
     fileURL =  dir.appendingPathComponent("CloudQueue.log")
     tempFileURL =  dir.appendingPathComponent("TempCloudQueue.log")
     crashFile = dir.appendingPathComponent("Crash.log")
