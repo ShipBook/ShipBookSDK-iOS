@@ -62,7 +62,7 @@ class ConnectionClient {
     return encoder
   }()
 
-  let session: URLSession  = {
+  var session: URLSession  = {
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 30
     return URLSession(configuration: configuration)

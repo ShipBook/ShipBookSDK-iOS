@@ -14,9 +14,6 @@ class AppenderTests: XCTestCase {
   override func setUp() {
     super.setUp()
     continueAfterFailure = false
-    let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
-    let dirURL = dir!.appendingPathComponent("shipbook")
-    try? FileManager.default.createDirectory(atPath: dirURL.path, withIntermediateDirectories: true, attributes: nil)
   }
   
   override func tearDown() {
@@ -40,6 +37,14 @@ class AppenderTests: XCTestCase {
     
   }
   
+  func testCloudAppenderCreatesMissingDirectory() {
+    try? FileManager.default.removeItem(at: SessionManager.shared.dirURL)
+    let cloudAppender = SBCloudAppender(name: "cloud", config: nil)
+    cloudAppender.saveToFile(data: Message(message: "message", severity: .Info, tag: "test", function: #function, file: #file, line: #line))
+    XCTAssertTrue(FileManager.default.fileExists(atPath: cloudAppender.fileURL.path))
+    try? FileManager.default.removeItem(at: cloudAppender.fileURL)
+  }
+
   func testCloudAppender() {
     let cloudAppender = SBCloudAppender(name: "cloud", config: nil)
     try? FileManager.default.createDirectory(at: SessionManager.shared.dirURL, withIntermediateDirectories: true)
