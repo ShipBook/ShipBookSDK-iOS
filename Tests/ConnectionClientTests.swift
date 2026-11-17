@@ -240,6 +240,21 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual((stored["until"] as! NSNumber).int64Value, Int64(session.pausedUntil.timeIntervalSince1970 * 1000))
   }
 
+  func testPauseAnsweredForTheAppStartedBeforeIsIgnored() {
+    session.appId = appId
+    session.token = "token"
+    StubURLProtocol.respond = { request in
+      XCTAssertEqual(request.value(forHTTPHeaderField: "x-shipbook-app-id"), self.appId)
+      self.session.appId = "5f0000000000000000000002" // what a start() with another appId does while the request is out
+      return StubURLProtocol.Response(status: 401, headers: ["x-shipbook-pause": "120"])
+    }
+
+    _ = send()
+
+    XCTAssertFalse(session.paused)
+    XCTAssertNil(StorageManager.shared.data(forKey: SessionManager.pauseKey))
+  }
+
   func testPauseHeaderOnA429PausesInsteadOfBackingOff() {
     session.appId = appId
     session.token = "token"

@@ -163,7 +163,9 @@ class SessionManager {
     self.innerLogin()
   }
 
-  func pause(for seconds: Int, status: Int) {
+  func pause(for seconds: Int, status: Int, appId: String?) {
+    // The answer is for the app that sent the request; a start() with another appId may have replaced it since.
+    guard appId == self.appId else { return }
     pausedUntil = Date().addingTimeInterval(min(TimeInterval(seconds), SessionManager.maxPause))
     token = nil
     sessionLink = nil

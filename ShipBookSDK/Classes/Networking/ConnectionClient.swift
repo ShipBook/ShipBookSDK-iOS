@@ -105,13 +105,14 @@ class ConnectionClient {
     if let token = SessionManager.shared.token {
       urlRequest.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
     }
-    urlRequest.setValue(SessionManager.shared.appId, forHTTPHeaderField: ConnectionClient.appIdHeader)
+    let appId = SessionManager.shared.appId
+    urlRequest.setValue(appId, forHTTPHeaderField: ConnectionClient.appIdHeader)
     urlRequest.setValue("ios/" + shipBookSDKVersion, forHTTPHeaderField: ConnectionClient.sdkHeader)
     
     session.dataTask(with: urlRequest as URLRequest) { (data, response, error) -> Void in
       let response = ResponseData(response: response as? HTTPURLResponse, data: data)
       if let pause = response.pause {
-        SessionManager.shared.pause(for: pause, status: response.statusCode)
+        SessionManager.shared.pause(for: pause, status: response.statusCode, appId: appId)
       }
       else if response.busy {
         SessionManager.shared.backOff(for: response.retryAfter, status: response.statusCode)
