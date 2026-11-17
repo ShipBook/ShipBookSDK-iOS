@@ -44,6 +44,7 @@ let config = """
 class SessionManager {
   private static let sessionLinkHeader = "x-shipbook-session"
   private static let configKey = "config"
+  static let pauseKey = "pause"
   private static let maxPause: TimeInterval = 30 * 24 * 60 * 60
   private static let defaultBackOff: TimeInterval = 5 * 60
   private static let maxBackOff: TimeInterval = 60 * 60
@@ -57,7 +58,6 @@ class SessionManager {
   private(set) var isInLoginRequest: Bool = false
   // Set when loginSdk got a 4xx — integration is wrong (bad appId/appKey, app deleted, etc.). Retrying won't fix it; suppress further attempts in this process so we don't hammer the server.
   private(set) var loginFailedPermanently: Bool = false
-  let pauseURL: URL
   let dirURL: URL
   var appKey: String?
   var appId: String?
@@ -105,7 +105,6 @@ class SessionManager {
     let dir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first
   #endif
     dirURL = dir!.appendingPathComponent("shipbook")
-    pauseURL = dirURL.appendingPathComponent("pause.json")
   }
   
   static let shared = SessionManager()
@@ -149,7 +148,8 @@ class SessionManager {
 
     self.pausedUntil = .distantPast
     // a pause further ahead than the cap was saved while the device clock was wrong
-    if let stored = try? JSONDecoder().decode(Pause.self, from: Data(contentsOf: self.pauseURL)),
+    if let data = StorageManager.shared.data(forKey: SessionManager.pauseKey),
+       let stored = try? JSONDecoder().decode(Pause.self, from: data),
        stored.appId == appId, stored.sdkVersion == shipBookSDKVersion,
        TimeInterval(stored.until) / 1000 <= Date().timeIntervalSince1970 + SessionManager.maxPause {
       self.pausedUntil = Date(timeIntervalSince1970: TimeInterval(stored.until) / 1000)
@@ -158,7 +158,7 @@ class SessionManager {
       InnerLog.w("paused until \(self.pausedUntil.toISO8601Format()) (from an earlier run); nothing will be sent")
     }
     else {
-      try? FileManager.default.removeItem(at: self.pauseURL)
+      StorageManager.shared.remove(forKey: SessionManager.pauseKey)
     }
     self.innerLogin()
   }
@@ -171,8 +171,7 @@ class SessionManager {
     InnerLog.w("paused until \(pausedUntil.toISO8601Format()): the server answered \(status) with x-shipbook-pause \(seconds)")
     guard let appId = appId else { return }
     let stored = Pause(appId: appId, sdkVersion: shipBookSDKVersion, until: Int64(pausedUntil.timeIntervalSince1970 * 1000))
-    try? FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
-    try? JSONEncoder().encode(stored).write(to: pauseURL, options: .atomic)
+    StorageManager.shared.set(try! JSONEncoder().encode(stored), forKey: SessionManager.pauseKey)
   }
 
   func backOff(for retryAfter: Int?, status: Int) {

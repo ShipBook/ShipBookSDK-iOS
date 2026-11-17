@@ -47,7 +47,7 @@ class SessionManagerTests: XCTestCase {
     session.loginCompletion = nil
     session.pausedUntil = .distantPast
     session.backOffUntil = .distantPast
-    try? FileManager.default.removeItem(at: session.pauseURL)
+    StorageManager.shared.remove(forKey: SessionManager.pauseKey)
   }
 
   private func loginFinished() -> Bool {
@@ -59,10 +59,9 @@ class SessionManagerTests: XCTestCase {
     return StubURLProtocol.Response(body: Data(body.utf8))
   }
 
-  private func storePause(appId: String, sdkVersion: String, until: Date) throws {
+  private func storePause(appId: String, sdkVersion: String, until: Date) {
     let record = #"{"appId":"\#(appId)","sdkVersion":"\#(sdkVersion)","until":\#(Int64(until.timeIntervalSince1970 * 1000))}"#
-    try FileManager.default.createDirectory(at: session.dirURL, withIntermediateDirectories: true)
-    try Data(record.utf8).write(to: session.pauseURL)
+    StorageManager.shared.set(Data(record.utf8), forKey: SessionManager.pauseKey)
   }
 
   private func assertStartLogsInAndDeletesTheStoredPause(file: StaticString = #filePath, line: UInt = #line) throws {
@@ -72,7 +71,7 @@ class SessionManagerTests: XCTestCase {
     ShipBook.start(appId: appId, appKey: appKey)
 
     XCTAssertFalse(session.paused, file: file, line: line)
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), file: file, line: line)
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil, file: file, line: line)
     XCTAssertTrue(loginFinished(), file: file, line: line)
     XCTAssertEqual(loginRequests.count, 1, file: file, line: line)
     XCTAssertEqual(session.token, "token-1", file: file, line: line)
@@ -112,7 +111,7 @@ class SessionManagerTests: XCTestCase {
 
   func testStartStaysPausedOnAStoredPause() throws {
     let until = Date().addingTimeInterval(600)
-    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: until)
+    storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: until)
     var completions = 0
 
     let log = captureInnerLog {
@@ -125,48 +124,48 @@ class SessionManagerTests: XCTestCase {
     DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
     assertNoRequest()
     XCTAssertEqual(completions, 0)
-    XCTAssertTrue(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertTrue(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
   }
 
   func testStartDeletesAPauseStoredForAnotherApp() throws {
-    try storePause(appId: "5f0000000000000000000002", sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
+    storePause(appId: "5f0000000000000000000002", sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
     try assertStartLogsInAndDeletesTheStoredPause()
   }
 
   func testStartDeletesAPauseStoredByAnotherSdkVersion() throws {
-    try storePause(appId: appId, sdkVersion: "0.0.1", until: Date().addingTimeInterval(600))
+    storePause(appId: appId, sdkVersion: "0.0.1", until: Date().addingTimeInterval(600))
     try assertStartLogsInAndDeletesTheStoredPause()
   }
 
   func testStartDeletesAPauseThatIsOver() throws {
-    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(-1))
+    storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(-1))
     try assertStartLogsInAndDeletesTheStoredPause()
   }
 
   func testStartDeletesAPauseMoreThan30DaysAhead() throws {
-    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(30 * 24 * 60 * 60 + 60))
+    storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(30 * 24 * 60 * 60 + 60))
     try assertStartLogsInAndDeletesTheStoredPause()
   }
 
   func testStartKeepsAPauseJustUnder30DaysAhead() throws {
-    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(30 * 24 * 60 * 60 - 60))
+    storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(30 * 24 * 60 * 60 - 60))
 
     ShipBook.start(appId: appId, appKey: appKey)
 
     XCTAssertTrue(session.paused)
-    XCTAssertTrue(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertTrue(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     assertNoRequest()
   }
 
-  func testStartTreatsACorruptPauseFileAsAbsent() throws {
+  func testStartTreatsACorruptStoredPauseAsAbsent() throws {
     for corrupt in ["", "not json", "{\"appId\":", "[]", "{\"appId\":\"\(appId)\",\"sdkVersion\":\"\(shipBookSDKVersion)\",\"until\":\"tomorrow\"}"] {
-      try Data(corrupt.utf8).write(to: session.pauseURL)
+      StorageManager.shared.set(Data(corrupt.utf8), forKey: SessionManager.pauseKey)
       session.appId = nil
 
       ShipBook.start(appId: appId, appKey: appKey)
 
       XCTAssertFalse(session.paused, corrupt)
-      XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), corrupt)
+      XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil, corrupt)
       XCTAssertTrue(loginFinished(), corrupt)
     }
     try XCTSkipUnless(Reachability.isConnectedToNetwork(), "loginSdk is only sent on a reachable network")
@@ -174,7 +173,7 @@ class SessionManagerTests: XCTestCase {
   }
 
   func testWhilePausedNothingLogsIn() throws {
-    try storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
+    storePause(appId: appId, sdkVersion: shipBookSDKVersion, until: Date().addingTimeInterval(600))
     ShipBook.start(appId: appId, appKey: appKey)
 
     session.token = "left over"
@@ -325,7 +324,7 @@ class SessionManagerTests: XCTestCase {
     XCTAssertFalse(session.requestsBlocked)
     XCTAssertTrue(session.loginFailedPermanently)
     XCTAssertTrue(log.contains("loginSdk rejected with 401 — check appId/appKey. Will not retry until next app start."), log)
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
     ShipBook.start(appId: appId, appKey: appKey)
     DispatchQueue.shipBook.sync {}
@@ -402,7 +401,7 @@ class SessionManagerTests: XCTestCase {
       XCTAssertTrue(session.requestsBlocked, "\(status)")
       XCTAssertFalse(session.paused, "\(status)")
       XCTAssertFalse(session.loginFailedPermanently, "\(status)")
-      XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), "\(status)")
+      XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil, "\(status)")
       DispatchQueue.shipBook.sync { XCTAssertFalse(session.connected) }
       ShipBook.logout()
       ShipBook.start(appId: appId, appKey: appKey)
@@ -522,6 +521,6 @@ class SessionManagerTests: XCTestCase {
     XCTAssertEqual(session.backOffUntil.timeIntervalSince(before), 300, accuracy: 5)
     XCTAssertFalse(session.paused)
     XCTAssertFalse(session.loginFailedPermanently)
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
   }
 }

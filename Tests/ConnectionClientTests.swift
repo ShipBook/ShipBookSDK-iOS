@@ -119,7 +119,7 @@ class ConnectionClientTests: XCTestCase {
     session.sessionLink = nil
     session.pausedUntil = .distantPast
     session.backOffUntil = .distantPast
-    try? FileManager.default.removeItem(at: session.pauseURL)
+    StorageManager.shared.remove(forKey: SessionManager.pauseKey)
   }
 
   private func response(status: Int, headers: [String: String] = [:]) -> ResponseData {
@@ -233,7 +233,7 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual(ShipBook.getSessionHeaders(), [:])
     XCTAssertTrue(log.contains("Warning - paused until \(session.pausedUntil.toISO8601Format()): the server answered 401 with x-shipbook-pause 120\n"), log)
 
-    let stored = try JSONSerialization.jsonObject(with: Data(contentsOf: session.pauseURL)) as! [String: Any]
+    let stored = try JSONSerialization.jsonObject(with: StorageManager.shared.data(forKey: SessionManager.pauseKey)!) as! [String: Any]
     XCTAssertEqual(Set(stored.keys), ["appId", "sdkVersion", "until"])
     XCTAssertEqual(stored["appId"] as? String, appId)
     XCTAssertEqual(stored["sdkVersion"] as? String, shipBookSDKVersion)
@@ -251,7 +251,7 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual(session.pausedUntil.timeIntervalSince(before), 7200, accuracy: 5)
     XCTAssertEqual(session.backOffUntil, .distantPast)
     XCTAssertNil(session.token)
-    XCTAssertTrue(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertTrue(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     XCTAssertTrue(log.contains("Warning - paused until \(session.pausedUntil.toISO8601Format()): the server answered 429 with x-shipbook-pause 7200\n"), log)
     XCTAssertFalse(log.contains("backing off"), log)
   }
@@ -286,7 +286,7 @@ class ConnectionClientTests: XCTestCase {
     assertNoRequest()
     XCTAssertEqual(session.pausedUntil, until)
     XCTAssertEqual(session.backOffUntil, .distantPast)
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     XCTAssertFalse(log.contains("paused"), log)
     XCTAssertFalse(log.contains("backing off"), log)
   }
@@ -311,7 +311,7 @@ class ConnectionClientTests: XCTestCase {
       XCTAssertFalse(session.paused, "\(status)")
       XCTAssertEqual(session.token, "token", "\(status)")
       XCTAssertEqual(ShipBook.getSessionHeaders(), ["x-shipbook-session": "1:app:session"], "\(status)")
-      XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), "\(status)")
+      XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil, "\(status)")
       XCTAssertTrue(log.contains("Warning - backing off until \(session.backOffUntil.toISO8601Format()): the server answered \(status)\n"), log)
       XCTAssertFalse(log.contains("paused"), log)
     }
@@ -361,7 +361,7 @@ class ConnectionClientTests: XCTestCase {
     XCTAssertEqual(session.backOffUntil, until)
     XCTAssertFalse(session.paused)
     XCTAssertEqual(session.token, "token")
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     XCTAssertFalse(log.contains("backing off"), log)
   }
 
@@ -376,7 +376,7 @@ class ConnectionClientTests: XCTestCase {
 
     XCTAssertFalse(session.requestsBlocked)
     XCTAssertEqual(session.token, "token")
-    XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path))
+    XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil)
     XCTAssertFalse(log.contains("paused"), log)
     XCTAssertFalse(log.contains("backing off"), log)
     XCTAssertTrue(send().statusCode == 401)
@@ -393,7 +393,7 @@ class ConnectionClientTests: XCTestCase {
 
       XCTAssertFalse(session.requestsBlocked, "\(status)")
       XCTAssertEqual(session.token, "token", "\(status)")
-      XCTAssertFalse(FileManager.default.fileExists(atPath: session.pauseURL.path), "\(status)")
+      XCTAssertFalse(StorageManager.shared.data(forKey: SessionManager.pauseKey) != nil, "\(status)")
       XCTAssertFalse(log.contains("paused") || log.contains("backing off"), log)
     }
   }
