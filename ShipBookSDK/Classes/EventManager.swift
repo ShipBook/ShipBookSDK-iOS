@@ -13,6 +13,7 @@ class EventManager {
   static let shared = EventManager()
   var hasViewController = false
   var hasAction = false
+  var hasApp = false
   
   private init() {}
   
@@ -37,6 +38,9 @@ class EventManager {
   }
   
   func enableApp() {
+    guard !hasApp else { return } // start with another app reads the config again; a second set of observers would double every event
+    hasApp = true
+
     let block = {(notification: Notification) in
       guard let application = notification.object as? UIApplication else {
         return
@@ -66,6 +70,14 @@ class EventManager {
   
   
   
+  // No sender means the app walked the responder chain itself (to find or resign the first responder); no user did anything.
+  func actionEvent(action: Selector, target: Any?, sender: Any?) -> ActionEvent? {
+    guard let sender = sender else { return nil }
+    let senderTitle = (sender as? UIButton)?.currentTitle ?? (sender as? UIBarItem)?.title
+    let targetString = target != nil ? String(reflecting: type(of: target!)) : nil
+    return ActionEvent(action: String(describing: action), sender: String(reflecting: type(of: sender)), senderTitle: senderTitle, target: targetString)
+  }
+
   private func swizzle(cls: AnyClass, original originalSelector: Selector, swizzled swizzledSelector: Selector) {
     let originalMethod = class_getInstanceMethod(cls, originalSelector)
     let swizzledMethod = class_getInstanceMethod(cls, swizzledSelector)
@@ -112,14 +124,9 @@ extension UIViewController {
 extension UIApplication {
   @objc func proj_sendAction(_ action: Selector, to target: Any?, from sender: Any?, for event: UIEvent?) -> Bool {
     let ret = self.proj_sendAction(action, to: target, from: sender, for: event)
-    let senderString = sender != nil ? String(reflecting: type(of: sender!)) : nil
-    var senderTitle: String?  = nil
-    if let sender = sender as? UIButton {
-      senderTitle = sender.currentTitle
+    if let actionEvent = EventManager.shared.actionEvent(action: action, target: target, sender: sender) {
+      LogManager.shared.push(log: actionEvent)
     }
-    let targetString = target != nil ? String(reflecting: type(of: target!)) : nil
-    let actionEvent = ActionEvent(action: String(describing: action), sender: senderString, senderTitle: senderTitle, target: targetString)
-    LogManager.shared.push(log: actionEvent)
     return ret
   }
 }
